@@ -29,7 +29,7 @@ public class Creature
     public AttackType Attack { get; set; }
     public State CurrentState { get; set; }
 
-    public void Attack()
+    public void Attack2()
     {
         if (CurrentState == State.Attacking)
         {
