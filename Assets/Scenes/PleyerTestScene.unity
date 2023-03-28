@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 2138279199}
   - component: {fileID: 2138279196}
   - component: {fileID: 2138279195}
+  - component: {fileID: 2138279201}
   - component: {fileID: 2138279194}
   - component: {fileID: 2138279193}
   m_Layer: 0
@@ -507,8 +508,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashSpeed: 10
-  dashDuration: 0.2
-  dashCooldown: 1
+  dashDuration: 0.5
+  dashCooldown: 0.7
 --- !u!114 &2138279196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,4 +620,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
-  IsDashing: 0
+  direction: 0
+  state: 0
+--- !u!114 &2138279201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8101cc10254d8c143814f833d93e8778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Power: 10
+  AnimationTime: 0.5
