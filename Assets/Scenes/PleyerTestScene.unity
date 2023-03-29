@@ -508,9 +508,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f33cfdaffb01944988d76a8c27cb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 10
-  dashDuration: 0.5
-  dashCooldown: 0.7
+  DashSpeed: 10
+  DashDuration: 0.5
+  DashCooldown: 0.7
 --- !u!114 &2138279196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,11 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71703c79551247442acfe174d20d3bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  direction: 0
-  state: 0
-  spriteRenderer: {fileID: 0}
-  sandevistan: {fileID: 0}
+  Rigidbody: {fileID: 2138279194}
+  Direction: 0
+  State: 0
+  SpriteRender: {fileID: 0}
+  Ghost: {fileID: 2138279202}
 --- !u!114 &2138279201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9061abf15dcf110468607697d7e96246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostPrefab: {fileID: 677311716083562342, guid: 0734a03fdba139e4d88ae81e4010fcf2, type: 3}
-  delay: 0.01
-  destroyTime: 0.1
-  color: {r: 0, g: 1, b: 0, a: 0}
+  GhostPrefab: {fileID: 677311716083562342, guid: 0734a03fdba139e4d88ae81e4010fcf2, type: 3}
+  Delay: 1
+  destroyTime: 5
+  color: {r: 0, g: 1, b: 0, a: 0.2509804}
   material: {fileID: 0}
