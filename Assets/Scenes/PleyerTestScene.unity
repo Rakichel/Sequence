@@ -439,6 +439,7 @@ GameObject:
   - component: {fileID: 2138279196}
   - component: {fileID: 2138279195}
   - component: {fileID: 2138279201}
+  - component: {fileID: 2138279202}
   - component: {fileID: 2138279194}
   - component: {fileID: 2138279193}
   m_Layer: 0
@@ -622,6 +623,8 @@ MonoBehaviour:
   Rigidbody: {fileID: 0}
   direction: 0
   state: 0
+  spriteRenderer: {fileID: 0}
+  sandevistan: {fileID: 0}
 --- !u!114 &2138279201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,3 +639,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Power: 10
   AnimationTime: 0.5
+--- !u!114 &2138279202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9061abf15dcf110468607697d7e96246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 677311716083562342, guid: 0734a03fdba139e4d88ae81e4010fcf2, type: 3}
+  delay: 0.01
+  destroyTime: 0.1
+  color: {r: 0, g: 1, b: 0, a: 0}
+  material: {fileID: 0}
