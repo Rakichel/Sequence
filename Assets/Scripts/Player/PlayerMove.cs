@@ -22,6 +22,10 @@ namespace PlayerInfo
                 _horizontal = Input.GetAxisRaw("Horizontal");
             else
                 _horizontal = 0;
+
+            if (!Input.anyKey && _player.state == PlayerState.Move)
+                _player.state = PlayerState.Idle;
+
             if (_horizontal != 0 && _player.state == PlayerState.Idle)
             {
                 _player.state = PlayerState.Move;
