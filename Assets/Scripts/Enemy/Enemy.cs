@@ -8,26 +8,23 @@ public class Enemy : MonoBehaviour
     private int _hp;
     private int _damage;
     private float _attackPower;
-    private AudioSource _audioSource;
-    private AudioClip _hitSound;
     private float _attackInterval = 2f; // 공격 대기 시간
     private bool _canAttack = true; // 공격 가능 여부
     private float _lastAttackTime; // 마지막 공격 시간
     private Player _player;
 
-    public void Init(Transform player, float moveSpeed, int hp, int damage, float attackPower, AudioSource audioSource, AudioClip hitSound)
+    public void Init(Transform player, float moveSpeed, int hp, int damage, float attackPowerd)
     {
         _player = player.GetComponent<Player>();
         _moveSpeed = moveSpeed;
         _hp = hp;
         _damage = damage;
-        _attackPower = attackPower;
-        _audioSource = audioSource;
-        _hitSound = hitSound;
+        _attackPower = attackPowerd;
+
     }
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        
     }
 
     public void Update()
@@ -62,26 +59,19 @@ public class Enemy : MonoBehaviour
         float distance = Vector2.Distance(transform.position, _player.transform.position);
         if (distance < 1f)
         {
-            _player.HitDamage(_damage);
+            //_player.HitDamage(_damage);
 
             _lastAttackTime = Time.time;
             _canAttack = false;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            collision.GetComponent<Player>().HitDamage(_damage);
-        }
-    }
 
     public int GetDamage(int damage)
     {
         int actualDamage = Mathf.Clamp((short)(damage), 0, 100);
         _hp -= actualDamage;
-        _audioSource.PlayOneShot(_hitSound);
+        
 
         if (_hp <= 0)
         {

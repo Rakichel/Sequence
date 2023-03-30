@@ -56,7 +56,7 @@ public class EnemyAttack : MonoBehaviour
         Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(1, 1), 0);
         if (distance < 1f & hit)
         {
-            _player.HitDamage(_damage);
+            //_player.HitDamage(_damage);
 
             _lastAttackTime = Time.time;
             _canAttack = false;
