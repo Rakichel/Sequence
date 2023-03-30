@@ -12,7 +12,7 @@ namespace PlayerInfo
         private Player _player;
 
         public int Power;                   // 공격력
-        public float AnimTime = 0.5f;  // 공격 애니메이션이 걸리는 시간
+        public float AnimTime = 0.5f;       // 공격 애니메이션이 걸리는 시간
         private void Start()
         {
             _player = GetComponent<Player>();

@@ -31,11 +31,8 @@ namespace PlayerInfo
             MoveStateSelector();
             // 플레이어 방향 전환
             DirectionSelector();
-        }
 
-        private void FixedUpdate()
-        {
-            if (_player.PlayerFixedState())
+            if (_player.State != PlayerState.Dash)
             {
                 // 움직임
                 Movement();
