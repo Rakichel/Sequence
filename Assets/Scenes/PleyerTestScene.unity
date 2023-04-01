@@ -438,6 +438,9 @@ GameObject:
   - component: {fileID: 2138279199}
   - component: {fileID: 2138279196}
   - component: {fileID: 2138279195}
+  - component: {fileID: 2138279201}
+  - component: {fileID: 2138279203}
+  - component: {fileID: 2138279202}
   - component: {fileID: 2138279194}
   - component: {fileID: 2138279193}
   m_Layer: 0
@@ -506,9 +509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f33cfdaffb01944988d76a8c27cb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 10
-  dashDuration: 0.2
-  dashCooldown: 1
+  DashSpeed: 10
+  DashDuration: 0.5
+  DashCooldown: 0.7
 --- !u!114 &2138279196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,5 +621,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71703c79551247442acfe174d20d3bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  IsDashing: 0
+  Rigidbody: {fileID: 2138279194}
+  Direction: 0
+  State: 0
+  SpriteRender: {fileID: 0}
+  Ghost: {fileID: 2138279202}
+--- !u!114 &2138279201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8101cc10254d8c143814f833d93e8778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Power: 10
+  AnimTime: 0.1
+--- !u!114 &2138279202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9061abf15dcf110468607697d7e96246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GhostPrefab: {fileID: 677311716083562342, guid: 0734a03fdba139e4d88ae81e4010fcf2, type: 3}
+  Delay: 0.01
+  DestroyTime: 0.1
+  color: {r: 0, g: 1, b: 0, a: 0.2509804}
+--- !u!114 &2138279203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138279192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eee0fe1aaacd2c499ff7d1bfcf410ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitAnimTime: 1
+  DieAnimTime: 1
+  Defence: 0.5
+  ParryTime: 1
