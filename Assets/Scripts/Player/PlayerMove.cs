@@ -61,10 +61,12 @@ namespace PlayerInfo
             if (_horizontal > 0)
             {
                 _player.Direction = PlayerDirection.Right;
+                _player.SpriteRender.flipX = false;
             }
             else if (_horizontal < 0)
             {
                 _player.Direction = PlayerDirection.Left;
+                _player.SpriteRender.flipX = true;
             }
         }
 

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using PlayerInfo;
+using UnityEngine;
 public class GhostTrail : MonoBehaviour
 {
     private Player _player;
@@ -20,14 +18,14 @@ public class GhostTrail : MonoBehaviour
 
     private void Update()
     {
-        if(_timer > 0) 
+        if (_timer > 0)
         {
-            _timer -= Time.deltaTime; 
+            _timer -= Time.deltaTime;
         }
-        else 
+        else
         {
-            _timer = Delay; 
-            CreateGhost(); 
+            _timer = Delay;
+            CreateGhost();
         }
     }
 
@@ -44,6 +42,7 @@ public class GhostTrail : MonoBehaviour
         // 생성된 오브젝트의 스프라이트 수정
         _spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = _player.SpriteRender.sprite;
+        _spriteRenderer.flipX = _player.SpriteRender.flipX;
         _spriteRenderer.color = color;
     }
 }

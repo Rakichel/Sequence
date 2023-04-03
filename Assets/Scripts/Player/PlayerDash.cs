@@ -73,11 +73,11 @@ namespace PlayerInfo
             {
                 _dashVelocity = transform.right * DashSpeed;
             }
-            else 
+            else
             {
                 _dashVelocity = -transform.right * DashSpeed;
             }
-            _player.Rigidbody.velocity = _dashVelocity;
+            _player.Rigidbody.velocity = new Vector2(_dashVelocity.x, _player.Rigidbody.velocity.y);
         }
     }
 }
