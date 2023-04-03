@@ -220,6 +220,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d679ac420cbc9c478719c42c6bd7c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 1
+  _hp: 100
+  _damage: 10
+  _attackPower: 5
+  _attackInterval: 2
+  _canAttack: 1
+  _lastAttackTime: 1
+  _player: {fileID: 1449646192}
 --- !u!50 &68537922
 Rigidbody2D:
   serializedVersion: 4
@@ -554,7 +562,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
