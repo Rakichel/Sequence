@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
-    public Player _player;
-    public float _attackPower;
-    public float _attackInterval = 2f;
-    public bool _canAttack = true;
-    public float _lastAttackTime;
+    public int _damage;
     public float _moveSpeed;
+    public float _attackPower;
+    public float _attackInterval = 2f; // 공격 대기 시간
+    public bool _canAttack = true; // 공격 가능 여부
+    public float _lastAttackTime; // 마지막 공격 시간
+    public Player _player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +21,15 @@ public class EnemyAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+
+
+    public void Update()
     {
-        
+        if (_player != null)
+        {
+            ChasePlayer();
+            AttackPlayer();
+        }
     }
 
     private void ChasePlayer()
@@ -43,18 +53,18 @@ public class EnemyAttack : MonoBehaviour
         }
 
         float distance = Vector2.Distance(transform.position, _player.transform.position);
-        if (distance < 1f)
+        Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(1, 1), 0);
+        if (distance < 1f & hit)
         {
+            //_player.HitDamage(_damage);
+
             _lastAttackTime = Time.time;
-            _canAttack = false; // ontrigger enter로 넘길 방법
+            _canAttack = false;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnDrawGizmos()
     {
-       // physics 2d중심점 .overlapbox 
-       // onDrawGizmos
-        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector2(1,1));
     }
-    
 }

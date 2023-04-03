@@ -4,42 +4,36 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    //fsm 구현 03.30 
-    // 기능별로 컴포넌트 분리
-    //공격 작동방식 수정
-    //4.1~ 4.7
-    //어느정도 틀 조작, 적을 잡기, 스테이지 넘어가기
-    //동선이 너무해 버려버릴거야
-    public float _moveSpeed;
-    public int _hp;
-    public int _damage;
-    public float _attackPower;
-    public float _attackInterval = 2f; // 공격 대기 시간
-    public bool _canAttack = true; // 공격 가능 여부
-    public float _lastAttackTime; // 마지막 공격 시간
-    public Player _player;
+    private float _moveSpeed;
+    private int _hp;
+    private int _damage;
+    private float _attackPower;
+    private float _attackInterval = 2f; // 공격 대기 시간
+    private bool _canAttack = true; // 공격 가능 여부
+    private float _lastAttackTime; // 마지막 공격 시간
+    private Player _player;
 
-    public void Init(Transform player, float moveSpeed, int hp, int damage, float attackPower)
+    public void Init(Transform player, float moveSpeed, int hp, int damage, float attackPowerd)
     {
         _player = player.GetComponent<Player>();
         _moveSpeed = moveSpeed;
         _hp = hp;
         _damage = damage;
-        _attackPower = attackPower;
+        _attackPower = attackPowerd;
+
+    }
+    private void Awake()
+    {
+        
     }
 
-    void Start()
-    {
-        _player = _player.GetComponent<Player>();
-    }
-    private void Update()
+    public void Update()
     {
         if (_player != null)
         {
             ChasePlayer();
             AttackPlayer();
         }
-        //Physics2D.OverlapCollider(Collider2D col,)
     }
 
     private void ChasePlayer()
@@ -65,18 +59,19 @@ public class Enemy : MonoBehaviour
         float distance = Vector2.Distance(transform.position, _player.transform.position);
         if (distance < 1f)
         {
+            //_player.HitDamage(_damage);
+
             _lastAttackTime = Time.time;
-            _canAttack = false; // ontrigger enter로 넘길 방법
+            _canAttack = false;
         }
     }
 
-
-    
 
     public int GetDamage(int damage)
     {
         int actualDamage = Mathf.Clamp((short)(damage), 0, 100);
         _hp -= actualDamage;
+        
 
         if (_hp <= 0)
         {
