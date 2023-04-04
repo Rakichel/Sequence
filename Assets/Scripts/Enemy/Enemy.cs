@@ -1,10 +1,10 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int _hp;
+    private int _hp;
     private Player _player;
 
 
@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     {
         int actualDamage = Mathf.Clamp((int)(damage), 0, 100);
         _hp -= actualDamage;
-
+        
 
         if (_hp <= 0)
         {
@@ -22,9 +22,10 @@ public class Enemy : MonoBehaviour
         return actualDamage;
     }
 
+
     private void Die()
     {
-        // ì ì„ íŒŒê´´í•˜ëŠ” ì½”ë“œ ìž‘ì„±
+        // ÀûÀ» ÆÄ±«ÇÏ´Â ÄÚµå ÀÛ¼º
         Destroy(gameObject);
     }
 }

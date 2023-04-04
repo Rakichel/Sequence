@@ -1,16 +1,17 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class EnemyAttack : MonoBehaviour
 {
     public int _damage;
     public float _moveSpeed;
     public float _attackPower;
-    public float _attackInterval = 2f; // ê³µê²© ëŒ€ê¸° ì‹œê°„
-    public bool _canAttack = true; // ê³µê²© ê°€ëŠ¥ ì—¬ë¶€
-    public float _lastAttackTime; // ë§ˆì§€ë§‰ ê³µê²© ì‹œê°„
+    public float _attackInterval = 2f; // °ø°Ý ´ë±â ½Ã°£
+    public bool _canAttack = true; // °ø°Ý °¡´É ¿©ºÎ
+    public float _lastAttackTime; // ¸¶Áö¸· °ø°Ý ½Ã°£
     public Player _player;
 
     // Start is called before the first frame update

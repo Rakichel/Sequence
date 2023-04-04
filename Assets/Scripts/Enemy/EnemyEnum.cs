@@ -32,6 +32,7 @@ public class EnemyEnum : MonoBehaviour
     // Update is called once per frame
     void Update() // 
     {
+        
         if (_enemySpriteRenderer.flipX = rb.velocity.magnitude > 0 && rb.velocity.x < 0)
         {
             _enemySpriteRenderer.flipX = true;
@@ -62,6 +63,4 @@ public class EnemyEnum : MonoBehaviour
     {
         throw new System.NotImplementedException();
     }
-
-
 }
