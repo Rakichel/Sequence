@@ -25,13 +25,17 @@ namespace PlayerInfo
         private void Update()
         {
             // 땅에 발 딛고 있는지 체크
-            _isGrounded = Physics2D.OverlapBox(GroundCheck.position - new Vector3(0, 0.5f - (CheckSizeY / 2f)), new Vector2(CheckSizeX, CheckSizeY), 0f, WhatIsGround);
-            
+            _isGrounded = Physics2D.OverlapBox(GroundCheck.position, new Vector2(CheckSizeX, CheckSizeY), 0f, WhatIsGround);
+
             // 체크한 값으로 플레이어 상태 전환
             JumpStateSelector();
 
             // 땅에 발 딛고 있으며 경직된 상태가 아닐 때 스페이스 바를 통해 작동
             if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && _player.PlayerFixedState())
+            {
+                _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && _player.State == PlayerState.Dash)
             {
                 _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
             }
@@ -59,7 +63,7 @@ namespace PlayerInfo
         {
             // 체크 구역 시각화
             Gizmos.color = Color.yellow;
-            Gizmos.DrawCube(GroundCheck.position - new Vector3(0, 0.5f - (CheckSizeY / 2f)), new Vector2(CheckSizeX, CheckSizeY));
+            Gizmos.DrawCube(GroundCheck.position, new Vector2(CheckSizeX, CheckSizeY));
         }
     }
 }

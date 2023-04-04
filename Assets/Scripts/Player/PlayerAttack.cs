@@ -12,7 +12,7 @@ namespace PlayerInfo
         private Player _player;
 
         public int Power;                   // 공격력
-        public float AnimTime = 0.5f;       // 공격 애니메이션이 걸리는 시간
+        public float AnimTime;              // 공격 애니메이션이 걸리는 시간
         private void Start()
         {
             _player = GetComponent<Player>();
@@ -21,6 +21,10 @@ namespace PlayerInfo
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.LeftControl) && _player.PlayerFixedState())
+            {
+                StartCoroutine(Attack());
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftControl) && _player.State == PlayerState.Dash)
             {
                 StartCoroutine(Attack());
             }
@@ -58,11 +62,11 @@ namespace PlayerInfo
             // 보는 방향 기준으로 공격 방향 지정
             if (_player.Direction == PlayerDirection.Right)
             {
-                return Physics2D.OverlapBox(transform.right, new Vector3(1f, 1f), 0f, 1 << 7);
+                return Physics2D.OverlapBox(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 7);
             }
             else
             {
-                return Physics2D.OverlapBox(-transform.right, new Vector3(1f, 1f), 0f, 1 << 7);
+                return Physics2D.OverlapBox(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 7);
             }
         }
 
@@ -74,11 +78,11 @@ namespace PlayerInfo
             {
                 if (_player.Direction == PlayerDirection.Right)
                 {
-                    Gizmos.DrawCube(transform.position + Vector3.right, new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f));
                 }
                 else
                 {
-                    Gizmos.DrawCube(transform.position + Vector3.left, new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f));
                 }
             }
         }
