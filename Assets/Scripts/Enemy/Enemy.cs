@@ -1,77 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float _moveSpeed;
-    private int _hp;
-    private int _damage;
-    private float _attackPower;
-    private float _attackInterval = 2f; // °ø°Ý ´ë±â ½Ã°£
-    private bool _canAttack = true; // °ø°Ý °¡´É ¿©ºÎ
-    private float _lastAttackTime; // ¸¶Áö¸· °ø°Ý ½Ã°£
+    public int _hp;
     private Player _player;
-
-    public void Init(Transform player, float moveSpeed, int hp, int damage, float attackPowerd)
-    {
-        _player = player.GetComponent<Player>();
-        _moveSpeed = moveSpeed;
-        _hp = hp;
-        _damage = damage;
-        _attackPower = attackPowerd;
-
-    }
-    private void Awake()
-    {
-        
-    }
-
-    public void Update()
-    {
-        if (_player != null)
-        {
-            ChasePlayer();
-            AttackPlayer();
-        }
-    }
-
-    private void ChasePlayer()
-    {
-        float distance = Vector2.Distance(transform.position, _player.transform.position);
-        if (distance < 5f)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
-        }
-    }
-
-    private void AttackPlayer()
-    {
-        if (!_canAttack)
-        {
-            if (Time.time - _lastAttackTime >= _attackInterval)
-            {
-                _canAttack = true;
-            }
-            return;
-        }
-
-        float distance = Vector2.Distance(transform.position, _player.transform.position);
-        if (distance < 1f)
-        {
-            //_player.HitDamage(_damage);
-
-            _lastAttackTime = Time.time;
-            _canAttack = false;
-        }
-    }
 
 
     public int GetDamage(int damage)
     {
-        int actualDamage = Mathf.Clamp((short)(damage), 0, 100);
+        int actualDamage = Mathf.Clamp((int)(damage), 0, 100);
         _hp -= actualDamage;
-        
+
 
         if (_hp <= 0)
         {
@@ -81,10 +22,9 @@ public class Enemy : MonoBehaviour
         return actualDamage;
     }
 
-
     private void Die()
     {
-        // ÀûÀ» ÆÄ±«ÇÏ´Â ÄÚµå ÀÛ¼º
+        // ì ì„ íŒŒê´´í•˜ëŠ” ì½”ë“œ ìž‘ì„±
         Destroy(gameObject);
     }
 }
