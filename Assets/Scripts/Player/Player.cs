@@ -40,12 +40,14 @@ namespace PlayerInfo
         public bool PlayerFixedState()
         {
             // 공격 시, 대쉬 시, 맞을 시, 죽을 시 경직된 상태로 판정
-            return (
-                State != PlayerState.Attack &&
-                State != PlayerState.Dash &&
-                State != PlayerState.Guard &&
-                State != PlayerState.Hit &&
-                State != PlayerState.Die
+            return 
+                (
+                    State != PlayerState.Attack &&
+                    State != PlayerState.Combo &&
+                    State != PlayerState.Dash &&
+                    State != PlayerState.Guard &&
+                    State != PlayerState.Hit &&
+                    State != PlayerState.Die
                 );
         }
     }

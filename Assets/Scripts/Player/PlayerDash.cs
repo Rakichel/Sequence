@@ -27,11 +27,11 @@ namespace PlayerInfo
             // 대쉬 쿨타임 감소
             if (_dashCooldownTimer > 0)
             {
-                _dashCooldownTimer -= Time.deltaTime;
+                _dashCooldownTimer -= Time.unscaledDeltaTime;
             }
 
             // Shift 키 누르면 대쉬
-            if (Input.GetKeyDown(KeyCode.LeftShift) && _dashCooldownTimer <= 0 && _player.PlayerFixedState())
+            if (Input.GetKeyDown(KeyCode.C) && _dashCooldownTimer <= 0 && _player.PlayerFixedState())
             {
                 DashInit();
             }
@@ -46,7 +46,7 @@ namespace PlayerInfo
                 DashMovement();
 
                 // 시간이 다 지나면 Idle 상태로 전환
-                _dashTimer -= Time.deltaTime;
+                _dashTimer -= Time.unscaledDeltaTime;
                 if (_dashTimer <= 0)
                 {
                     _player.State = PlayerState.Idle;
@@ -77,7 +77,7 @@ namespace PlayerInfo
             {
                 _dashVelocity = -transform.right * DashSpeed;
             }
-            _player.Rigidbody.velocity = new Vector2(_dashVelocity.x, _player.Rigidbody.velocity.y);
+            _player.Rigidbody.velocity = new Vector2(_dashVelocity.x / Time.timeScale, _player.Rigidbody.velocity.y);
         }
     }
 }

@@ -23,12 +23,12 @@ namespace PlayerInfo
         private void Update()
         {
             // 가드키 입력
-            if (Input.GetKey(KeyCode.LeftAlt) && _player.PlayerFixedState())
+            if (Input.GetKey(KeyCode.Z) && _player.PlayerFixedState())
             {
                 _player.State = PlayerState.Guard;
                 ParryTime -= Time.deltaTime;
             }
-            else if(Input.GetKeyUp(KeyCode.LeftAlt) && _player.State == PlayerState.Guard)
+            else if(Input.GetKeyUp(KeyCode.Z) && _player.State == PlayerState.Guard)
             {
                 _player.State = PlayerState.Idle;
             }

@@ -20,7 +20,7 @@ public class GhostTrail : MonoBehaviour
     {
         if (_timer > 0)
         {
-            _timer -= Time.deltaTime;
+            _timer -= Time.unscaledDeltaTime;
         }
         else
         {
