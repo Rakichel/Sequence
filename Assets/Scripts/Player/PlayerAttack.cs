@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PlayerInfo
 {
-    
+
     /// <summary>
     /// 플레이어의 공격 기능을 담당하는 클래스입니다.
     /// </summary>
@@ -18,7 +18,7 @@ namespace PlayerInfo
         public int Power;                   // 공격력
         public float AnimTime;              // 공격 애니메이션이 걸리는 시간
         public float NextAttackTime;
-        
+
         private void Start()
         {
             _player = GetComponent<Player>();
@@ -62,8 +62,6 @@ namespace PlayerInfo
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X))
                 {
-                    Debug.Log("Combo");
-                    
                     _combo = StartCoroutine(Combo());
                     StopCoroutine(_attack);
                 }
@@ -97,8 +95,6 @@ namespace PlayerInfo
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X))
                 {
-                    Debug.Log("Attack");
-
                     _attack = StartCoroutine(Attack());
                     StopCoroutine(_combo);
                 }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerInfo
@@ -28,7 +27,7 @@ namespace PlayerInfo
                 _player.State = PlayerState.Guard;
                 ParryTime -= Time.deltaTime;
             }
-            else if(Input.GetKeyUp(KeyCode.Z) && _player.State == PlayerState.Guard)
+            else if (Input.GetKeyUp(KeyCode.Z) && _player.State == PlayerState.Guard)
             {
                 _player.State = PlayerState.Idle;
             }
@@ -55,9 +54,9 @@ namespace PlayerInfo
         public void GetDamage(int _damage)
         {
             // 공격 받았을 때 가드 중인 경우
-            if(_player.State == PlayerState.Guard)
+            if (_player.State == PlayerState.Guard)
             {
-                if(_timer > 0)
+                if (_timer > 0)
                 {
                     // Parry 구현
                 }
@@ -67,7 +66,7 @@ namespace PlayerInfo
                 }
             }
             // 일반적인 피격 로직 실행
-            else
+            else if (_player.State != PlayerState.Hit && _player.State != PlayerState.Die)
             {
                 StopAllCoroutines();
                 StartCoroutine(Hit(_damage));
@@ -85,15 +84,17 @@ namespace PlayerInfo
             if (_player.Hp > 0)
             {
                 _player.State = PlayerState.Hit;
+                yield return new WaitForSeconds(HitAnimTime);
+                _player.State = PlayerState.Idle;
             }
 
             // 체력이 다 떨어짐
             else
             {
                 _player.State = PlayerState.Die;
+                yield return new WaitForSeconds(HitAnimTime);
             }
-            yield return new WaitForSeconds(HitAnimTime);
-            _player.State = PlayerState.Idle;
+
         }
     }
 }
