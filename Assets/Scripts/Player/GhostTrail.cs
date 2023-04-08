@@ -101,25 +101,4 @@ public class GhostTrail : MonoBehaviour
             DrawGhost();
         }
     }
-
-    //private void CreateGhost()
-    //{
-    //    // 생성, 크기조절, 삭제 타이머
-    //    GameObject ghostObj = Instantiate(GhostPrefab, transform.position, transform.rotation);
-    //    ghostObj.transform.localScale = _player.transform.localScale;
-    //    Destroy(ghostObj, DestroyTime);
-
-    //    // 생성된 오브젝트의 스프라이트 수정
-    //    _spriteRenderer = ghostObj.GetComponent<SpriteRenderer>();
-    //    _spriteRenderer.sprite = _player.SpriteRender.sprite;
-    //    _spriteRenderer.flipX = _player.SpriteRender.flipX;
-    //    Color newColor = new Color(
-    //        Mathf.Lerp(StartColor.r, EndColor.r, Mathf.Abs(Mathf.Sin(Timer))),
-    //        Mathf.Lerp(StartColor.g, EndColor.g, Mathf.Abs(Mathf.Sin(Timer))),
-    //        Mathf.Lerp(StartColor.b, EndColor.b, Mathf.Abs(Mathf.Sin(Timer))),
-    //        0.5f);
-    //    _spriteRenderer.color = newColor;
-    //    //_spriteRenderer.color = color;
-    //}
-
 }

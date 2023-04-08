@@ -46,13 +46,17 @@ namespace PlayerInfo
             _player.State = PlayerState.Attack;
 
             // 공격 범위 지정 및 충돌 체크
-            Collider2D enemy;
-            enemy = AttackAreaSelector();
-
+            Collider2D collider;
+            collider = AttackAreaSelector();
             // 적 피격 시
-            if (enemy != null)
+            if (collider != null)
             {
                 // enemy 피격 함수 호출
+                if (collider.GetComponent<Enemy>() != null)
+                {
+                    Enemy enemy = collider.GetComponent<Enemy>();
+                    enemy.GetDamage(Power);
+                }
             }
             yield return new WaitForSecondsRealtime(AnimTime);
             _timer = 0;
@@ -79,13 +83,17 @@ namespace PlayerInfo
             _player.State = PlayerState.Combo;
 
             // 공격 범위 지정 및 충돌 체크
-            Collider2D enemy;
-            enemy = AttackAreaSelector();
-
+            Collider2D collider;
+            collider = AttackAreaSelector();
             // 적 피격 시
-            if (enemy != null)
+            if (collider != null)
             {
                 // enemy 피격 함수 호출
+                if (collider.GetComponent<Enemy>() != null)
+                {
+                    Enemy enemy = collider.GetComponent<Enemy>();
+                    enemy.GetDamage(Power);
+                }
             }
             yield return new WaitForSecondsRealtime(AnimTime);
             _timer = 0;
