@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace PlayerInfo
 {
+
     /// <summary>
     /// 플레이어의 공격 기능을 담당하는 클래스입니다.
     /// </summary>
@@ -10,9 +11,14 @@ namespace PlayerInfo
     public class PlayerAttack : MonoBehaviour
     {
         private Player _player;
+        private Coroutine _attack;
+        private Coroutine _combo;
+        private float _timer;
 
         public int Power;                   // 공격력
         public float AnimTime;              // 공격 애니메이션이 걸리는 시간
+        public float NextAttackTime;
+
         private void Start()
         {
             _player = GetComponent<Player>();
@@ -20,13 +26,13 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.LeftControl) && _player.PlayerFixedState())
+            if (Input.GetKeyDown(KeyCode.X) && _player.PlayerFixedState())
             {
-                StartCoroutine(Attack());
+                _attack = StartCoroutine(Attack());
             }
-            else if (Input.GetKeyDown(KeyCode.LeftControl) && _player.State == PlayerState.Dash)
+            else if (Input.GetKeyDown(KeyCode.X) && _player.State == PlayerState.Dash)
             {
-                StartCoroutine(Attack());
+                _attack = StartCoroutine(Attack());
             }
         }
 
@@ -40,16 +46,69 @@ namespace PlayerInfo
             _player.State = PlayerState.Attack;
 
             // 공격 범위 지정 및 충돌 체크
-            Collider2D enemy;
-            enemy = AttackAreaSelector();
-
+            Collider2D collider;
+            collider = AttackAreaSelector();
             // 적 피격 시
-            if (enemy != null)
+            if (collider != null)
             {
                 // enemy 피격 함수 호출
+                if (collider.GetComponent<Enemy>() != null)
+                {
+                    Enemy enemy = collider.GetComponent<Enemy>();
+                    enemy.GetDamage(Power);
+                }
             }
-            yield return new WaitForSeconds(AnimTime);
+            yield return new WaitForSecondsRealtime(AnimTime);
+            _timer = 0;
+            while (_timer < NextAttackTime)
+            {
+                yield return new WaitForEndOfFrame();
+                _timer = _timer + Time.unscaledDeltaTime;
+                if (Input.GetKey(KeyCode.X))
+                {
+                    _combo = StartCoroutine(Combo());
+                    StopCoroutine(_attack);
+                }
+                else if (Input.anyKey)
+                    break;
+            }
+
             // 공격 후 Idle로 전환
+            _player.State = PlayerState.Idle;
+        }
+
+        private IEnumerator Combo()
+        {
+            // 공격 상태 전환
+            _player.State = PlayerState.Combo;
+
+            // 공격 범위 지정 및 충돌 체크
+            Collider2D collider;
+            collider = AttackAreaSelector();
+            // 적 피격 시
+            if (collider != null)
+            {
+                // enemy 피격 함수 호출
+                if (collider.GetComponent<Enemy>() != null)
+                {
+                    Enemy enemy = collider.GetComponent<Enemy>();
+                    enemy.GetDamage(Power);
+                }
+            }
+            yield return new WaitForSecondsRealtime(AnimTime);
+            _timer = 0;
+            while (_timer < NextAttackTime)
+            {
+                yield return new WaitForEndOfFrame();
+                _timer = _timer + Time.unscaledDeltaTime;
+                if (Input.GetKey(KeyCode.X))
+                {
+                    _attack = StartCoroutine(Attack());
+                    StopCoroutine(_combo);
+                }
+                else if (Input.anyKey)
+                    break;
+            }
             _player.State = PlayerState.Idle;
         }
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace PlayerInfo
@@ -9,36 +10,94 @@ namespace PlayerInfo
     public class PlayerJump : MonoBehaviour
     {
         private Player _player;         // 플레이어 정보를 받아오기 위한 객체
-        private bool _isGrounded;       // 땅에 발을 딛는지 확인하는 용도
+        private Collider2D _isGrounded;       // 땅에 발을 딛는지 확인하는 용도
+        private PlatformEffector2D _getGround;
+        private float _curJumpForce;
+        private float _curGravity;
 
         public float JumpForce;         // 점프력
         public Transform GroundCheck;   // 땅을 체크하기 위한 범위의 좌표
         public LayerMask WhatIsGround;  // 땅의 레이어를 받아옴
         public float CheckSizeX;        // 체크박스의 크기를 조절 (가로)
         public float CheckSizeY;        // 체크박스의 크기를 조절 (세로)
+        public float LandAnimationTime;
 
         private void Start()
         {
             _player = GetComponent<Player>();
+            _curJumpForce = JumpForce;
+            _curGravity = _player.Rigidbody.gravityScale;
         }
 
         private void Update()
         {
+            if (Time.timeScale < 1f)
+            {
+                JumpForce = 45f;
+                _player.Rigidbody.gravityScale = 25f;
+            }
+            else
+            {
+                JumpForce = _curJumpForce;
+                _player.Rigidbody.gravityScale = _curGravity;
+            }
             // 땅에 발 딛고 있는지 체크
             _isGrounded = Physics2D.OverlapBox(GroundCheck.position, new Vector2(CheckSizeX, CheckSizeY), 0f, WhatIsGround);
 
             // 체크한 값으로 플레이어 상태 전환
             JumpStateSelector();
 
-            // 땅에 발 딛고 있으며 경직된 상태가 아닐 때 스페이스 바를 통해 작동
-            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && _player.PlayerFixedState())
+            // 점프
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                // 하단 점프
+                if (Input.GetKey(KeyCode.DownArrow) && _player.PlayerFixedState())
+                {
+                    // 공중에 있을 시 랜딩
+                    if (!_isGrounded)
+                    {
+                        StartCoroutine(Landing());
+                    }
+                    // 지면에 있을 시 밑층으로 내려가기
+                    else if (_isGrounded && _isGrounded.CompareTag("Platform"))
+                    {
+                        StartCoroutine(DownJump());
+                    }
+                }
+                // 땅에 발 딛고 있으며 경직된 상태가 아닐 때 혹은 대쉬 중 일때 작동
+                else if (_isGrounded && (_player.PlayerFixedState() || _player.State == PlayerState.Dash))
+                {
+                    _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
+                    _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && _isGrounded && _player.State == PlayerState.Dash)
-            {
-                _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-            }
+        }
+
+        /// <summary>
+        /// 하단 점프 구현부 입니다.
+        /// 밟고 있는 땅의 표면을 180도로 변경하여 플레이어가 땅을 밟고 있지 않게 합니다.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator DownJump()
+        {
+            _getGround = _isGrounded.GetComponent<PlatformEffector2D>();
+            _getGround.surfaceArc = 0;
+            yield return new WaitForSeconds(0.5f);
+            _getGround.surfaceArc = 180;
+        }
+
+        /// <summary>
+        /// 랜딩 구현부 입니다.
+        /// 순간적으로 밑으로 힘을 가해서 빠르게 내려가게 하고 애니메이션에 맞춰서 원상태로 복귀 합니다.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator Landing()
+        {
+            _player.State = PlayerState.Landing;
+            _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
+            _player.Rigidbody.AddForce(new Vector2(0, -JumpForce), ForceMode2D.Impulse);
+            yield return new WaitForSeconds(LandAnimationTime);
+            _player.State = PlayerState.Idle;
         }
 
         /// <summary>
