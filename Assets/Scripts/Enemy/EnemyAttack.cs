@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using PlayerInfo;
+
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -11,14 +13,12 @@ public class EnemyAttack : MonoBehaviour
     public float _attackPower;
     public float _attackInterval = 2f; // 공격 대기 시간
     public bool _canAttack = true; // 공격 가능 여부
-    public float _lastAttackTime; // 마지막 공격 시간
+    public float _lastAttackTime = 0; // 마지막 공격 시간
     public Player _player;
+    public PlayerHit playerHit;
+    public Animator enemyAnimator;
+    public LayerMask playerLayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _player = _player.GetComponent<Player>();
-    }
 
     // Update is called once per frame
 
@@ -30,6 +30,8 @@ public class EnemyAttack : MonoBehaviour
             ChasePlayer();
             AttackPlayer();
         }
+        if(!_canAttack)
+            _lastAttackTime += Time.deltaTime;
     }
 
     private void ChasePlayer()
@@ -38,33 +40,49 @@ public class EnemyAttack : MonoBehaviour
         if (distance < 5f)
         {
             transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
+            enemyAnimator.SetBool("IsWalking", true);
         }
+        
     }
 
     private void AttackPlayer()
     {
-        if (!_canAttack)
-        {
-            if (Time.time - _lastAttackTime >= _attackInterval)
+        if (!_canAttack) // 공격이 가능하지 않다면
+
+        { //_moveSpeed = 0;
+            enemyAnimator.SetBool("IsWalking", false);
+           
+        
+        if (_lastAttackTime >= _attackInterval) // 공격 간격이 마지막 공격시간보다 크거나 같다면 
             {
                 _canAttack = true;
+                enemyAnimator.SetTrigger("Attack");
+                _lastAttackTime = 0;
             }
+            
             return;
         }
+   
 
         float distance = Vector2.Distance(transform.position, _player.transform.position);
-        Collider2D hit = Physics2D.OverlapBox(transform.position, new Vector2(1, 1), 0);
-        if (distance < 1f & hit)
+        Collider2D hit = Physics2D.OverlapBox(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1), 1<<7);
+        if (distance < 1f && hit)
         {
-            //_player.HitDamage(_damage);
-
-            _lastAttackTime = Time.time;
+            enemyAnimator.SetTrigger("Attack");
+            playerHit.GetDamage(_damage);
             _canAttack = false;
+            
         }
+        else 
+        {
+            enemyAnimator.ResetTrigger("Attack");
+        }
+            
+        
     }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector2(1,1));
+        Gizmos.DrawWireCube(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1));
     }
 }
