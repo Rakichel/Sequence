@@ -6,12 +6,14 @@ public class EnemyEnum : MonoBehaviour
 {
     Animator animator;
    
-    private bool _isEnemyRight = true;
+    
     public SpriteRenderer _enemySpriteRenderer;
-    Rigidbody2D rb;
+    
+
+    enum EnemyDirection { Left, Right }
     enum EnemyState
     {
-        Idle,
+        Idle = 0,
         Attack,
         Hurt,
         Walk,
@@ -22,7 +24,7 @@ public class EnemyEnum : MonoBehaviour
     }
     EnemyState _enemyState = EnemyState.Idle;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         _enemySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,35 +34,30 @@ public class EnemyEnum : MonoBehaviour
     // Update is called once per frame
     void Update() // 
     {
-        
-        if (_enemySpriteRenderer.flipX = rb.velocity.magnitude > 0 && rb.velocity.x < 0)
-        {
-            _enemySpriteRenderer.flipX = true;
-        }
-        
+
     }
     public void Idle() // 코루틴 공격도중에 판정을 
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Idle;
     }
     public void Attack()
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Attack;
     }
     public void Hurt()
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Hurt;
     }
     public void Walk()
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Walk;
     }
     public void Protection()
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Protection;
     }
     public void Dead()
     {
-        throw new System.NotImplementedException();
+        _enemyState = EnemyState.Dead;
     }
 }
