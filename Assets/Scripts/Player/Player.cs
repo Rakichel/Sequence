@@ -32,6 +32,21 @@ namespace PlayerInfo
             SpriteRender = GetComponent<SpriteRenderer>();
             Ghost = GetComponent<GhostTrail>();
         }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                if (Time.timeScale >= 1f)
+                {
+                    Time.timeScale = 0.2f;
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            }
+        }
 
         /// <summary>
         /// 플레이어가 경직된 상태인지 판별하기 위한 함수입니다.
@@ -40,12 +55,15 @@ namespace PlayerInfo
         public bool PlayerFixedState()
         {
             // 공격 시, 대쉬 시, 맞을 시, 죽을 시 경직된 상태로 판정
-            return (
-                State != PlayerState.Attack &&
-                State != PlayerState.Dash &&
-                State != PlayerState.Guard &&
-                State != PlayerState.Hit &&
-                State != PlayerState.Die
+            return
+                (
+                    State != PlayerState.Attack &&
+                    State != PlayerState.Combo &&
+                    State != PlayerState.Landing &&
+                    State != PlayerState.Dash &&
+                    State != PlayerState.Guard &&
+                    State != PlayerState.Hit &&
+                    State != PlayerState.Die
                 );
         }
     }
