@@ -49,7 +49,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!_canAttack) // 공격이 가능하지 않다면
 
-        { //_moveSpeed = 0;
+        {
             enemyAnimator.SetBool("IsWalking", false);
            
         
