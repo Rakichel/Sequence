@@ -6,17 +6,14 @@ namespace PlayerInfo
     public class PlayerHit : MonoBehaviour
     {
         private Player _player;
-        private float _timer;
+        private Coroutine _guarding;
 
         public float HitAnimTime;   // Hit 애니메이션 출력 시간
         public float DieAnimTime;   // Die 애니메이션 출력 시간
-        public float Defence;       // 가드율 0 ~ 1
-        public float ParryTime;     // 패링 판정 시간
 
         private void Start()
         {
             _player = GetComponent<Player>();
-            _timer = ParryTime;
         }
 
         private void Update()
@@ -25,25 +22,15 @@ namespace PlayerInfo
             if (Input.GetKey(KeyCode.Z) && _player.PlayerFixedState())
             {
                 _player.State = PlayerState.Guard;
-                ParryTime -= Time.deltaTime;
             }
             else if (Input.GetKeyUp(KeyCode.Z) && _player.State == PlayerState.Guard)
             {
                 _player.State = PlayerState.Idle;
             }
 
-            SetTimer();
-        }
-
-        private void SetTimer()
-        {
-            if (_player.State == PlayerState.Guard)
+            if (Input.GetKey(KeyCode.H))
             {
-                _timer -= Time.deltaTime;
-            }
-            else
-            {
-                _timer = ParryTime;
+                GetDamage(0);
             }
         }
 
@@ -54,16 +41,13 @@ namespace PlayerInfo
         public void GetDamage(int _damage)
         {
             // 공격 받았을 때 가드 중인 경우
-            if (_player.State == PlayerState.Guard)
+            if (_player.State == PlayerState.Guard || _player.State == PlayerState.Guarding)
             {
-                if (_timer > 0)
+                if (_guarding != null)
                 {
-                    // Parry 구현
+                    StopCoroutine(_guarding);
                 }
-                else
-                {
-                    _player.Hp -= _damage * Defence;
-                }
+                _guarding = StartCoroutine(Guarding());
             }
             // 일반적인 피격 로직 실행
             else if (_player.State != PlayerState.Hit && _player.State != PlayerState.Die)
@@ -71,6 +55,23 @@ namespace PlayerInfo
                 StopAllCoroutines();
                 StartCoroutine(Hit(_damage));
             }
+        }
+
+        private IEnumerator Guarding()
+        {
+            yield return null;
+            _player.State = PlayerState.Guarding;
+            float _timer = 0f;
+            while (_timer <= 0.5f)
+            {
+                if (_player.State != PlayerState.Guarding)
+                    break;
+                _timer += Time.fixedUnscaledDeltaTime;
+                yield return new WaitForSecondsRealtime(Time.fixedUnscaledDeltaTime);
+            }
+            if (_player.State == PlayerState.Guarding)
+                _player.State = PlayerState.Idle;
+
         }
 
         /// <summary>
@@ -94,7 +95,6 @@ namespace PlayerInfo
                 _player.State = PlayerState.Die;
                 yield return new WaitForSeconds(HitAnimTime);
             }
-
         }
     }
 }

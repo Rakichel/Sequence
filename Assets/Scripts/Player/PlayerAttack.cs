@@ -1,3 +1,4 @@
+using Manager;
 using System.Collections;
 using UnityEngine;
 
@@ -26,14 +27,57 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.X) && _player.PlayerFixedState())
+            if (Input.GetKeyDown(KeyCode.X))
             {
-                _attack = StartCoroutine(Attack());
+                if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
+                {
+                    _attack = StartCoroutine(Attack());
+                }
+                else if (_player.PlayerFixedState() || _player.State == PlayerState.Guarding)
+                {
+                    _attack = StartCoroutine(Counter());
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.X) && _player.State == PlayerState.Dash)
+
+        }
+        private IEnumerator Counter()
+        {
+            // 공격 상태 전환
+            _player.State = PlayerState.Counter;
+
+            // 공격 범위 지정 및 충돌 체크
+            Collider2D[] collider;
+            collider = AttackAreaSelector();
+            // 적 피격 시
+            if (collider != null)
             {
-                _attack = StartCoroutine(Attack());
+                CameraManager.Instance.Impulse();
+                // enemy 피격 함수 호출
+                foreach (var col in collider)
+                {
+                    if (col.GetComponent<Enemy>() != null)
+                    {
+                        col.GetComponent<Enemy>().GetDamage(Power);
+                    }
+                }
             }
+            yield return new WaitForSecondsRealtime(AnimTime);
+            _timer = 0;
+            while (_timer < NextAttackTime)
+            {
+                yield return new WaitForEndOfFrame();
+                _timer = _timer + Time.unscaledDeltaTime;
+                if (Input.GetKey(KeyCode.X))
+                {
+                    _combo = StartCoroutine(Combo());
+                    StopCoroutine(_attack);
+                }
+                else if (Input.anyKey)
+                    break;
+            }
+
+            // 공격 후 Idle로 전환
+            _player.State = PlayerState.Idle;
         }
 
         /// <summary>
@@ -46,16 +90,19 @@ namespace PlayerInfo
             _player.State = PlayerState.Attack;
 
             // 공격 범위 지정 및 충돌 체크
-            Collider2D collider;
+            Collider2D[] collider;
             collider = AttackAreaSelector();
             // 적 피격 시
             if (collider != null)
             {
+                CameraManager.Instance.Impulse();
                 // enemy 피격 함수 호출
-                if (collider.GetComponent<Enemy>() != null)
+                foreach (var col in collider)
                 {
-                    Enemy enemy = collider.GetComponent<Enemy>();
-                    enemy.GetDamage(Power);
+                    if (col.GetComponent<Enemy>() != null)
+                    {
+                        col.GetComponent<Enemy>().GetDamage(Power);
+                    }
                 }
             }
             yield return new WaitForSecondsRealtime(AnimTime);
@@ -83,16 +130,19 @@ namespace PlayerInfo
             _player.State = PlayerState.Combo;
 
             // 공격 범위 지정 및 충돌 체크
-            Collider2D collider;
+            Collider2D[] collider;
             collider = AttackAreaSelector();
             // 적 피격 시
             if (collider != null)
             {
+                CameraManager.Instance.Impulse();
                 // enemy 피격 함수 호출
-                if (collider.GetComponent<Enemy>() != null)
+                foreach (var col in collider)
                 {
-                    Enemy enemy = collider.GetComponent<Enemy>();
-                    enemy.GetDamage(Power);
+                    if (col.GetComponent<Enemy>() != null)
+                    {
+                        col.GetComponent<Enemy>().GetDamage(Power);
+                    }
                 }
             }
             yield return new WaitForSecondsRealtime(AnimTime);
@@ -116,33 +166,38 @@ namespace PlayerInfo
         /// 공격 방향과 범위를 지정하고 충돌한 Collider정보를 전달하는 함수입니다.
         /// </summary>
         /// <param name="col">충돌이 감지된 Collider 정보를 저장할 변수</param>
-        private Collider2D AttackAreaSelector()
+        private Collider2D[] AttackAreaSelector()
         {
             // 보는 방향 기준으로 공격 방향 지정
-            if (_player.Direction == PlayerDirection.Right)
+            if (_player.State == PlayerState.Counter)
             {
-                return Physics2D.OverlapBox(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 7);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8);
+            }
+            else if (_player.Direction == PlayerDirection.Right)
+            {
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
             }
             else
             {
-                return Physics2D.OverlapBox(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 7);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
             }
         }
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-
             if (_player != null)
             {
+                Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
                 if (_player.Direction == PlayerDirection.Right)
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(0.75f, 0.5f), new Vector3(1f, 1f));
                 }
                 else
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(-0.75f, 0.5f), new Vector3(1f, 1f));
                 }
+                Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
+                Gizmos.DrawCube(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f));
             }
         }
     }

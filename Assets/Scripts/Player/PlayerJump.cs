@@ -1,3 +1,4 @@
+using Manager;
 using System.Collections;
 using UnityEngine;
 
@@ -12,8 +13,7 @@ namespace PlayerInfo
         private Player _player;         // 플레이어 정보를 받아오기 위한 객체
         private Collider2D _isGrounded;       // 땅에 발을 딛는지 확인하는 용도
         private PlatformEffector2D _getGround;
-        private float _curJumpForce;
-        private float _curGravity;
+        private int _jumpCnt = 2;
 
         public float JumpForce;         // 점프력
         public Transform GroundCheck;   // 땅을 체크하기 위한 범위의 좌표
@@ -25,25 +25,17 @@ namespace PlayerInfo
         private void Start()
         {
             _player = GetComponent<Player>();
-            _curJumpForce = JumpForce;
-            _curGravity = _player.Rigidbody.gravityScale;
         }
 
         private void Update()
         {
-            if (Time.timeScale < 1f)
-            {
-                JumpForce = 45f;
-                _player.Rigidbody.gravityScale = 25f;
-            }
-            else
-            {
-                JumpForce = _curJumpForce;
-                _player.Rigidbody.gravityScale = _curGravity;
-            }
             // 땅에 발 딛고 있는지 체크
             _isGrounded = Physics2D.OverlapBox(GroundCheck.position, new Vector2(CheckSizeX, CheckSizeY), 0f, WhatIsGround);
 
+            if (_isGrounded)
+            {
+                _jumpCnt = 2;
+            }
             // 체크한 값으로 플레이어 상태 전환
             JumpStateSelector();
 
@@ -61,12 +53,21 @@ namespace PlayerInfo
                     // 지면에 있을 시 밑층으로 내려가기
                     else if (_isGrounded && _isGrounded.CompareTag("Platform"))
                     {
+                        _jumpCnt--;
                         StartCoroutine(DownJump());
                     }
                 }
                 // 땅에 발 딛고 있으며 경직된 상태가 아닐 때 혹은 대쉬 중 일때 작동
                 else if (_isGrounded && (_player.PlayerFixedState() || _player.State == PlayerState.Dash))
                 {
+                    _jumpCnt--;
+                    _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
+                    _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                }
+                else if (_player.State == PlayerState.Jump && _jumpCnt > 0)
+                {
+                    _jumpCnt--;
+                    _player.State = PlayerState.DJump;
                     _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
                     _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
                 }
@@ -82,7 +83,7 @@ namespace PlayerInfo
         {
             _getGround = _isGrounded.GetComponent<PlatformEffector2D>();
             _getGround.surfaceArc = 0;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSecondsRealtime(0.4f);
             _getGround.surfaceArc = 180;
         }
 
@@ -93,10 +94,17 @@ namespace PlayerInfo
         /// <returns></returns>
         IEnumerator Landing()
         {
+            yield return null;
             _player.State = PlayerState.Landing;
             _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
             _player.Rigidbody.AddForce(new Vector2(0, -JumpForce), ForceMode2D.Impulse);
-            yield return new WaitForSeconds(LandAnimationTime);
+            while (!_isGrounded)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            _player.State = PlayerState.Landed;
+            CameraManager.Instance.Impulse();
+            yield return new WaitForSecondsRealtime(LandAnimationTime);
             _player.State = PlayerState.Idle;
         }
 
@@ -106,13 +114,13 @@ namespace PlayerInfo
         private void JumpStateSelector()
         {
             // 점프 후 땅에 다시 착지할 때
-            if (_isGrounded && _player.State == PlayerState.Jump)
+            if (_isGrounded && (_player.State == PlayerState.Jump || _player.State == PlayerState.DJump))
             {
                 _player.State = PlayerState.Idle;
             }
 
             // 공중에 있으면서 플레이어가 경직된 상태가 아닐 때
-            else if (!_isGrounded && _player.PlayerFixedState())
+            else if (!_isGrounded && _player.PlayerFixedState() && _player.State != PlayerState.DJump)
             {
                 _player.State = PlayerState.Jump;
             }
