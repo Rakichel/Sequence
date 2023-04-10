@@ -17,7 +17,7 @@ public class EnemyAttack : MonoBehaviour
     public Player _player;
     public PlayerHit playerHit;
     public Animator enemyAnimator;
-    public LayerMask playerLayer;
+    
 
 
     // Update is called once per frame
@@ -29,6 +29,14 @@ public class EnemyAttack : MonoBehaviour
         {
             ChasePlayer();
             AttackPlayer();
+        }
+        else
+        {
+            Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position,6f, 1<<7); // 
+            if(Player != null )
+            {
+                _player = Player.GetComponent<Player>();
+            }
         }
         if(!_canAttack)
             _lastAttackTime += Time.deltaTime;
