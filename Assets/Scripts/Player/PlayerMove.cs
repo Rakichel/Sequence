@@ -77,7 +77,7 @@ namespace PlayerInfo
         {
             _movement = new Vector2(_horizontal, 0f);
             _movement.Normalize();
-            _player.Rigidbody.velocity = new Vector2(_movement.x * Speed / Time.timeScale, _player.Rigidbody.velocity.y);
+            _player.Rigidbody.velocity = new Vector2(_movement.x * Speed, _player.Rigidbody.velocity.y);
         }
     }
 }
