@@ -35,7 +35,6 @@ namespace Manager
         {
             if (Input.GetKey(KeyCode.R))
                 ChronosBGA = 0;
-            Instance.Impulse();
             ChronosStart();
             ChronosBG.color = new Color(0, 0, 0, ChronosBGA);
             if (c.intensity.value >= 1 || c.intensity.value == 0)
@@ -46,10 +45,7 @@ namespace Manager
         }
         public void Impulse()
         {
-            if (Input.GetKey(KeyCode.Q))
-            {
-                imp.GenerateImpulse(Vector3.right);
-            }
+            imp.GenerateImpulse(Vector3.right);
         }
 
         private IEnumerator CD()
