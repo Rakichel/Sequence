@@ -19,7 +19,7 @@ namespace Manager
         public int ChronosCount = 0;
         bool InputChronos = false;
         public SpriteRenderer ChronosBG;
-        float ChronosBGA = 0;
+        public float ChronosBGA = 0;
         private void Awake()
         {
             imp = gameObject.GetComponent<CinemachineImpulseSource>();
