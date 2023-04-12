@@ -30,7 +30,7 @@ namespace PlayerInfo
 
             if (Input.GetKey(KeyCode.H))
             {
-                GetDamage(0);
+                GetDamage(100);
             }
         }
 
