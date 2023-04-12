@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     {
         int actualDamage = Mathf.Clamp(damage, 0, 100);
         _hp -= actualDamage;
-
+        
         if (_hp <= 0)
         {
             
@@ -24,11 +24,12 @@ public class Enemy : MonoBehaviour
         return actualDamage;
     }
 
-
+    
     private void Die()
     {
-        enemyAnimator.SetTrigger("Die");
+
+        enemyAnimator.SetBool("Die",true);
         // 적을 파괴하는 코드 작성
-        Destroy(gameObject);
+        //Destroy(gameObject, 2f);
     }
 }
