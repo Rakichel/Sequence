@@ -40,29 +40,12 @@ namespace PlayerInfo
             }
 
         }
+
         private IEnumerator Counter()
         {
             // 공격 상태 전환
             _player.State = PlayerState.Counter;
-
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
-            // 공격 범위 지정 및 충돌 체크
-            Collider2D[] collider;
-            collider = AttackAreaSelector();
-            // 적 피격 시
-            if (collider.Length > 0)
-            {
-                CameraManager.Instance.Impulse();
-                // enemy 피격 함수 호출
-                foreach (var col in collider)
-                {
-                    if (col.GetComponent<Enemy>() != null)
-                    {
-                        col.GetComponent<Enemy>().GetDamage(Power);
-                    }
-                }
-            }
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
+            yield return new WaitForSecondsRealtime(AnimTime);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -89,25 +72,7 @@ namespace PlayerInfo
         {
             // 공격 상태 전환
             _player.State = PlayerState.Attack;
-
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
-            // 공격 범위 지정 및 충돌 체크
-            Collider2D[] collider;
-            collider = AttackAreaSelector();
-            // 적 피격 시
-            if (collider.Length > 0)
-            {
-                CameraManager.Instance.Impulse();
-                // enemy 피격 함수 호출
-                foreach (var col in collider)
-                {
-                    if (col.GetComponent<Enemy>() != null)
-                    {
-                        col.GetComponent<Enemy>().GetDamage(Power);
-                    }
-                }
-            }
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
+            yield return new WaitForSecondsRealtime(AnimTime);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -130,25 +95,7 @@ namespace PlayerInfo
         {
             // 공격 상태 전환
             _player.State = PlayerState.Combo;
-
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
-            // 공격 범위 지정 및 충돌 체크
-            Collider2D[] collider;
-            collider = AttackAreaSelector();
-            // 적 피격 시
-            if (collider.Length > 0)
-            {
-                CameraManager.Instance.Impulse();
-                // enemy 피격 함수 호출
-                foreach (var col in collider)
-                {
-                    if (col.GetComponent<Enemy>() != null)
-                    {
-                        col.GetComponent<Enemy>().GetDamage(Power);
-                    }
-                }
-            }
-            yield return new WaitForSecondsRealtime(AnimTime / 2);
+            yield return new WaitForSecondsRealtime(AnimTime);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -165,6 +112,26 @@ namespace PlayerInfo
             _player.State = PlayerState.Idle;
         }
 
+        public void Attacking()
+        {
+            // 공격 범위 지정 및 충돌 체크
+            Collider2D[] collider;
+            collider = AttackAreaSelector();
+            // 적 피격 시
+            if (collider.Length > 0)
+            {
+                CameraManager.Instance.Impulse();
+                // enemy 피격 함수 호출
+                foreach (var col in collider)
+                {
+                    if (col.GetComponent<Enemy>() != null)
+                    {
+                        col.GetComponent<Enemy>().GetDamage(Power);
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 공격 방향과 범위를 지정하고 충돌한 Collider정보를 전달하는 함수입니다.
         /// </summary>
@@ -173,6 +140,10 @@ namespace PlayerInfo
         {
             // 보는 방향 기준으로 공격 방향 지정
             if (_player.State == PlayerState.Counter)
+            {
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8);
+            }
+            else if(_player.State == PlayerState.Landed)
             {
                 return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8);
             }
