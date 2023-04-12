@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71703c79551247442acfe174d20d3bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 100
   Rigidbody: {fileID: 2086709476964619450}
   Direction: 0
   State: 0
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06785a21426ee34f86dfb664d29ce90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
+  Speed: 8
 --- !u!114 &2086709476964619452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   CheckSizeX: 0.5
-  CheckSizeY: 0.1
+  CheckSizeY: 0.02
   LandAnimationTime: 0.5
 --- !u!114 &2086709476964619455
 MonoBehaviour:
@@ -188,8 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitAnimTime: 1
   DieAnimTime: 1
-  Defence: 0.5
-  ParryTime: 1
 --- !u!114 &2086709476964619448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,8 +216,6 @@ MonoBehaviour:
   GhostGroup: {fileID: 0}
   GhostPrefab: {fileID: 677311716083562342, guid: 0734a03fdba139e4d88ae81e4010fcf2, type: 3}
   Delay: 0.05
-  DestroyTime: 0.8
-  color: {r: 0, g: 1, b: 0, a: 0.2509804}
   StartColor: {r: 0, g: 1, b: 0.25335073, a: 0}
   EndColor: {r: 0.24180031, g: 0, b: 1, a: 0}
   Timer: 0

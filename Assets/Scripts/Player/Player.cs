@@ -8,7 +8,7 @@ namespace PlayerInfo
     [RequireComponent(typeof(GhostTrail))]
     public class Player : MonoBehaviour
     {
-        private float _hp = 10f;
+        [SerializeField] private float _hp = 100f;
 
         public float Hp
         {
@@ -30,7 +30,6 @@ namespace PlayerInfo
             }
         }
         private bool _isSkill = false;
-        private float _delay = 0f;
 
         public Rigidbody2D Rigidbody;
         public PlayerDirection Direction = PlayerDirection.Right;   // 플레이어가 보고있는 방향
@@ -46,28 +45,27 @@ namespace PlayerInfo
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F) && _isSkill == false)
+            if (Input.GetKeyDown(KeyCode.F) && _isSkill == false && _skillGage == 100f)
             {
                 _isSkill = true;
                 CameraManager.Instance.Chronos();
+                GameManager.Instance.TimeS = 0.2f;
             }
-            else if ((Input.GetKeyDown(KeyCode.F) && _isSkill == true && _delay > 1f) || _skillGage == 0f)
+            else if (_skillGage == 0f)
             {
                 _isSkill = false;
                 CameraManager.Instance.ChronosBGA = 0f;
+                GameManager.Instance.TimeS = 1f;
             }
 
             if (_isSkill == true)
             {
                 _skillGage = Mathf.Clamp(_skillGage - Time.unscaledDeltaTime * 20f, 0f, 100f);
-                _delay += Time.unscaledDeltaTime;
             }
             else if (_isSkill == false)
             {
                 _skillGage = Mathf.Clamp(_skillGage + Time.unscaledDeltaTime * 10f, 0f, 100f);
-                _delay = 0f;
             }
-            Debug.Log(_skillGage);
         }
 
         /// <summary>
