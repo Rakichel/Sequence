@@ -58,7 +58,7 @@ namespace Manager
         {
             if(InputChronos)
             {
-                if (ChronosCount <= 22)
+                if (ChronosCount <= 21)
                 {
                     if (CDelay)
                     {
@@ -66,7 +66,7 @@ namespace Manager
                         c.intensity.value += ChronosI;
                         StartCoroutine(CD());
                         ChronosCount++;
-                        ChronosBGA += 0.015f;
+                        ChronosBGA += 0.02f;
                     }
                 }
                 else

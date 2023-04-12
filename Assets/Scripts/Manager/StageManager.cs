@@ -17,6 +17,11 @@ namespace Manager
                     SceneManager.LoadScene("Japanese landscape");
                 }
             }
+
+            if (Input.GetKey(KeyCode.Minus))
+            {
+                SceneManager.LoadScene(gameObject.scene.name);
+            }
         }
     }
 }
