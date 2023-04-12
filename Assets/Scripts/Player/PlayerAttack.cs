@@ -45,11 +45,12 @@ namespace PlayerInfo
             // 공격 상태 전환
             _player.State = PlayerState.Counter;
 
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             // 공격 범위 지정 및 충돌 체크
             Collider2D[] collider;
             collider = AttackAreaSelector();
             // 적 피격 시
-            if (collider != null)
+            if (collider.Length > 0)
             {
                 CameraManager.Instance.Impulse();
                 // enemy 피격 함수 호출
@@ -61,7 +62,7 @@ namespace PlayerInfo
                     }
                 }
             }
-            yield return new WaitForSecondsRealtime(AnimTime);
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -89,11 +90,12 @@ namespace PlayerInfo
             // 공격 상태 전환
             _player.State = PlayerState.Attack;
 
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             // 공격 범위 지정 및 충돌 체크
             Collider2D[] collider;
             collider = AttackAreaSelector();
             // 적 피격 시
-            if (collider != null)
+            if (collider.Length > 0)
             {
                 CameraManager.Instance.Impulse();
                 // enemy 피격 함수 호출
@@ -105,7 +107,7 @@ namespace PlayerInfo
                     }
                 }
             }
-            yield return new WaitForSecondsRealtime(AnimTime);
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -129,11 +131,12 @@ namespace PlayerInfo
             // 공격 상태 전환
             _player.State = PlayerState.Combo;
 
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             // 공격 범위 지정 및 충돌 체크
             Collider2D[] collider;
             collider = AttackAreaSelector();
             // 적 피격 시
-            if (collider != null)
+            if (collider.Length > 0)
             {
                 CameraManager.Instance.Impulse();
                 // enemy 피격 함수 호출
@@ -145,7 +148,7 @@ namespace PlayerInfo
                     }
                 }
             }
-            yield return new WaitForSecondsRealtime(AnimTime);
+            yield return new WaitForSecondsRealtime(AnimTime / 2);
             _timer = 0;
             while (_timer < NextAttackTime)
             {
@@ -179,7 +182,7 @@ namespace PlayerInfo
             }
             else
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
             }
         }
 

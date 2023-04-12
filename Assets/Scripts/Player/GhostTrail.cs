@@ -12,9 +12,7 @@ public class GhostTrail : MonoBehaviour
 
     public GameObject GhostGroup;
     public GameObject GhostPrefab;          // 생성될 Prefab
-    public float Delay = 1.0f;              // 생성하는데 걸리는 시간
-    public float DestroyTime = 0.1f;        // 생성된 오브젝트가 삭제되는 시간
-    public Color color;                     // 잔상 색 지정
+    public float Delay;                     // 생성하는데 걸리는 시간
     public Color StartColor;
     public Color EndColor;
     public float Timer;
@@ -59,7 +57,7 @@ public class GhostTrail : MonoBehaviour
 
     private void GhostInit()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 5 / Delay; i++)
             _ghostPool.Push(CreateGhost());
     }
 
@@ -92,7 +90,6 @@ public class GhostTrail : MonoBehaviour
                 Mathf.Lerp(StartColor.b, EndColor.b, Mathf.Abs(Mathf.Sin(Timer))),
                 0.5f);
             _spriteRenderer.color = newColor;
-            //_spriteRenderer.color = color;
             g.SetActive(true);
         }
         else

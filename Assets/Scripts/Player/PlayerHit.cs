@@ -85,7 +85,7 @@ namespace PlayerInfo
             if (_player.Hp > 0)
             {
                 _player.State = PlayerState.Hit;
-                yield return new WaitForSeconds(HitAnimTime);
+                yield return new WaitForSecondsRealtime(HitAnimTime);
                 _player.State = PlayerState.Idle;
             }
 
@@ -93,7 +93,7 @@ namespace PlayerInfo
             else
             {
                 _player.State = PlayerState.Die;
-                yield return new WaitForSeconds(HitAnimTime);
+                yield return new WaitForSecondsRealtime(HitAnimTime);
             }
         }
     }
