@@ -24,15 +24,7 @@ namespace Manager
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (TimeS == 0.2f)
-                    TimeS = 1;
-                else
-                {
-                    TimeS = 0.2f;
-                }
-            }
+            
         }
     }
 
