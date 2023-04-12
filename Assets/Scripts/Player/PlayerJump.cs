@@ -82,9 +82,9 @@ namespace PlayerInfo
         IEnumerator DownJump()
         {
             _getGround = _isGrounded.GetComponent<PlatformEffector2D>();
-            _getGround.surfaceArc = 0;
+            _getGround.colliderMask = _getGround.colliderMask ^ 1 << 7;
             yield return new WaitForSecondsRealtime(0.4f);
-            _getGround.surfaceArc = 180;
+            _getGround.colliderMask = _getGround.colliderMask ^ 1 << 7;
         }
 
         /// <summary>
