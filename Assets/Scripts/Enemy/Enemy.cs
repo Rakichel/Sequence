@@ -5,11 +5,10 @@ using PlayerInfo;
 
 public class Enemy : MonoBehaviour
 {
-    private int _hp;
+    [SerializeField] private int _hp;
     private Player _player;
     public Animator enemyAnimator;
-
-
+    bool d = false;
     public int GetDamage(int damage)
     {
         int actualDamage = Mathf.Clamp(damage, 0, 100);
@@ -24,11 +23,20 @@ public class Enemy : MonoBehaviour
         return actualDamage;
     }
 
-    
+    public void Update()
+    {
+        if(d)
+            Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
+        if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") == 0)
+        {
+            Destroy(gameObject);
+        }
+    }
     private void Die()
     {
-
-        enemyAnimator.SetBool("Die",true);
+        gameObject.GetComponent<EnemyAttack>().enabled = false;
+        d = true;
+        //enemyAnimator.SetBool("Die",true);
         // 적을 파괴하는 코드 작성
         //Destroy(gameObject, 2f);
     }

@@ -50,11 +50,11 @@ Material:
     m_Floats:
     - Vector1_f0d2a4bf2dcd4ea693859cfa8d3aa6f6: 0
     - _EnableExternalAlpha: 0
-    - _Fade: 0.42
+    - _Fade: 1
     - _Scale: 26.88
     m_Colors:
     - Vector2_8355900b8d354e8d846cc5dba284ba9f: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 2.2183743, g: 0, b: 0.6211448, a: 0.7176471}
+    - _Color: {r: 0, g: 1.8772484, b: 2.218374, a: 0.7176471}
     - _DissolveColor: {r: 1.1129392, g: 0.47112152, b: 0.55988353, a: 0}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

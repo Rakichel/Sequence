@@ -9,6 +9,9 @@ namespace Manager
     public class GameManager : Singleton<GameManager>
     {
         public float TimeS = 1f;
+        [SerializeField] private float dieTime = 0.1f;
+        [SerializeField] private float _fade = 0.1f;
+        private bool dieShader = true;
         // Start is called before the first frame update
         private void Start()
         {
@@ -24,7 +27,23 @@ namespace Manager
         // Update is called once per frame
         private void Update()
         {
-            
+            //EnemyDie(null);
+        }
+
+        public void EnemyDie(Material EnemyM)
+        {
+            if (dieShader && EnemyM.GetFloat("_Fade") > 0)
+            {
+                dieShader = false;
+                float fade = EnemyM.GetFloat("_Fade");
+                EnemyM.SetFloat("_Fade", (fade - _fade));
+                StartCoroutine(IEnemyDie());
+            }
+        }
+        private IEnumerator IEnemyDie()
+        {
+            yield return new WaitForSeconds(dieTime);
+            dieShader = true;
         }
     }
 
