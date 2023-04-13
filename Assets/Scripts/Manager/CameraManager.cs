@@ -15,11 +15,11 @@ namespace Manager
         private ChromaticAberration c;
         private Volume v;
         bool CDelay = true;
-        float ChronosI = 0.1f;
-        public int ChronosCount = 0;
+        bool ChronosAble = true;
         bool InputChronos = false;
-        public SpriteRenderer ChronosBG;
         public float ChronosBGA = 0;
+        [SerializeField] private float ChronosI = 0.1f;
+        [SerializeField] private SpriteRenderer ChronosBG;
         private void Awake()
         {
             imp = gameObject.GetComponent<CinemachineImpulseSource>();
@@ -28,6 +28,7 @@ namespace Manager
             v.profile.TryGet(out c);
             ChronosBG = MCam.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
             Screen.SetResolution(1920, 1080, true);
+            Debug.Log(CDelay);
         }
 
         // Update is called once per frame
@@ -37,10 +38,7 @@ namespace Manager
                 ChronosBGA = 0;
             ChronosStart();
             ChronosBG.color = new Color(0, 0, 0, ChronosBGA);
-            if (c.intensity.value >= 1 || c.intensity.value == 0)
-            {
-                ChronosI *= -1f;
-            }
+            
                 
         }
         public void Impulse()
@@ -50,7 +48,7 @@ namespace Manager
 
         private IEnumerator CD()
         {
-            yield return new WaitForSecondsRealtime(0.02f);
+            yield return new WaitForSecondsRealtime(0.025f);
             CDelay = true;
         }
 
@@ -58,21 +56,33 @@ namespace Manager
         {
             if(InputChronos)
             {
-                if (ChronosCount <= 21)
+                if (c.intensity.value == 1)
+                {
+                    ChronosI *= -1f;
+                }
+                else if (c.intensity.value == 0)
+                {
+                    ChronosI = Mathf.Abs(ChronosI);
+                }
+                if (ChronosAble)
                 {
                     if (CDelay)
                     {
                         CDelay = false;
                         c.intensity.value += ChronosI;
                         StartCoroutine(CD());
-                        ChronosCount++;
                         ChronosBGA += 0.02f;
+                        Debug.Log(c.intensity.value);
+                        if (c.intensity.value == 0)
+                        {
+                            ChronosAble = false;
+                        }
                     }
+                    
                 }
                 else
                 {
-                    c.intensity.value = 0;
-                    ChronosCount = 0;
+                    ChronosAble = true;
                     InputChronos = false;
                 }
             }
