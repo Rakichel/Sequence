@@ -30,7 +30,7 @@ public class ESamurai_CAttack : MonoBehaviour
     {
         if (!_isDead)
         {
-            if (_player != null && !ESEnemySprite.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+            if (_player != null)
             {
                 ChasePlayer();
                 AttackPlayer();
