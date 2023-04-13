@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
     {
         if(d)
             Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
-        if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") == 0)
+        if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
         {
             Destroy(gameObject);
         }
