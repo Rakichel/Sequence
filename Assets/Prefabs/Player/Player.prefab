@@ -21,8 +21,7 @@ GameObject:
   - component: {fileID: 2086709476964619450}
   - component: {fileID: 2086709476964619445}
   - component: {fileID: 2086709476964619444}
-  - component: {fileID: 2086709476964619447}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -175,6 +174,7 @@ MonoBehaviour:
   Power: 10
   AnimTime: 0.35
   NextAttackTime: 1
+  Slash: {fileID: 6772996672497361952, guid: efa0efe8a97cdd84b9011c2dac5761a5, type: 3}
 --- !u!114 &2086709476964619449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,18 +286,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!111 &2086709476964619447
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2086709476964619446}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
