@@ -64,7 +64,7 @@ namespace PlayerInfo
             }
             else if (_isSkill == false)
             {
-                _skillGage = Mathf.Clamp(_skillGage + Time.unscaledDeltaTime * 10f, 0f, 100f);
+                _skillGage = Mathf.Clamp(_skillGage + Time.unscaledDeltaTime * 50f, 0f, 100f);
             }
         }
 
