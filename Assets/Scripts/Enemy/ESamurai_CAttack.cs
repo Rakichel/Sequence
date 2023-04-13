@@ -5,6 +5,7 @@ using PlayerInfo;
 
 public class ESamurai_CAttack : MonoBehaviour
 {
+    private Rigidbody2D rigid;
     public int _damage;
     public float _moveSpeed;
     public float _attackPower;
@@ -12,98 +13,111 @@ public class ESamurai_CAttack : MonoBehaviour
     public bool _canAttack = true; // 공격 가능 여부
     public float _lastAttackTime = 0; // 마지막 공격 시간
     public Player _player;
-    public PlayerHit playerHit;
-    public Animator ESamuraiAnimator;
-
+    public Animator ESenemyAnimator;
+    private SpriteRenderer ESEnemySprite;
+    private bool _isDead = false; // 적의 사망 상태 여부
+    public bool _attackin;
     private void Awake()
     {
         // 적 초기화 시 공격 대기 시간 초기화
         _lastAttackTime = _attackInterval;
-        ESamuraiAnimator = GetComponent<Animator>(); // enemyAnimator 변수 초기화
+        ESEnemySprite = gameObject.GetComponent<SpriteRenderer>();
+        rigid = transform.GetComponent<Rigidbody2D>();
+
     }
-    
+    // Update is called once per frame
     public void Update()
     {
-        if (_player != null)
+        if (!_isDead)
         {
-            CChasePlayer();
-            CAttackPlayer();
-        }
-        else
-        {
-            Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
-            if (Player != null)
+            if (_player != null && !ESEnemySprite.GetCurrentAnimatorStateInfo(0).IsName("Die"))
             {
-                _player = Player.GetComponent<Player>();
-                playerHit = Player.GetComponent<PlayerHit>();
+                ChasePlayer();
+                AttackPlayer();
             }
-        }
-        if (!_canAttack)
-            _lastAttackTime += Time.deltaTime;
-    }
-    private void CChasePlayer()
-    {
-        float distance = Vector2.Distance(transform.position, _player.transform.position);
-        if (distance < 5f)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, _player.transform.position, _moveSpeed * Time.deltaTime);
-            ESamuraiAnimator.SetBool("Walk", true);
-        }
-        else
-            ESamuraiAnimator.SetBool("Walk", false);
-        
-    }
-
-    private void CAttackPlayer()
-    {
-        if (!_canAttack) // 공격이 가능하지 않다면
-
-        {
-            ESamuraiAnimator.SetBool("Walk", false);
-
-
-            if (_lastAttackTime >= _attackInterval) // 공격 간격이 마지막 공격시간보다 크거나 같다면 
+            else
             {
-                _canAttack = true;
-                //enemyAnimator.SetTrigger("Attack");
-                _lastAttackTime = 0;
+                Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
+                if (Player != null)
+                {
+                    _player = Player.GetComponent<Player>();
+                }
             }
-
-            return;
+            if (!_canAttack)
+                _lastAttackTime += Time.deltaTime;
         }
-
-
-        float distance = Vector2.Distance(transform.position, _player.transform.position);
-        Collider2D hit = Physics2D.OverlapBox(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1), 0f, 1 << 7);
-        if (transform.position.x < _player.transform.position.x)
+        else
+            enabled = false;
+    }
+    public void Attackin(int attackEvent) // 애니메이션 이벤트 사용
+    {
+        if (attackEvent == 0)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            _attackin = true;
         }
         else
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            _attackin = false;
         }
-        if (hit)
+    }
+    private void ChasePlayer()
+    {
+        float distance = transform.position.x - _player.transform.position.x; // 내 포지션.x에서 플레이어포지션을 빼면 음수면 왼쪽 오른쪽이면 양수
+        Vector2 dis = new Vector2(distance, 0f);
+        dis.Normalize();
+        if (distance < 0)
         {
-            
-            ESamuraiAnimator.SetBool("Attack", true);
-            playerHit.GetDamage(_damage);
-            _canAttack = false;
-
+            ESEnemySprite.flipX = false;
         }
         else
         {
-            ESamuraiAnimator.SetBool("Attack", false);
+            ESEnemySprite.flipX = true;
         }
+        if (Mathf.Abs(distance) <= 5f && Mathf.Abs(distance) >= 1f)
+        {
+            rigid.velocity = new Vector2(-dis.x * _moveSpeed * Time.timeScale, rigid.velocity.y);
+            ESenemyAnimator.SetBool("IsWalking", true);
+        }
+        else
+        {
+            ESenemyAnimator.SetBool("IsWalking", false);
+        }
+    }
 
-
+    private void AttackPlayer()
+    {
+        Collider2D hit;
+        if (!ESEnemySprite.flipX)
+        {
+            hit = Physics2D.OverlapBox(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1), 0f, 1 << 7);
+        }
+        else
+        {
+            hit = Physics2D.OverlapBox(transform.position + new Vector3(-0.5f, 0.1f, 0), new Vector3(1, 1, 1), 0f, 1 << 7);
+        }
+        if (hit != null)
+        {
+            _moveSpeed = 0;
+            ESenemyAnimator.SetBool("IsWalking", false);
+            ESenemyAnimator.SetBool("isAttack", true);
+        }
+        else
+        {
+            _moveSpeed = 3;
+            ESenemyAnimator.SetBool("isAttack", false);
+        }
+        if (_attackin)
+        {
+            if (hit != null)
+                hit.GetComponent<PlayerHit>().GetDamage(_damage);
+            _attackin = false;
+        }
     }
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1));
     }
-
 }
 
     

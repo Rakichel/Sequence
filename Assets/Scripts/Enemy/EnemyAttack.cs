@@ -14,6 +14,7 @@ public class EnemyAttack : MonoBehaviour
     public Player _player;
     public Animator enemyAnimator;
     private SpriteRenderer enemySprite;
+    private bool _isDead = false; // 적의 사망 상태 여부
     public bool _attackin;
     private void Awake()
     {
@@ -26,23 +27,28 @@ public class EnemyAttack : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (_player != null)
+        if (!_isDead)
         {
-            ChasePlayer();
-            AttackPlayer();
+            if (_player != null && !enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Die"))
+            {
+                ChasePlayer();
+                AttackPlayer();
+            }
+            else
+            {
+                Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
+                if (Player != null)
+                {
+                    _player = Player.GetComponent<Player>();
+                }
+            }
+            if (!_canAttack)
+                _lastAttackTime += Time.deltaTime;
         }
         else
-        {
-            Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
-            if (Player != null)
-            {
-                _player = Player.GetComponent<Player>();
-            }
-        }
-        if (!_canAttack)
-            _lastAttackTime += Time.deltaTime;
+            enabled = false;
     }
-    public void Attackin(int attackEvent)
+    public void Attackin(int attackEvent) // 애니메이션 이벤트 사용
     {
         if (attackEvent == 0)
         {
@@ -55,7 +61,7 @@ public class EnemyAttack : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        float distance = transform.position.x - _player.transform.position.x;
+        float distance = transform.position.x - _player.transform.position.x; // 내 포지션.x에서 플레이어포지션을 빼면 음수면 왼쪽 오른쪽이면 양수
         Vector2 dis = new Vector2(distance, 0f);
         dis.Normalize();
         if (distance < 0)
@@ -79,21 +85,6 @@ public class EnemyAttack : MonoBehaviour
 
     private void AttackPlayer()
     {
-        /*if (!_canAttack) // 공격이 가능하지 않다면
-
-        {
-            enemyAnimator.SetBool("IsWalking", false);
-
-
-            if (_lastAttackTime >= _attackInterval) // 공격 간격이 마지막 공격시간보다 크거나 같다면 
-            {
-                _canAttack = true;
-                //enemyAnimator.SetTrigger("Attack");
-                _lastAttackTime = 0;
-            }
-
-            return;
-        }*/
         Collider2D hit;
         if (!enemySprite.flipX)
         {
