@@ -19,6 +19,7 @@ namespace PlayerInfo
         public int Power;                   // 공격력
         public float AnimTime;              // 공격 애니메이션이 걸리는 시간
         public float NextAttackTime;
+        public GameObject Slash;
 
         private void Start()
         {
@@ -38,7 +39,6 @@ namespace PlayerInfo
                     _attack = StartCoroutine(Counter());
                 }
             }
-
         }
 
         private IEnumerator Counter()
@@ -127,9 +127,17 @@ namespace PlayerInfo
                     if (col.GetComponent<Enemy>() != null)
                     {
                         col.GetComponent<Enemy>().GetDamage(Power);
+                        Quaternion q = Quaternion.AngleAxis(GetAngle(transform.position, col.transform.position), Vector3.forward);
+                        GameObject g = Instantiate(Slash, col.transform.position, q);
+                        Destroy(g, 1f);
                     }
                 }
             }
+        }
+        float GetAngle(Vector2 start, Vector2 end)
+        {
+            Vector2 v2 = end - start;
+            return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
         }
 
         /// <summary>
