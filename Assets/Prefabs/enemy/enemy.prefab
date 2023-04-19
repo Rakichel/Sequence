@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 7714250245606231835}
   - component: {fileID: 7714250245606231834}
   - component: {fileID: 7714250245606231833}
-  - component: {fileID: 7714250245606231832}
+  - component: {fileID: 1349212854524150603}
+  - component: {fileID: 2144113664311979386}
   - component: {fileID: 7714250245606231839}
   - component: {fileID: 7714250245606231838}
   - component: {fileID: 7714250245606231837}
@@ -57,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c5499ad1981b6dc479827a062003fcc6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,7 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d679ac420cbc9c478719c42c6bd7c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hp: 100
+  _player: {fileID: 0}
   enemyAnimator: {fileID: 7714250245606231837}
+  enemySprite: {fileID: 0}
+  rigid: {fileID: 0}
+  _enemyState: 0
 --- !u!114 &7714250245606231833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,15 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _moveSpeed: 1
   _attackPower: 2
-  _attackInterval: 2
-  _canAttack: 0
-  _lastAttackTime: 3
-  _player: {fileID: 0}
-  enemyAnimator: {fileID: 7714250245606231837}
+  _enemy: {fileID: 0}
   _attackin: 0
---- !u!114 &7714250245606231832
+--- !u!114 &1349212854524150603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,10 +133,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7714250245606231827}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bd147509df46a64995ab4ca6b087cec, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e7df9fa38aad704ba48e1e697cb13bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpriteRenderer: {fileID: 7714250245606231835}
+  _enemy: {fileID: 0}
+  distance: 0
+--- !u!114 &2144113664311979386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714250245606231827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 247d1682bf0bd7f408f1647cdc592bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &7714250245606231839
 Rigidbody2D:
   serializedVersion: 4
@@ -151,7 +165,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -67,13 +67,14 @@ public class Enemy : MonoBehaviour
             _player = Player.GetComponent<Player>();
         }
 
-        if (Input.GetKey(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Hp -= 10;
         }
 
         if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
         {
+            Manager.GameManager.Instance.KillCount++;
             Destroy(gameObject);
         }
         if (dieCheck)
@@ -84,10 +85,6 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         _enemyState = EnemyState.Dead;
-        //gameObject.GetComponent<EnemyAttack>().enabled = false;
- // 움직임 중지 // 공격 애니메이션 중지
-                                                  // 적을 파괴하는 코드 작성
-                                                  //Destroy(gameObject, 2f);
     }
     public void DieShader()
     {
