@@ -62,14 +62,14 @@ namespace PlayerInfo
                 {
                     _jumpCnt--;
                     _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
-                    _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                    _player.Rigidbody.velocity = new Vector2(0, JumpForce);
                 }
                 else if (_player.State == PlayerState.Jump && _jumpCnt > 0)
                 {
                     _jumpCnt--;
                     _player.State = PlayerState.DJump;
                     _player.Rigidbody.velocity = new Vector2(_player.Rigidbody.velocity.x, 0);
-                    _player.Rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                    _player.Rigidbody.velocity = new Vector2(0, JumpForce);
                 }
             }
         }

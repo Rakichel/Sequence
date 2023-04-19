@@ -3,7 +3,7 @@ namespace PlayerInfo
     /// <summary>
     /// 플레이어의 방향을 열거합니다.
     /// </summary>
-    public enum PlayerDirection { Right, Left }
+    public enum PlayerDirection { Right = 0, Left }
 
     /// <summary>
     /// 플레이어의 상태를 열거합니다.
