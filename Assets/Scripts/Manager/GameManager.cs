@@ -9,6 +9,7 @@ namespace Manager
     public class GameManager : Singleton<GameManager>
     {
         public float TimeS = 1f;
+        public int KillCount = 0;
         [SerializeField] private float dieTime = 0.1f;
         [SerializeField] private float _fade = 0.1f;
         private bool dieShader = true;
