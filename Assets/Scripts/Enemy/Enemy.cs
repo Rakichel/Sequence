@@ -3,41 +3,108 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayerInfo;
 
+
+
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _hp;
-    private Player _player;
+    [SerializeField] private int _hp = 100;
+    public Player _player;
+    private int _damagePower;
+    private float _attackSpeed;
     public Animator enemyAnimator;
-    bool d = false;
-    public int GetDamage(int damage)
-    {
-        int actualDamage = Mathf.Clamp(damage, 0, 100);
-        _hp -= actualDamage;
-        
-        if (_hp <= 0)
-        {
-            
-            Die();
-        }
+    public SpriteRenderer enemySprite;
+    public Rigidbody2D rigid;
+    bool dieCheck = false;
+    public EnemyState _enemyState;
 
-        return actualDamage;
+    private void Awake()
+    {
+        rigid = transform.GetComponent<Rigidbody2D>();
+        enemyAnimator = gameObject.GetComponent<Animator>();
+        enemySprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
+    public void GetDamage(int damage)
+    {
+        Hp -= damage;
+    }
+
+    public int Hp
+    {
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, 100);
+            if (_hp <= 0)
+            {
+                Die();
+            }
+        }
+        get
+        {
+            return _hp;
+        }
+    }
+
+    public int DamagePower
+    {
+        get
+        {
+            return _damagePower;
+        }
+        set => _damagePower = value;
+    }
+   
+    public float AttackSpeed
+    {
+        get => _attackSpeed;
+        set => _attackSpeed = value;
+    }
     public void Update()
     {
-        if(d)
-            Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
+        Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
+        if (Player != null)
+        {
+            _player = Player.GetComponent<Player>();
+        }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+            Hp -= 10;
+        }
+
         if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
         {
             Destroy(gameObject);
         }
+        if (dieCheck)
+        {
+            Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
+        }
     }
     private void Die()
     {
-        gameObject.GetComponent<EnemyAttack>().enabled = false;
-        d = true;
-        //enemyAnimator.SetBool("Die",true);
-        // 적을 파괴하는 코드 작성
-        //Destroy(gameObject, 2f);
+        _enemyState = EnemyState.Dead;
+        //gameObject.GetComponent<EnemyAttack>().enabled = false;
+ // 움직임 중지 // 공격 애니메이션 중지
+                                                  // 적을 파괴하는 코드 작성
+                                                  //Destroy(gameObject, 2f);
+    }
+    public void DieShader()
+    {
+        dieCheck = true;
+    }
+
+    public bool EnemyFixedState()
+    {
+        // 공격 시, 대쉬 시, 맞을 시, 죽을 시 경직된 상태로 판정
+        return
+            (
+                _enemyState != EnemyState.isAttack &&
+                _enemyState != EnemyState.isHurt &&
+                _enemyState != EnemyState.isStiffen &&
+                _enemyState != EnemyState.Protection &&
+                _enemyState != EnemyState.Shot &&
+                _enemyState != EnemyState.Dead
+            );
     }
 }
