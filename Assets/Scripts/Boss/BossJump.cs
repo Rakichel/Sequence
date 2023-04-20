@@ -4,16 +4,18 @@ namespace BossInfo
 {
     public class BossJump : IBossTodo
     {
-        Rigidbody2D _rigid;
-        float _timeScale;
-        float _jumpPower;
-        Transform _transform;
-
-        public BossJump(Rigidbody2D _rigid, Transform _transform, float _jumpPower = 20f)
+        private BossController _controller;
+        private Rigidbody2D _rigid;
+        private Transform _transform;
+        private float _timeScale;
+        private float _jumpPower;
+        private bool isJump;
+        public BossJump(BossController _controller, float _jumpPower = 20f)
         {
-            this._rigid = _rigid;
-            this._transform = _transform;
+            this._controller = _controller;
             this._jumpPower = _jumpPower;
+            _rigid = _controller.GetComponent<Rigidbody2D>();
+            _transform = _controller.transform;
             _timeScale = 1f;
         }
 
@@ -21,9 +23,14 @@ namespace BossInfo
         {
             VelocityControl();
 
-            if (IsGround())
+            if (IsGround() && !isJump)
             {
                 Jump();
+                isJump = true;
+            }
+            else if(IsGround() && isJump) 
+            {
+                _controller.State = BossState.Idle;
             }
         }
 
@@ -41,11 +48,12 @@ namespace BossInfo
 
         private bool IsGround()
         {
-            return Physics2D.OverlapBox(_transform.position + Vector3.down / 2f, new Vector2(0.5f, 0.02f), 0f, 1 << 6);
+            return Physics2D.OverlapBox(_transform.position, new Vector2(0.5f, 0.02f), 0f, 1 << 6);
         }
 
         private void Jump()
         {
+            _rigid.velocity = new Vector2(_rigid.velocity.x, 0);
             _rigid.velocity = new Vector2(0, _jumpPower * Time.timeScale);
         }
     }

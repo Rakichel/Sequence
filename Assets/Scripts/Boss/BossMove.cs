@@ -1,20 +1,22 @@
+using BossInfo;
 using UnityEngine;
 
 public class BossMove : IBossTodo
 {
     private float _distance = 0f;
-    private float _speed = 8f;
     private Vector2 _movement = Vector2.one;
+    private float _speed;
+    private BossController _controller;
     private Rigidbody2D _rigid;
     private Transform _start;
     private Transform _end;
-
-    public BossMove(Rigidbody2D _rigid, Transform _start, Transform _end, float _speed = 8f)
+    public BossMove(BossController _controller, float _speed = 8f)
     {
-        this._rigid = _rigid;
-        this._start = _start;
-        this._end = _end;
+        this._controller = _controller;
         this._speed = _speed;
+        _rigid = _controller.GetComponent<Rigidbody2D>();
+        _start = _controller.transform;
+        _end = _controller.Player.transform;
     }
 
     public void Work()
@@ -27,6 +29,7 @@ public class BossMove : IBossTodo
         else
         {
             Movement(0f);
+            _controller.State = BossState.Idle;
         }
     }
 

@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PlayerInfo
+namespace BossInfo
 {
-
-    public class GhostTrail : MonoBehaviour
+    public class BGhostTrail : MonoBehaviour
     {
-        private Player _player;
+        private BossController _controller;
         private SpriteRenderer _spriteRenderer;     // 새로 생성한 ghost의 SpriteRenderer를 수정하기 위한 변수
         private float _timer = 0;                   // 주기적으로 생성하기 위한 타이머
         private Stack<GameObject> _ghostPool = new Stack<GameObject>();
@@ -21,9 +20,9 @@ namespace PlayerInfo
 
         private void Start()
         {
-            _player = GetComponent<Player>();
+            _controller = GetComponent<BossController>();
             if (GhostGroup == null)
-                GhostGroup = new GameObject("GhostGroup");
+                GhostGroup = new GameObject("BGhostGroup");
             GhostInit();
         }
 
@@ -38,7 +37,7 @@ namespace PlayerInfo
                 }
                 else
                 {
-                    if (_player.State != PlayerState.Idle && _player.State != PlayerState.Attack && _player.State != PlayerState.Combo)
+                    if (_controller.State != BossState.Idle)
                     {
                         Timer += Delay;
                         _timer = Delay;
@@ -71,7 +70,7 @@ namespace PlayerInfo
         {
             // 생성, 크기조절
             GameObject ghostObj = Instantiate(GhostPrefab, Vector2.zero, Quaternion.identity, GhostGroup.transform);
-            ghostObj.transform.localScale = _player.transform.localScale;
+            ghostObj.transform.localScale = _controller.transform.localScale;
             ghostObj.SetActive(false);
             return ghostObj;
         }
@@ -84,8 +83,8 @@ namespace PlayerInfo
                 g.transform.rotation = transform.rotation;
 
                 _spriteRenderer = g.GetComponent<SpriteRenderer>();
-                _spriteRenderer.sprite = _player.SpriteRender.sprite;
-                _spriteRenderer.flipX = _player.SpriteRender.flipX;
+                _spriteRenderer.sprite = _controller.GetComponent<SpriteRenderer>().sprite;
+                _spriteRenderer.flipX = _controller.GetComponent<SpriteRenderer>().flipX;
                 Color newColor = new Color(
                     Mathf.Lerp(StartColor.r, EndColor.r, Mathf.Abs(Mathf.Sin(Timer))),
                     Mathf.Lerp(StartColor.g, EndColor.g, Mathf.Abs(Mathf.Sin(Timer))),

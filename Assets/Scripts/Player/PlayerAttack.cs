@@ -134,7 +134,7 @@ namespace PlayerInfo
                         {
                             col.GetComponent<Enemy>().GetDamage(Power);
                         }
-                        Quaternion q = Quaternion.AngleAxis(GetAngle(transform.position, col.transform.position), Vector3.forward);
+                        Quaternion q = Quaternion.AngleAxis(GetAngle(transform.position + new Vector3(0f, 0.5f), col.transform.position), Vector3.forward);
                         GameObject g = Instantiate(Slash, col.transform.position + new Vector3(0, 0, -1f), q);
                         Destroy(g, 1f);
                     }
