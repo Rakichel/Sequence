@@ -1,4 +1,5 @@
 using PlayerInfo;
+using System.Collections;
 using UnityEngine;
 
 namespace BossInfo
@@ -9,8 +10,11 @@ namespace BossInfo
         private IBossTodo _todo;
         private Rigidbody2D _rigid;
         private BossState _currentState = BossState.None;
+        private Coroutine _control;
+        private Animator _animator;
 
         public Player Player { get { return _player; } }
+        public bool IsUnscaled = false;
         public BossStatus Status;
         public BossState State;
 
@@ -18,6 +22,7 @@ namespace BossInfo
         {
             _player = GameObject.FindWithTag("Player").GetComponent<Player>();
             _rigid = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
             _todo = null;
             State = BossState.Idle;
         }
@@ -25,6 +30,7 @@ namespace BossInfo
         void Update()
         {
             Gravity();
+            Unscaling();
             _todo?.Work();
 
             if (State == _currentState)
@@ -37,18 +43,48 @@ namespace BossInfo
                     _todo = new BossIdle(this);
                     break;
                 case BossState.Move:
-                    _todo = new BossMove(this, Status.Speed);
-                    break;
                 case BossState.Jump:
-                    _todo = new BossJump(this, Status.JumpPower);
+                    if (_todo?.GetType().ToString() != "BossMovement")
+                        _todo = new BossMovement(this, Status.Speed, Status.JumpPower);
                     break;
                 default:
                     break;
             }
         }
+        IEnumerator VelocityControl()
+        {
+            _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y / 5f);
+            _animator.updateMode = AnimatorUpdateMode.Normal;
+            yield return new WaitForSecondsRealtime(1f);
+            IsUnscaled = true;
+            _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y * 5f);
+            _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+        private void Unscaling()
+        {
+            if (Time.timeScale != 1f)
+            {
+                if (_control == null)
+                    _control = StartCoroutine(VelocityControl());
+            }
+            else
+            {
+                if (_control != null)
+                    _control = null;
+                IsUnscaled = false;
+                _animator.updateMode = AnimatorUpdateMode.Normal;
+            }
+        }
         private void Gravity()
         {
-            _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y + Status.Gravity * Status.GravityAccel * Time.deltaTime * Time.timeScale);
+            if (IsUnscaled)
+            {
+                _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y + Status.Gravity * Status.GravityAccel * Time.unscaledDeltaTime);
+            }
+            else
+            {
+                _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y + Status.Gravity * Status.GravityAccel * Time.deltaTime * Time.timeScale);
+            }
         }
     }
 }

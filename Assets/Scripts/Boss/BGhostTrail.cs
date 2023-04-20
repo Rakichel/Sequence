@@ -28,7 +28,7 @@ namespace BossInfo
 
         private void Update()
         {
-            if (Time.timeScale < 1f)
+            if (Time.timeScale < 1f && _controller.IsUnscaled)
             {
                 isOne = true;
                 if (_timer > 0)
