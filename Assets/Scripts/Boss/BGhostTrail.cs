@@ -37,7 +37,7 @@ namespace BossInfo
                 }
                 else
                 {
-                    if (_controller.State != BossState.Idle)
+                    if (CanCreateState())
                     {
                         Timer += Delay;
                         _timer = Delay;
@@ -55,7 +55,11 @@ namespace BossInfo
                 isOne = false;
             }
         }
-
+        private bool CanCreateState()
+        {
+            return _controller.State == BossState.Move
+                || _controller.State == BossState.Jump;
+        }
         private void GhostInit()
         {
             for (int i = 0; i < 5 / Delay; i++)

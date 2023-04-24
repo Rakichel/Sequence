@@ -10,11 +10,14 @@ public class BossIdle : IBossTodo
 
     public void Work()
     {
-        StateChange();
+        if (_controller.Player != null)
+        {
+            PlayerChase();
+        }
     }
 
-    private void StateChange()
+    private void PlayerChase()
     {
-
+        _controller.State = BossState.Move;
     }
 }

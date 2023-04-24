@@ -3665,9 +3665,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsUnscaled: 0
+  Direction: 0
   Status:
-    _hp: 100
+    _hp: 500
     _speed: 8
+    _power: 10
     _jumpPower: 20
     _gravity: 5
     _gravityAccel: -9.8
@@ -3714,7 +3716,7 @@ SpriteRenderer:
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 66c32ec536cce5d4d89bd64a0e6be3c7, type: 3}
   m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
