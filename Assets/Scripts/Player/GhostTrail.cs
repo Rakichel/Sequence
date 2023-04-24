@@ -38,7 +38,7 @@ namespace PlayerInfo
                 }
                 else
                 {
-                    if (_player.State != PlayerState.Idle && _player.State != PlayerState.Attack && _player.State != PlayerState.Combo)
+                    if (CanCreateState())
                     {
                         Timer += Delay;
                         _timer = Delay;
@@ -56,7 +56,14 @@ namespace PlayerInfo
                 isOne = false;
             }
         }
-
+        private bool CanCreateState()
+        {
+            return _player.State == PlayerState.Move
+                || _player.State == PlayerState.Jump
+                || _player.State == PlayerState.DJump
+                || _player.State == PlayerState.Landing
+                || _player.State == PlayerState.Dash;
+        }
         private void GhostInit()
         {
             for (int i = 0; i < 5 / Delay; i++)

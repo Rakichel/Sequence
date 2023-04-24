@@ -1,3 +1,4 @@
+using BossInfo;
 using Manager;
 using System.Collections;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKey(KeyCode.X))
             {
                 if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
                 {
@@ -51,7 +52,7 @@ namespace PlayerInfo
             {
                 yield return new WaitForEndOfFrame();
                 _timer = _timer + Time.unscaledDeltaTime;
-                if (Input.GetKey(KeyCode.X))
+                if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Counter)
                 {
                     _combo = StartCoroutine(Combo());
                     StopCoroutine(_attack);
@@ -78,7 +79,7 @@ namespace PlayerInfo
             {
                 yield return new WaitForEndOfFrame();
                 _timer = _timer + Time.unscaledDeltaTime;
-                if (Input.GetKey(KeyCode.X))
+                if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Attack)
                 {
                     _combo = StartCoroutine(Combo());
                     StopCoroutine(_attack);
@@ -101,7 +102,7 @@ namespace PlayerInfo
             {
                 yield return new WaitForEndOfFrame();
                 _timer = _timer + Time.unscaledDeltaTime;
-                if (Input.GetKey(KeyCode.X))
+                if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Combo)
                 {
                     _attack = StartCoroutine(Attack());
                     StopCoroutine(_combo);
@@ -124,27 +125,54 @@ namespace PlayerInfo
                 // enemy 피격 함수 호출
                 foreach (var col in collider)
                 {
+                    // 나중에 인터페이스로 묶어야 함
                     if (col.GetComponent<Enemy>() != null)
                     {
-                        if(_player.State == PlayerState.Counter)
+                        Enemy _enemy = col.GetComponent<Enemy>();
+                        if (_enemy._enemyState != EnemyState.Dead)
                         {
-                            col.GetComponent<Enemy>().GetDamage(Power * 2);
+                            if (_player.State == PlayerState.Counter)
+                            {
+                                _enemy.GetDamage(Power * 2);
+                            }
+                            else
+                            {
+                                _enemy.GetDamage(Power);
+                            }
+                            CreateSlash(transform.position, col.transform.position);
                         }
-                        else
+
+                    }
+                    else if (col.GetComponent<BossController>() != null)
+                    {
+                        BossController _boss = col.GetComponent<BossController>();
+                        if (_boss.State != BossState.Die && _boss.State != BossState.Knockback)
                         {
-                            col.GetComponent<Enemy>().GetDamage(Power);
+                            if (_player.State == PlayerState.Counter)
+                            {
+                                _boss.GetDamage(Power * 2);
+                            }
+                            else
+                            {
+                                _boss.GetDamage(Power);
+                            }
+                            CreateSlash(transform.position, col.transform.position + new Vector3(0f, 0.5f));
                         }
-                        Quaternion q = Quaternion.AngleAxis(GetAngle(transform.position + new Vector3(0f, 0.5f), col.transform.position), Vector3.forward);
-                        GameObject g = Instantiate(Slash, col.transform.position + new Vector3(0, 0, -1f), q);
-                        Destroy(g, 1f);
                     }
                 }
             }
         }
-        float GetAngle(Vector2 start, Vector2 end)
+        private float GetAngle(Vector2 start, Vector2 end)
         {
             Vector2 v2 = end - start;
             return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+        }
+
+        private void CreateSlash(Vector3 from, Vector3 to)
+        {
+            Quaternion q = Quaternion.AngleAxis(GetAngle(from + new Vector3(0f, 0.5f), to), Vector3.forward);
+            GameObject g = Instantiate(Slash, to + new Vector3(0, 0, -1f), q);
+            Destroy(g, 1f);
         }
 
         /// <summary>
@@ -156,19 +184,19 @@ namespace PlayerInfo
             // 보는 방향 기준으로 공격 방향 지정
             if (_player.State == PlayerState.Counter)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8 | 1 << 9);
             }
-            else if(_player.State == PlayerState.Landed)
+            else if (_player.State == PlayerState.Landed)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8 | 1 << 9);
             }
             else if (_player.Direction == PlayerDirection.Right)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8 | 1 << 9);
             }
             else
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8 | 1 << 9);
             }
         }
 
