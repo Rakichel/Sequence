@@ -23,6 +23,7 @@ namespace BossInfo
                 return _player;
             }
         }
+        public GameObject BSlash;
         public bool IsUnscaled = false;
         public BossDirection Direction;
         public BossStatus Status;
@@ -71,6 +72,9 @@ namespace BossInfo
                 case BossState.Hit:
                     _todo = new BossHit(this);
                     break;
+                case BossState.Groggy:
+                    _todo = new BossGroggy(this);
+                    break;
                 case BossState.Knockback:
                     _todo = new BossKnockback(this);
                     break;
@@ -87,15 +91,41 @@ namespace BossInfo
             if (State == BossState.Knockback)
                 return;
 
-            Status.Hp -= _damage;
-            if (Status.Hp <= 0)
+            if (State == BossState.Groggy)
             {
-                State = BossState.Die;
+                Status.Hp -= _damage;
+                if (Status.Hp <= 0)
+                {
+                    State = BossState.Die;
+                }
             }
-            else
+            else if (Status.Posture > 0)
             {
-                State = BossState.Hit;
+                Status.Posture--;
+                if (Status.Posture <= 0)
+                {
+                    State = BossState.Groggy;
+                }
+                else
+                {
+                    State = BossState.Hit;
+                }
             }
+        }
+
+        private float GetAngle(Vector2 start, Vector2 end)
+        {
+            Vector2 v2 = end - start;
+            return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+        }
+
+        public void CreateBSlash()
+        {
+            Vector3 from = transform.position + new Vector3(0f, 0.5f);
+            Vector3 to = _player.transform.position + new Vector3(0f, 0.5f);
+            Quaternion q = Quaternion.AngleAxis(GetAngle(from, to), Vector3.forward);
+            GameObject g = Instantiate(BSlash, to + new Vector3(0f, 0f, -1f), q);
+            Destroy(g, 1f);
         }
 
         IEnumerator VelocityControl()

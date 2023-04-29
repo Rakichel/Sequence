@@ -45,7 +45,12 @@ namespace BossInfo
         public void Attack()
         {
             Collider2D _collider = AttackAreaSelector();
-            _collider?.GetComponent<PlayerHit>().GetDamage(_power);
+            if (_collider != null)
+            {
+                _collider.GetComponent<PlayerHit>().GetDamage(_power);
+                _controller.CreateBSlash();
+            }
+
         }
 
         public void NextState()

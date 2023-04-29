@@ -171,7 +171,7 @@ namespace PlayerInfo
         private void CreateSlash(Vector3 from, Vector3 to)
         {
             Quaternion q = Quaternion.AngleAxis(GetAngle(from + new Vector3(0f, 0.5f), to), Vector3.forward);
-            GameObject g = Instantiate(Slash, to + new Vector3(0, 0, -1f), q);
+            GameObject g = Instantiate(Slash, to + new Vector3(0f, 0f, -1f), q);
             Destroy(g, 1f);
         }
 

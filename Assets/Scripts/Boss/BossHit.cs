@@ -38,7 +38,7 @@ public class BossHit : IBossTodo
             hitCount++;
         }
 
-        if (hitCount == 3)
+        if (hitCount == 5)
         {
             _controller.State = BossState.Knockback;
         }
