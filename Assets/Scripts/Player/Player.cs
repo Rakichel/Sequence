@@ -30,7 +30,7 @@ namespace PlayerInfo
             }
         }
         private bool _isSkill = false;
-
+        
         public Rigidbody2D Rigidbody;
         public PlayerDirection Direction = PlayerDirection.Right;   // 플레이어가 보고있는 방향
         public PlayerState State = PlayerState.Idle;                // 플레이어의 상태
