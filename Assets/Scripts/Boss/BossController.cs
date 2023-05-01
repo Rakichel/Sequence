@@ -106,19 +106,13 @@ namespace BossInfo
                 {
                     State = BossState.Groggy;
                 }
-                else
-                {
-                    State = BossState.Hit;
-                }
             }
         }
-
         private float GetAngle(Vector2 start, Vector2 end)
         {
             Vector2 v2 = end - start;
             return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
         }
-
         public void CreateBSlash()
         {
             Vector3 from = transform.position + new Vector3(0f, 0.5f);
@@ -127,7 +121,6 @@ namespace BossInfo
             GameObject g = Instantiate(BSlash, to + new Vector3(0f, 0f, -1f), q);
             Destroy(g, 1f);
         }
-
         IEnumerator VelocityControl()
         {
             _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y / 5f);
