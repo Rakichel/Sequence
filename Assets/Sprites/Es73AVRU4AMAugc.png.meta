@@ -1,0 +1,997 @@
+fileFormatVersion: 2
+guid: 0693f3665d508a4498d87ef54e329d66
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 109681953178035851
+    second: Es73AVRU4AMAugc_0
+  - first:
+      213: -3888072636815717828
+    second: Es73AVRU4AMAugc_1
+  - first:
+      213: 2236062413064091372
+    second: Es73AVRU4AMAugc_2
+  - first:
+      213: -8042204894463507868
+    second: Es73AVRU4AMAugc_3
+  - first:
+      213: -1773283032808581574
+    second: Es73AVRU4AMAugc_4
+  - first:
+      213: -1562155228782655234
+    second: Es73AVRU4AMAugc_5
+  - first:
+      213: 6945566214577891200
+    second: Es73AVRU4AMAugc_6
+  - first:
+      213: -73318216805832210
+    second: Es73AVRU4AMAugc_7
+  - first:
+      213: -2359451585982243833
+    second: Es73AVRU4AMAugc_8
+  - first:
+      213: 2678812657192725787
+    second: Es73AVRU4AMAugc_9
+  - first:
+      213: -2188243148614293614
+    second: Es73AVRU4AMAugc_10
+  - first:
+      213: 7730122563066641431
+    second: Es73AVRU4AMAugc_11
+  - first:
+      213: 568747286531848204
+    second: Es73AVRU4AMAugc_12
+  - first:
+      213: -4471276346560383734
+    second: Es73AVRU4AMAugc_13
+  - first:
+      213: -6161444114027969573
+    second: Es73AVRU4AMAugc_14
+  - first:
+      213: -7562873754886669043
+    second: Es73AVRU4AMAugc_15
+  - first:
+      213: 2037026392400811057
+    second: Es73AVRU4AMAugc_16
+  - first:
+      213: 6293066338907223388
+    second: Es73AVRU4AMAugc_17
+  - first:
+      213: -8545472697227544692
+    second: Es73AVRU4AMAugc_18
+  - first:
+      213: -8260028129921549119
+    second: Es73AVRU4AMAugc_19
+  - first:
+      213: -1209417249608768042
+    second: Es73AVRU4AMAugc_20
+  - first:
+      213: -4949340276709324249
+    second: Es73AVRU4AMAugc_21
+  - first:
+      213: 6024983585404339913
+    second: Es73AVRU4AMAugc_22
+  - first:
+      213: -4712714100065749336
+    second: Es73AVRU4AMAugc_23
+  - first:
+      213: 2411969675138458540
+    second: Es73AVRU4AMAugc_24
+  - first:
+      213: -1791413706899260667
+    second: Es73AVRU4AMAugc_25
+  - first:
+      213: 6102474486372310354
+    second: Es73AVRU4AMAugc_26
+  - first:
+      213: 8699689258603510451
+    second: Es73AVRU4AMAugc_27
+  - first:
+      213: -3665868008450094713
+    second: Es73AVRU4AMAugc_28
+  - first:
+      213: -5378572853265683982
+    second: Es73AVRU4AMAugc_29
+  - first:
+      213: 4795396061922797280
+    second: Es73AVRU4AMAugc_30
+  - first:
+      213: -4042538393138099674
+    second: Es73AVRU4AMAugc_31
+  - first:
+      213: 8284888513936150987
+    second: Es73AVRU4AMAugc_32
+  - first:
+      213: 4714966950206455725
+    second: Es73AVRU4AMAugc_33
+  - first:
+      213: 6848197887968601841
+    second: Es73AVRU4AMAugc_34
+  - first:
+      213: 3684134157818873957
+    second: Es73AVRU4AMAugc_35
+  - first:
+      213: 4726115585214789694
+    second: Es73AVRU4AMAugc_36
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1626
+        width: 542
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86a271c72ba58100800000000000000
+      internalID: 109681953178035851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_1
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 1630
+        width: 538
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3acea5698aca0ac0800000000000000
+      internalID: -3888072636815717828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_2
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 1656
+        width: 534
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6b942eae6180f10800000000000000
+      internalID: 2236062413064091372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_3
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 1516
+        width: 422
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46248960249546090800000000000000
+      internalID: -8042204894463507868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_4
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1234
+        width: 522
+        height: 390
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3697371a780467e0800000000000000
+      internalID: -1773283032808581574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_5
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 1312
+        width: 529
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef80468981c125ae0800000000000000
+      internalID: -1562155228782655234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_6
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 1276
+        width: 533
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 087aed74cab936060800000000000000
+      internalID: 6945566214577891200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_7
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 1445
+        width: 56
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee929b368758bfef0800000000000000
+      internalID: -73318216805832210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_8
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 1420
+        width: 48
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70cdbc0984b814fd0800000000000000
+      internalID: -2359451585982243833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 620
+        width: 338
+        height: 612
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1deac33bed0d2520800000000000000
+      internalID: 2678812657192725787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_10
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 990
+        width: 170
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 297a9ac337cc1a1e0800000000000000
+      internalID: -2188243148614293614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_11
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 922
+        width: 513
+        height: 386
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71cb1d1e389e64b60800000000000000
+      internalID: 7730122563066641431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_12
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 972
+        width: 299
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c08b2bcc4a894e700800000000000000
+      internalID: 568747286531848204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_13
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 1128
+        width: 244
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0579a64ad5d2f1c0800000000000000
+      internalID: -4471276346560383734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_14
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 996
+        width: 156
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd301f719372e7aa0800000000000000
+      internalID: -6161444114027969573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_15
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 750
+        width: 155
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0dfad6c3664b0790800000000000000
+      internalID: -7562873754886669043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_16
+      rect:
+        serializedVersion: 2
+        x: 1164
+        y: 901
+        width: 151
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134552516b8f44c10800000000000000
+      internalID: 2037026392400811057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_17
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 902
+        width: 234
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c55788e3e76755750800000000000000
+      internalID: 6293066338907223388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_18
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 696
+        width: 302
+        height: 296
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c87f3f39bd1686980800000000000000
+      internalID: -8545472697227544692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_19
+      rect:
+        serializedVersion: 2
+        x: 1757
+        y: 940
+        width: 95
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ccba49ed2c7e5d80800000000000000
+      internalID: -8260028129921549119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_20
+      rect:
+        serializedVersion: 2
+        x: 1886
+        y: 900
+        width: 93
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d5e6d35b69473fe0800000000000000
+      internalID: -1209417249608768042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_21
+      rect:
+        serializedVersion: 2
+        x: 1985
+        y: 940
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72a0536bd39605bb0800000000000000
+      internalID: -4949340276709324249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_22
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 792
+        width: 86
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c6c59136aa0d9350800000000000000
+      internalID: 6024983585404339913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_23
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 699
+        width: 209
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a63b99be73199eb0800000000000000
+      internalID: -4712714100065749336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_24
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 762
+        width: 220
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca364afe3a9097120800000000000000
+      internalID: 2411969675138458540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_25
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 674
+        width: 118
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50bf08299be9327e0800000000000000
+      internalID: -1791413706899260667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_26
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 683
+        width: 41
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25d1b1b863850b450800000000000000
+      internalID: 6102474486372310354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_27
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 576
+        width: 182
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3baf75ba9418bb870800000000000000
+      internalID: 8699689258603510451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_28
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 399
+        width: 302
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7890dda0878302dc0800000000000000
+      internalID: -3665868008450094713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_29
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 398
+        width: 288
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f92a82ac787b55b0800000000000000
+      internalID: -5378572853265683982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_30
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 365
+        width: 68
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e6273caf4bac8240800000000000000
+      internalID: 4795396061922797280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_31
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 100
+        width: 288
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a002eefb406e7c0800000000000000
+      internalID: -4042538393138099674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_32
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 292
+        width: 34
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc1d0ec4536d9f270800000000000000
+      internalID: 8284888513936150987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_33
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 196
+        width: 83
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daf33c2d57dee6140800000000000000
+      internalID: 4714966950206455725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_34
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 129
+        width: 40
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f6e2ff12bfa90f50800000000000000
+      internalID: 6848197887968601841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_35
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 107
+        width: 51
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5684da54f7ca02330800000000000000
+      internalID: 3684134157818873957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Es73AVRU4AMAugc_36
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 94
+        width: 42
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e383a20b519869140800000000000000
+      internalID: 4726115585214789694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
