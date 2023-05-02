@@ -8,6 +8,7 @@ public class BackgroundParalax : MonoBehaviour
     public Transform playerCam;
     public Transform[] backgrounds;
     public Transform overlay;
+    public GameObject BG;
 
     public float startSensitivity = 0;
     public float endSensitivity = 0.4f;
@@ -28,6 +29,7 @@ public class BackgroundParalax : MonoBehaviour
             var childTransform = child.transform;
 
             var newObj = Instantiate(child.gameObject, childTransform.position, childTransform.rotation);
+            newObj.transform.SetParent(BG.transform);
 
             var list = new LinkedList<SpriteRenderer>();
             list.AddFirst(newObj.GetComponent<SpriteRenderer>());
@@ -159,6 +161,7 @@ public class BackgroundParalax : MonoBehaviour
         var sampleTransform = sample.transform;
 
         var newObject = Instantiate(sprite.gameObject, sampleTransform.position, sprite.transform.rotation);
+        newObject.transform.SetParent(BG.transform);
         
         var position = newObject.transform.position;
         newObject.transform.position = new Vector3(position.x, sprite.transform.position.y, position.z);
