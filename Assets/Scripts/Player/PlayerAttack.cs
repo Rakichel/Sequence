@@ -159,6 +159,19 @@ namespace PlayerInfo
                             CreateSlash(transform.position, col.transform.position + new Vector3(0f, 0.5f));
                         }
                     }
+                    else if (col.GetComponent<ArcherController>() != null)
+                    {
+                        ArcherController _archer = col.GetComponent<ArcherController>();
+                        if (_player.State == PlayerState.Counter)
+                        {
+                            _archer.GetDamage(Power * 2);
+                        }
+                        else
+                        {
+                            _archer.GetDamage(Power);
+                        }
+                        CreateSlash(transform.position, col.transform.position);
+                    }
                 }
             }
         }
