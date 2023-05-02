@@ -15,11 +15,11 @@ public class EffectPoint : MonoBehaviour
     {
         if(gameObject.transform.GetComponentInParent<SpriteRenderer>().flipX)
         {
-            gameObject.transform.localPosition = new Vector3(1.3f, 0.7f, 0);
+            gameObject.transform.localPosition = new Vector3(0.9f, 0.7f, 0);
         }
         else
         {
-            gameObject.transform.localPosition = new Vector3(-1.3f, 0.7f, 0);
+            gameObject.transform.localPosition = new Vector3(-0.9f, 0.7f, 0);
         }
     }
 }
