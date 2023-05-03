@@ -21,7 +21,10 @@ public class EnemyMove : MonoBehaviour
     }
     void Update()
     {
-        ChasePlayer();
+        if(_enemy._enemyState != EnemyState.Dead)
+        {
+            ChasePlayer();
+        }
     }
     private void ChasePlayer()
     {

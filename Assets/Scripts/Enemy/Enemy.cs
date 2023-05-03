@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rigid;
     bool dieCheck = false;
     public EnemyState _enemyState;
+    private float colorTimer = 1f;
 
     private void Awake()
     {
@@ -27,6 +28,10 @@ public class Enemy : MonoBehaviour
     public void GetDamage(int damage)
     {
         Hp -= damage;
+        if(Hp > 0)
+        {
+            colorTimer = 0f;
+        }
     }
 
     public int Hp
@@ -61,6 +66,11 @@ public class Enemy : MonoBehaviour
     }
     public void Update()
     {
+        enemySprite.color = Color.Lerp(Color.red, Color.white, colorTimer);
+        if(colorTimer < 1f)
+        {
+            colorTimer += 2f * Time.deltaTime;
+        }
         Collider2D Player = Physics2D.OverlapCircle(gameObject.transform.position, 6f, 1 << 7); // 
         if (Player != null)
         {
