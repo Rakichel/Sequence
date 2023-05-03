@@ -10,7 +10,7 @@ public class ArcherController : MonoBehaviour
 
     public int hp = 50;
     public GameObject Arrow;
-
+    public bool dieShader = false;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +23,16 @@ public class ArcherController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dieShader)
+        {
+            Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
+            Debug.Log("Åº´Ú");
+        }
+        if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
+        {
+            Manager.GameManager.Instance.KillCount++;
+            Destroy(gameObject);
+        }
         archerSprite.color = Color.Lerp(Color.red, Color.white, colorTimer);
         if (colorTimer < 1f)
         {
@@ -40,6 +50,7 @@ public class ArcherController : MonoBehaviour
         {
             Animator.SetBool("Shot", true);
         }
+
     }
     public void GetDamage(int damage)
     {
@@ -79,7 +90,10 @@ public class ArcherController : MonoBehaviour
         Vector2 v2 = end - start;
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
     }
-
+    public void Die()
+    {
+        dieShader = true;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 10f);

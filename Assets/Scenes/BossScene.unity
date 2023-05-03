@@ -1808,8 +1808,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerEffect: {fileID: 0}
-  effect: {fileID: 0}
-  DashEffect: {fileID: 8786031551322628119, guid: d91283323ce688a40aff4ba7e19550ec, type: 3}
+  chronosEffect: {fileID: 0}
+  dashEffect: {fileID: 8786031551322628119, guid: d91283323ce688a40aff4ba7e19550ec, type: 3}
 --- !u!1 &495569752
 GameObject:
   m_ObjectHideFlags: 0
@@ -4281,7 +4281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238201560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0000014, y: 3.6999998, z: -9}
+  m_LocalPosition: {x: -7.000001, y: 3.6999998, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1795733749}
@@ -5378,6 +5378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7db9ade6f0df24ab73a964a4c480f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DashEffectDistance: 0
 --- !u!65 &1474353223
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6949,7 +6950,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811451602}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.0000014, y: 3.6999998, z: -9}
+  m_LocalPosition: {x: -7.000001, y: 3.6999998, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1550866620}

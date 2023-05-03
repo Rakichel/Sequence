@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Japanese landscape/Scenes/Japanese landscape.unity
     guid: b2c0952a23690b746936b0f20cd1edf1
+  - enabled: 1
+    path: Assets/Scenes/BossScene.unity
+    guid: 4e37c6bcc8d49c14d934e8e6fecde0ea
   m_configObjects: {}

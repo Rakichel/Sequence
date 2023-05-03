@@ -28,7 +28,7 @@ namespace Manager
             {
                 if (GameManager.Instance.KillCount == 100)
                 {
-
+                    SceneManager.LoadScene("BossScene");
                 }
             }
         }

@@ -115,8 +115,8 @@ namespace BossInfo
         }
         public void CreateBSlash()
         {
-            Vector3 from = transform.position + new Vector3(0f, 0.5f);
-            Vector3 to = _player.transform.position + new Vector3(0f, 0.5f);
+            Vector3 from = transform.position + new Vector3(0f, 1f);
+            Vector3 to = _player.transform.position + new Vector3(0f, 1f);
             Quaternion q = Quaternion.AngleAxis(GetAngle(from, to), Vector3.forward);
             GameObject g = Instantiate(BSlash, to + new Vector3(0f, 0f, -1f), q);
             Destroy(g, 1f);
