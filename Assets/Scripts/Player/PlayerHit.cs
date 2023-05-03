@@ -7,13 +7,20 @@ namespace PlayerInfo
     {
         private Player _player;
         private Coroutine _guarding;
+        private SpriteRenderer _spriteRenderer;
+        private Color _myColor;
+        private Color _lerpColor;
+        private float _colorTimer = 1f;
 
         public float HitAnimTime;   // Hit 애니메이션 출력 시간
-        public float DieAnimTime;   // Die 애니메이션 출력 시간
+        public float DieAnimTime;   // Die 애니메이션 출력 시간  
 
         private void Start()
         {
             _player = GetComponent<Player>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _myColor = _spriteRenderer.color;
+            _lerpColor = _myColor;
         }
 
         private void Update()
@@ -27,6 +34,12 @@ namespace PlayerInfo
             {
                 _player.State = PlayerState.Idle;
             }
+            if (_colorTimer <= 1f)
+            {
+                _colorTimer += 3f * Time.unscaledDeltaTime;
+                _spriteRenderer.color = Color.Lerp(_lerpColor, _myColor, _colorTimer);
+            }
+
 
             if (Input.GetKey(KeyCode.H))
             {
@@ -48,12 +61,16 @@ namespace PlayerInfo
                     StopCoroutine(_guarding);
                 }
                 _guarding = StartCoroutine(Guarding());
+                _lerpColor = Color.cyan;
+                _colorTimer = 0f;
             }
             // 일반적인 피격 로직 실행
             else if (_player.State != PlayerState.Hit && _player.State != PlayerState.Die)
             {
                 StopAllCoroutines();
                 StartCoroutine(Hit(_damage));
+                _lerpColor = Color.red;
+                _colorTimer = 0f;
             }
         }
 
@@ -81,16 +98,9 @@ namespace PlayerInfo
         private IEnumerator Hit(int _damage)
         {
             _player.Hp -= _damage;
-            // 체력이 남아있음
-            if (_player.Hp > 0)
-            {
-                _player.State = PlayerState.Hit;
-                yield return new WaitForSecondsRealtime(HitAnimTime);
-                _player.State = PlayerState.Idle;
-            }
 
             // 체력이 다 떨어짐
-            else
+            if (_player.Hp <= 0)
             {
                 _player.State = PlayerState.Die;
                 yield return new WaitForSecondsRealtime(HitAnimTime);

@@ -29,7 +29,13 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.X))
+            if (_player.State == PlayerState.Die)
+            {
+                StopAllCoroutines();
+                return;
+            }
+
+            if (Input.GetKey(KeyCode.X) && _player.State != PlayerState.Die)
             {
                 if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
                 {
@@ -51,6 +57,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_attack);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Counter)
                 {
@@ -78,6 +88,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_attack);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Attack)
                 {
@@ -101,6 +115,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_combo);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Combo)
                 {
