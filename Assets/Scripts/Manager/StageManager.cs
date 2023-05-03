@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -21,6 +22,14 @@ namespace Manager
             if (Input.GetKey(KeyCode.Minus))
             {
                 SceneManager.LoadScene(gameObject.scene.name);
+            }
+
+            if (SceneManager.GetActiveScene().name == "Japanese landscape")
+            {
+                if (GameManager.Instance.KillCount == 100)
+                {
+                    SceneManager.LoadScene("BossScene");
+                }
             }
         }
     }

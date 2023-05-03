@@ -8,8 +8,8 @@ namespace Manager
     {
         public GameObject player;
         public GameObject playerEffect;
-        public GameObject effect;
-        [SerializeField] GameObject DashEffect;
+        public GameObject chronosEffect;
+        [SerializeField] GameObject dashEffect;
         // Start is called before the first frame update
         void Awake()
         {
@@ -24,13 +24,19 @@ namespace Manager
 
         public void Dash()
         {
-            var newDash = Instantiate(DashEffect, playerEffect.transform.position, playerEffect.transform.rotation);
+            var newDash = Instantiate(dashEffect, playerEffect.transform.position, playerEffect.transform.rotation);
             newDash.transform.SetParent(playerEffect.transform);
             if (player.transform.GetComponent<SpriteRenderer>().flipX)
             {
                 newDash.GetComponent<SpriteRenderer>().flipX = true;
             }
         }
+
+        /*public void Chronos()
+        {
+            var newChronos = Instantiate(chronosEffect, playerEffect.transform.position, playerEffect.transform.rotation);
+            newChronos.transform.SetParent(playerEffect.transform);
+        }*/
     }
 }
 

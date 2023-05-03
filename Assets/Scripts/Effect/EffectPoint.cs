@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EffectPoint : MonoBehaviour
 {
+    [SerializeField] private float DashEffectDistance;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,11 +16,11 @@ public class EffectPoint : MonoBehaviour
     {
         if(gameObject.transform.GetComponentInParent<SpriteRenderer>().flipX)
         {
-            gameObject.transform.localPosition = new Vector3(1.3f, 0.7f, 0);
+            gameObject.transform.localPosition = new Vector3(DashEffectDistance, 0.7f, 0);
         }
         else
         {
-            gameObject.transform.localPosition = new Vector3(-1.3f, 0.7f, 0);
+            gameObject.transform.localPosition = new Vector3(-DashEffectDistance, 0.7f, 0);
         }
     }
 }

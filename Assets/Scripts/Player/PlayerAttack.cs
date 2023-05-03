@@ -156,7 +156,7 @@ namespace PlayerInfo
                             {
                                 _boss.GetDamage(Power);
                             }
-                            CreateSlash(transform.position, col.transform.position + new Vector3(0f, 0.5f));
+                            CreateSlash(transform.position, col.transform.position + new Vector3(0f, 1f));
                         }
                     }
                     else if (col.GetComponent<ArcherController>() != null)
@@ -183,7 +183,7 @@ namespace PlayerInfo
 
         private void CreateSlash(Vector3 from, Vector3 to)
         {
-            Quaternion q = Quaternion.AngleAxis(GetAngle(from + new Vector3(0f, 0.5f), to), Vector3.forward);
+            Quaternion q = Quaternion.AngleAxis(GetAngle(from + new Vector3(0f, 1f), to), Vector3.forward);
             GameObject g = Instantiate(Slash, to + new Vector3(0f, 0f, -1f), q);
             Destroy(g, 1f);
         }
