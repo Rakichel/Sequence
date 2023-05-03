@@ -170,7 +170,7 @@ namespace PlayerInfo
                         {
                             _archer.GetDamage(Power);
                         }
-                        CreateSlash(transform.position, col.transform.position);
+                        CreateSlash(transform.position, col.transform.position - new Vector3(0f, 0.5f));
                     }
                 }
             }

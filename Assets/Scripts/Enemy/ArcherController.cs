@@ -4,21 +4,30 @@ using UnityEngine;
 public class ArcherController : MonoBehaviour
 {
     private Animator Animator;
+    private Player target;
+    private SpriteRenderer archerSprite;
+    private float colorTimer = 1f;
 
-    public int hp = 10;
+    public int hp = 50;
     public GameObject Arrow;
-    Player target;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Animator = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").GetComponent<Player>();
+        archerSprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        archerSprite.color = Color.Lerp(Color.red, Color.white, colorTimer);
+        if (colorTimer < 1f)
+        {
+            colorTimer += 2f * Time.deltaTime;
+        }
         if (hp <= 0)
         {
             Animator.SetBool("Shot", false);
@@ -35,6 +44,10 @@ public class ArcherController : MonoBehaviour
     public void GetDamage(int damage)
     {
         hp -= damage;
+        if(hp > 0)
+        {
+            colorTimer = 0f;
+        }
     }
     public void StopShot()
     {
