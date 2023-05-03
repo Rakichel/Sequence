@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f33cfdaffb01944988d76a8c27cb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DashSpeed: 15
+  DashSpeed: 35
   DashDuration: 0.2
   DashCooldown: 0.31
 --- !u!114 &2086709476964619454
@@ -233,7 +233,7 @@ MonoBehaviour:
   Power: 10
   AnimTime: 0.35
   NextAttackTime: 1
-  Slash: {fileID: 6772996672497361952, guid: efa0efe8a97cdd84b9011c2dac5761a5, type: 3}
+  Slash: {fileID: 4150443416626131060, guid: 250b62731cf6b8b41a64911a0aa869e5, type: 3}
 --- !u!114 &2086709476964619449
 MonoBehaviour:
   m_ObjectHideFlags: 0

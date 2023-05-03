@@ -26,7 +26,6 @@ public class ArcherController : MonoBehaviour
         if (dieShader)
         {
             Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
-            Debug.Log("Åº´Ú");
         }
         if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
         {

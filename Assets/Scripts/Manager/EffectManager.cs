@@ -8,7 +8,7 @@ namespace Manager
     {
         public GameObject player;
         public GameObject playerEffect;
-        public GameObject chronosEffect;
+        public GameObject[] chronosEffect;
         [SerializeField] GameObject dashEffect;
         // Start is called before the first frame update
         void Awake()
@@ -19,7 +19,6 @@ namespace Manager
         // Update is called once per frame
         void Update()
         {
-
         }
 
         public void Dash()
@@ -32,11 +31,16 @@ namespace Manager
             }
         }
 
-        /*public void Chronos()
+        public void Chronos()
         {
-            var newChronos = Instantiate(chronosEffect, playerEffect.transform.position, playerEffect.transform.rotation);
-            newChronos.transform.SetParent(playerEffect.transform);
-        }*/
+            var newChronos = Instantiate(chronosEffect[0], playerEffect.transform.position, playerEffect.transform.rotation);
+        }
+
+        public void BossChronos(GameObject g)
+        {
+            var newChronos = Instantiate(chronosEffect[1], g.transform.position + new Vector3(0, 0.7f, 0), g.transform.rotation);
+        }
     }
+
 }
 
