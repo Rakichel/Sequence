@@ -31,9 +31,9 @@ namespace Manager
             }
         }
 
-        public void Chronos(GameObject g)
+        public void Chronos()
         {
-            var newChronos = Instantiate(chronosEffect[0], g.transform.position, g.transform.rotation);
+            var newChronos = Instantiate(chronosEffect[0], playerEffect.transform.position, playerEffect.transform.rotation);
         }
 
         public void BossChronos(GameObject g)

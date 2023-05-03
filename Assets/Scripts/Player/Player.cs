@@ -49,7 +49,7 @@ namespace PlayerInfo
             {
                 _isSkill = true;
                 CameraManager.Instance.Chronos();
-                EffectManager.Instance.Chronos(gameObject);
+                EffectManager.Instance.Chronos();
                 GameManager.Instance.TimeS = 0.2f;
             }
             else if (_skillGage == 0f)
