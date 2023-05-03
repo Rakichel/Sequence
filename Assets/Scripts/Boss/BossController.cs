@@ -128,6 +128,7 @@ namespace BossInfo
             yield return new WaitForSecondsRealtime(1f);
             IsUnscaled = true;
             _rigid.velocity = new Vector2(_rigid.velocity.x, _rigid.velocity.y * 5f);
+            Manager.EffectManager.Instance.BossChronos(gameObject);
             _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
         private void Unscaling()
