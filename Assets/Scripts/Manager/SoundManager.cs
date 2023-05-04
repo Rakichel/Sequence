@@ -12,12 +12,12 @@ namespace Manager
         [SerializeField] public AudioClip[] MainAudioClip; // 배경음 저장
         [SerializeField] private AudioClip[] SFXAudioClips; // 효과음 저장
 
-        public float VolumeSFX = 1.0f; // 효과음 사운드
         public float VolumeBGM = 1.0f; // 배경음 사운드
+        public float VolumeSFX = 1.0f; // 효과음 사운드
 
         //Dictionary<key, value>로 오디오를 불러온다
         Dictionary<string, AudioClip> audioclipdic = new Dictionary<string, AudioClip>();
-        private void Awake()
+        /*private void Awake()
         {
             BGMPlayer = GameObject.Find("BGMSoundPlayer").GetComponent<AudioSource>(); // BGM플레이어
             SFXPlayer = GameObject.Find("SFXSoundPlayer").GetComponent<AudioSource>(); // 효과음플레이어
@@ -29,7 +29,7 @@ namespace Manager
             }
 
             PlayBGMSound();
-        }
+        }*/
 
         public void PlaySFXSound(string name, float volum = 1.0f)
         {
@@ -47,9 +47,10 @@ namespace Manager
         {
             BGMPlayer.loop = true;
         }
+
         private void Update()
         {
-            BGMPlayer.volume = VolumeBGM;
+            //BGMPlayer.volume = VolumeBGM;
         }
     }
 }

@@ -50,7 +50,7 @@ Material:
     m_Floats:
     - Vector1_f0d2a4bf2dcd4ea693859cfa8d3aa6f6: 0
     - _EnableExternalAlpha: 0
-    - _Fade: 1
+    - _Fade: 1.17
     - _Scale: 26.88
     m_Colors:
     - Vector2_8355900b8d354e8d846cc5dba284ba9f: {r: 0, g: 0, b: 0, a: 0}

@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Platform
   - Boss
+  - Floor1
+  - Floor2
+  - Floor3
   layers:
   - Default
   - TransparentFX

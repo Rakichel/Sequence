@@ -350,7 +350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &69653389
 Transform:
   m_ObjectHideFlags: 0
@@ -379,6 +379,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HpBar: {fileID: 0}
   SkillBar: {fileID: 0}
+  PauseFade: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  SettingMenu: {fileID: 0}
+  BGM: {fileID: 0}
+  SFX: {fileID: 0}
 --- !u!1 &80157827
 GameObject:
   m_ObjectHideFlags: 0
