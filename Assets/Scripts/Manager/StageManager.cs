@@ -15,7 +15,7 @@ namespace Manager
             {
                 if(Input.anyKey)
                 {
-                    SceneManager.LoadScene("Japanese landscape");
+                    SceneManager.LoadScene("Tutorial");
                 }
             }
 
@@ -24,18 +24,29 @@ namespace Manager
                 SceneManager.LoadScene(gameObject.scene.name);
             }
 
-            if (SceneManager.GetActiveScene().name == "Japanese landscape")
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                if (GameManager.Instance.KillCount == 100)
-                {
-                    SceneManager.LoadScene("BossScene");
-                }
+                GotoBoss();
+            }
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                GotoReader();
             }
         }
 
         public void GotoTitle()
         {
             SceneManager.LoadScene("Title");
+        }
+
+        public void GotoBoss()
+        {
+            SceneManager.LoadScene("BossScene");
+        }
+
+        public void GotoReader()
+        {
+            SceneManager.LoadScene("ReaderBoard");
         }
     }
 }

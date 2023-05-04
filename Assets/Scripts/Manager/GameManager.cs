@@ -10,6 +10,9 @@ namespace Manager
     {
         public float TimeS = 1f;
         public int KillCount = 0;
+        public int EnemyLevel = 1;
+        public int LevelScale;
+        public int KillCountTotal = 0;
         [SerializeField] private float dieTime = 0.1f;
         [SerializeField] private float _fade = 0.1f;
         private bool dieShader = true;
@@ -28,10 +31,16 @@ namespace Manager
         // Update is called once per frame
         private void Update()
         {
-            //EnemyDie(null);
             if(Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log(Time.timeScale);
+            }
+
+            if (KillCount == LevelScale + KillCountTotal)
+            {
+                EnemyLevel++;
+                KillCountTotal += KillCount;
+                KillCount = 0;
             }
         }
 
