@@ -4433,6 +4433,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeS: 1
   KillCount: 0
+  EnemyLevel: 1
+  LevelScale: 0
+  KillCountTotal: 0
   dieTime: 0.1
   _fade: 0.1
 --- !u!1 &1100005730

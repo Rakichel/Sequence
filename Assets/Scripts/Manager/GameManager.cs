@@ -31,7 +31,7 @@ namespace Manager
         // Update is called once per frame
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.T))
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log(Time.timeScale);
             }

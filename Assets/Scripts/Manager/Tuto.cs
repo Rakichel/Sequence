@@ -53,7 +53,7 @@ public class Tuto : MonoBehaviour
                 ADG.SetActive(false);
                 GuardAttack.SetActive(true);
                 break;
-            case "Chronos":
+            case "ChronosT":
                 GuardAttack.SetActive(false);
                 Chronos.SetActive(true);
                 break;

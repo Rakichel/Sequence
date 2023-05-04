@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BossScene.unity
     guid: 4e37c6bcc8d49c14d934e8e6fecde0ea
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 64a4e770f256a4d4aba4b4f7c20023be
+  - enabled: 1
     path: Assets/Scenes/ReaderBoard.unity
     guid: 4c766846475502b4ba58d530e7823699
   m_configObjects: {}

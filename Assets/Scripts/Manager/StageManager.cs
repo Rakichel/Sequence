@@ -19,6 +19,11 @@ namespace Manager
                 }
             }
 
+            if (SceneManager.GetActiveScene().name == "Tutorial")
+            {
+                SoundManager.Instance.PlayBGMSound();
+            }
+
             if (Input.GetKey(KeyCode.Minus))
             {
                 SceneManager.LoadScene(gameObject.scene.name);
@@ -31,6 +36,10 @@ namespace Manager
             if (Input.GetKeyDown(KeyCode.O))
             {
                 GotoReader();
+            }
+            if(Input.GetKeyDown(KeyCode.I))
+            {
+                SceneManager.LoadScene("Japanese landscape");
             }
         }
 
