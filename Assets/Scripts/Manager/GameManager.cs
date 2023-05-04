@@ -29,6 +29,10 @@ namespace Manager
         private void Update()
         {
             //EnemyDie(null);
+            if(Input.GetKeyDown(KeyCode.T))
+            {
+                Debug.Log(Time.timeScale);
+            }
         }
 
         public void EnemyDie(Material EnemyM)

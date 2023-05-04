@@ -20,4 +20,9 @@ public class Dash : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void sActive(bool b)
+    {
+        gameObject.SetActive(b);
+    }
 }

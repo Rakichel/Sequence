@@ -32,5 +32,10 @@ namespace Manager
                 }
             }
         }
+
+        public void GotoTitle()
+        {
+            SceneManager.LoadScene("Title");
+        }
     }
 }

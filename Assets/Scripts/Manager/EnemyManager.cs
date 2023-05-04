@@ -24,7 +24,24 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < Stage.CurrentBlock.Length; i++)
         {
-            var newEnemy = Instantiate(EnemyArr[0], new Vector3((Stage.CurrentBlock[i].transform.localPosition.x + Random.Range(-4, 5)), Stage.BlockFloor[i], 0), Stage.CurrentBlock[i].transform.rotation);
+            int floor = Random.Range(1, Stage.BlockFloor[i] + 1);
+            float EnemySpawn = -3f;
+            switch (floor)
+            {
+                case 1:
+                    EnemySpawn = -3f;
+                    break;
+                case 2:
+                    EnemySpawn = 0f;
+                    break;
+                case 3:
+                    EnemySpawn = 6f;
+                    break;
+                case 4:
+                    EnemySpawn = 6f;
+                    break;
+            }
+            var newEnemy = Instantiate(EnemyArr[0], new Vector3((Stage.CurrentBlock[i].transform.position.x + Random.Range(-3, 4)), EnemySpawn, 0), Stage.CurrentBlock[i].transform.rotation);
         }
     }   
 }
