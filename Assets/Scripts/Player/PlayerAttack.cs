@@ -29,7 +29,13 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.X))
+            if (_player.State == PlayerState.Die)
+            {
+                StopAllCoroutines();
+                return;
+            }
+
+            if (Input.GetKey(KeyCode.X) && _player.State != PlayerState.Die)
             {
                 if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
                 {
@@ -51,6 +57,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_attack);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Counter)
                 {
@@ -78,6 +88,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_attack);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Attack)
                 {
@@ -101,6 +115,10 @@ namespace PlayerInfo
             while (_timer < NextAttackTime)
             {
                 yield return new WaitForEndOfFrame();
+
+                if (_player.State == PlayerState.Die)
+                    StopCoroutine(_combo);
+
                 _timer = _timer + Time.unscaledDeltaTime;
                 if (Input.GetKey(KeyCode.X) && _player.State == PlayerState.Combo)
                 {
@@ -197,7 +215,7 @@ namespace PlayerInfo
             // 보는 방향 기준으로 공격 방향 지정
             if (_player.State == PlayerState.Counter)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f), 0f, 1 << 8 | 1 << 9);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0f, 0.75f), new Vector3(3.5f, 1.5f), 0f, 1 << 8 | 1 << 9);
             }
             else if (_player.State == PlayerState.Landed)
             {
@@ -205,11 +223,11 @@ namespace PlayerInfo
             }
             else if (_player.Direction == PlayerDirection.Right)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8 | 1 << 9);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
             }
             else
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-0.75f, 0.75f), new Vector3(1f, 1f), 0f, 1 << 8 | 1 << 9);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
             }
         }
 
@@ -220,14 +238,14 @@ namespace PlayerInfo
                 Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
                 if (_player.Direction == PlayerDirection.Right)
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(0.75f, 0.5f), new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(1f, 1f), new Vector3(1.5f, 2f));
                 }
                 else
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(-0.75f, 0.5f), new Vector3(1f, 1f));
+                    Gizmos.DrawCube(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f));
                 }
                 Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
-                Gizmos.DrawCube(transform.position + new Vector3(0f, 0.5f), new Vector3(2f, 1f));
+                Gizmos.DrawCube(transform.position + new Vector3(0f, 0.75f), new Vector3(3.5f, 1.5f));
             }
         }
     }
