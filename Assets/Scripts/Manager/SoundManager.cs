@@ -17,10 +17,10 @@ namespace Manager
 
         //Dictionary<key, value>로 오디오를 불러온다
         Dictionary<string, AudioClip> audioclipdic = new Dictionary<string, AudioClip>();
-        /*private void Awake()
+        private void Awake()
         {
-            BGMPlayer = GameObject.Find("BGMSoundPlayer").GetComponent<AudioSource>(); // BGM플레이어
-            SFXPlayer = GameObject.Find("SFXSoundPlayer").GetComponent<AudioSource>(); // 효과음플레이어
+            BGMPlayer = GameObject.Find("BGMPlayer").GetComponent<AudioSource>(); // BGM플레이어
+            SFXPlayer = GameObject.Find("SFXPlayer").GetComponent<AudioSource>(); // 효과음플레이어
 
             // SFXAudioClips내에 오디오클립들을 Dictionary내에 저장
             foreach (AudioClip audioclip in SFXAudioClips)
@@ -29,7 +29,7 @@ namespace Manager
             }
 
             PlayBGMSound();
-        }*/
+        }
 
         public void PlaySFXSound(string name, float volum = 1.0f)
         {
@@ -45,12 +45,13 @@ namespace Manager
 
         public void PlayBGMSound()
         {
+            //BGMPlayer.clip = MainAudioClip[0];
             BGMPlayer.loop = true;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            //BGMPlayer.volume = VolumeBGM;
+            BGMPlayer.volume = VolumeBGM;
         }
     }
 }

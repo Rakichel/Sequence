@@ -39,7 +39,7 @@ namespace PlayerInfo
             {
                 if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
                 {
-                    _attack = StartCoroutine(Attack());
+                    _attack = StartCoroutine(Attack());    
                 }
                 else if (_player.PlayerFixedState() || _player.State == PlayerState.Guarding)
                 {
@@ -50,6 +50,7 @@ namespace PlayerInfo
 
         private IEnumerator Counter()
         {
+            SoundManager.Instance.PlaySFXSound("AttackSound", 0.5f);
             // 공격 상태 전환
             _player.State = PlayerState.Counter;
             yield return new WaitForSecondsRealtime(AnimTime);
@@ -81,6 +82,7 @@ namespace PlayerInfo
         /// <returns></returns>
         private IEnumerator Attack()
         {
+            SoundManager.Instance.PlaySFXSound("AttackSound", 0.5f);
             // 공격 상태 전환
             _player.State = PlayerState.Attack;
             yield return new WaitForSecondsRealtime(AnimTime);
@@ -108,6 +110,7 @@ namespace PlayerInfo
 
         private IEnumerator Combo()
         {
+            SoundManager.Instance.PlaySFXSound("AttackSound", 0.5f);
             // 공격 상태 전환
             _player.State = PlayerState.Combo;
             yield return new WaitForSecondsRealtime(AnimTime);
