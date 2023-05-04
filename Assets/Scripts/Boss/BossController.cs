@@ -46,6 +46,11 @@ namespace BossInfo
             LookDirection();
             _todo?.Work();
 
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                GetDamage(100);
+            }
+
             if (State == _currentState)
                 return;
 
