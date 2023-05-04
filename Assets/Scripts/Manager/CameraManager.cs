@@ -26,7 +26,7 @@ namespace Manager
             MCam = Camera.main;
             v = MCam.GetComponent<Volume>();
             v.profile.TryGet(out c);
-            ChronosBG = MCam.transform.GetChild(0).GetChild(0).GetComponent<SpriteRenderer>();
+            ChronosBG = GameObject.Find("Chronos").GetComponent<SpriteRenderer>();
             Screen.SetResolution(1920, 1080, true);
             Debug.Log(CDelay);
         }
@@ -34,12 +34,8 @@ namespace Manager
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKey(KeyCode.R))
-                ChronosBGA = 0;
             ChronosStart();
             ChronosBG.color = new Color(0, 0, 0, ChronosBGA);
-            
-                
         }
         public void Impulse()
         {
