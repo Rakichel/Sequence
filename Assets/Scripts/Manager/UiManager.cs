@@ -15,8 +15,9 @@ namespace Manager
         [SerializeField] private GameObject PauseFade;
         [SerializeField] private GameObject PauseMenu;
         [SerializeField] private GameObject SettingMenu;
-        [SerializeField] private Text EnemyLevel;
         [SerializeField] private GameObject ProgressBar;
+        [SerializeField] private Text EnemyLevel;
+        [SerializeField] private GameObject LevelUp;
         [SerializeField] private Slider BGM;
         [SerializeField] private Slider SFX;
         // Start is called before the first frame update
@@ -34,6 +35,7 @@ namespace Manager
                     SettingMenu = GameObject.Find("SettingMenu");
                     ProgressBar = GameObject.Find("ProgressBar");
                     EnemyLevel = GameObject.Find("EnemyLevel").GetComponent<Text>();
+                    LevelUp = GameObject.Find("LevelUpMenu");
                     BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
                     SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
                     GameStart();
@@ -134,21 +136,13 @@ namespace Manager
             PauseFade.SetActive(false);
             PauseMenu.SetActive(false);
             SettingMenu.SetActive(false);
+            LevelUp.SetActive(false);
         }
         public void Pause(bool c)
         {
-            if(c)
-            {
-                GameManager.Instance.TimeS = 0f;
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                GameManager.Instance.TimeS = 1f;
-                Time.timeScale = 1f;
-            }
             PauseFade.SetActive(c);
             PauseMenu.SetActive(c);
+            SettingMenu.SetActive(false);
         }
 
         public void Setting(bool c)
@@ -159,6 +153,11 @@ namespace Manager
         public void MainMenu()
         {
             StageManager.Instance.GotoTitle();
+        }
+
+        public void LevelUpMenu(bool c)
+        {
+            LevelUp.SetActive(c);
         }
     }
 }

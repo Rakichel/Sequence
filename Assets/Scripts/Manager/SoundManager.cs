@@ -49,7 +49,7 @@ namespace Manager
             BGMPlayer.loop = true;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             BGMPlayer.volume = VolumeBGM;
         }

@@ -40,26 +40,32 @@ public class Tuto : MonoBehaviour
             case "Jump":
                 Move.SetActive(false);
                 Jump.SetActive(true);
+                Landing.SetActive(false);
                 break;
             case "Landing":
                 Jump.SetActive(false);
                 Landing.SetActive(true);
+                ADG.SetActive(false);
                 break;
             case "ADG":
                 Landing.SetActive(false);
                 ADG.SetActive(true);
+                GuardAttack.SetActive(false);
                 break;
             case "GuardAttack":
                 ADG.SetActive(false);
                 GuardAttack.SetActive(true);
+                Chronos.SetActive(false);
                 break;
             case "ChronosT":
                 GuardAttack.SetActive(false);
                 Chronos.SetActive(true);
+                Pause.SetActive(false);
                 break;
             case "Pause":
                 Chronos.SetActive(false);
                 Pause.SetActive(true);
+                KillEnemy.SetActive(false);
                 break;
             case "KillEnemy":
                 Pause.SetActive(false);
