@@ -16,21 +16,17 @@ namespace Manager
         [SerializeField] private float dieTime = 0.1f;
         [SerializeField] private float _fade = 0.1f;
         private bool dieShader = true;
-        // Start is called before the first frame update
-        private void Start()
-        {
-            
-        }
 
         private void FixedUpdate()
         {
-            Time.timeScale = TimeS;
-            Time.fixedDeltaTime = 0.02f * Time.timeScale;
             Physics2D.Simulate(0.02f);
         }
-        // Update is called once per frame
         private void Update()
         {
+            Time.timeScale = TimeS;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            
+
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Debug.Log(Time.timeScale);
@@ -39,6 +35,7 @@ namespace Manager
             if (KillCount == LevelScale + KillCountTotal)
             {
                 EnemyLevel++;
+                UiManager.Instance.LevelUpMenu(true);
                 KillCountTotal += KillCount;
                 KillCount = 0;
             }
