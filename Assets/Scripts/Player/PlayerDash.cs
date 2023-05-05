@@ -24,6 +24,8 @@ namespace PlayerInfo
 
         private void Update()
         {
+            if (_player.isDash)
+                DashSpeed = 35f;
             // 대쉬 쿨타임 감소
             if (_dashCooldownTimer > 0)
             {
