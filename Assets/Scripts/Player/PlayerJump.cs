@@ -10,6 +10,8 @@ namespace PlayerInfo
     [RequireComponent(typeof(Player))]
     public class PlayerJump : MonoBehaviour
     {
+        private string _fileName = "PlayerStatus";
+
         private Player _player;         // 플레이어 정보를 받아오기 위한 객체
         private Collider2D _isGrounded;       // 땅에 발을 딛는지 확인하는 용도
         private PlatformEffector2D _getGround;
@@ -24,6 +26,7 @@ namespace PlayerInfo
 
         private void Start()
         {
+            LoadData();
             _player = GetComponent<Player>();
         }
 
@@ -123,6 +126,25 @@ namespace PlayerInfo
             else if (!_isGrounded && _player.PlayerFixedState() && _player.State != PlayerState.DJump)
             {
                 _player.State = PlayerState.Jump;
+            }
+        }
+
+        private void SaveData()
+        {
+            JsonManager<PlayerStatus>.Save(new PlayerStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerStatus data = JsonManager<PlayerStatus>.Load(_fileName);
+            if (data != null)
+            {
+                JumpForce = data.JumpForce;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
             }
         }
 

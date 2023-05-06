@@ -8,6 +8,8 @@ namespace PlayerInfo
     [RequireComponent(typeof(Player))]
     public class PlayerDash : MonoBehaviour
     {
+        private string _fileName = "PlayerStatus";
+
         private Player _player;
         private float _dashTimer = 0f;              // 대쉬 지속 시간을 재는 타이머
         private float _dashCooldownTimer = 0f;      // 대쉬 쿨타임을 재는 타이머
@@ -19,13 +21,16 @@ namespace PlayerInfo
 
         private void Start()
         {
+            LoadData();
             _player = GetComponent<Player>();
         }
 
         private void Update()
         {
             if (_player.isDash)
-                DashSpeed = 35f;
+            {
+
+            }
             // 대쉬 쿨타임 감소
             if (_dashCooldownTimer > 0)
             {
@@ -81,6 +86,26 @@ namespace PlayerInfo
                 _dashVelocity = -transform.right * DashSpeed;
             }
             _player.Rigidbody.velocity = new Vector2(_dashVelocity.x, _player.Rigidbody.velocity.y);
+        }
+        private void SaveData()
+        {
+            JsonManager<PlayerStatus>.Save(new PlayerStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerStatus data = JsonManager<PlayerStatus>.Load(_fileName);
+            if (data != null)
+            {
+                DashSpeed = data.DashSpeed;
+                DashDuration = data.DashDuration;
+                DashCooldown = data.DashCooldown;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
+            }
         }
     }
 }

@@ -1,14 +1,53 @@
 using Manager;
+using System;
 using UnityEngine;
 
 namespace PlayerInfo
 {
+    [Serializable]
+    public class PlayerStatus
+    {
+        public float Speed;                 // 이동속도
+        public float DashSpeed;             // 대쉬 속도
+        public float DashDuration;          // 대쉬 지속 시간
+        public float DashCooldown;          // 대쉬 쿨타임
+        public float JumpForce;             // 점프력
+        public int Power;                   // 공격력
+
+        public PlayerStatus()
+        {
+            Speed = 8f;
+            DashSpeed = 35f;
+            DashDuration = 0.2f;
+            DashCooldown = 0.31f;
+            JumpForce = 20f;
+            Power = 10;
+        }
+    }
+
+    [Serializable]
+    public class PlayerData
+    {
+        public float Hp;
+        public bool isShadow;
+        public bool isDrain;
+        public bool isDash;
+
+        public PlayerData(float hp, bool isShadow, bool isDrain, bool isDash)
+        {
+            Hp = hp;
+            this.isShadow = isShadow;
+            this.isDrain = isDrain;
+            this.isDash = isDash;
+        }
+    }
+
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(SpriteRenderer))]
     [RequireComponent(typeof(GhostTrail))]
     public class Player : MonoBehaviour
     {
-        [SerializeField] private float _hp = 100f;
+        private float _hp;
 
         public float Hp
         {
@@ -30,11 +69,12 @@ namespace PlayerInfo
             }
         }
         private bool _isSkill = false;
+        private string _fileName = "PlayerSave";
 
         public GameObject Shadow;
-        public bool isShadow = false;
-        public bool isDrain = false;
-        public bool isDash = false;
+        public bool isShadow;
+        public bool isDrain;
+        public bool isDash;
         public Rigidbody2D Rigidbody;
         public PlayerDirection Direction = PlayerDirection.Right;   // 플레이어가 보고있는 방향
         public PlayerState State = PlayerState.Idle;                // 플레이어의 상태
@@ -52,6 +92,7 @@ namespace PlayerInfo
             {
                 Shadow = GameObject.Find("Shadow");
             }
+            LoadData();
         }
         private void Update()
         {
@@ -81,6 +122,38 @@ namespace PlayerInfo
             {
                 _skillGage = Mathf.Clamp(_skillGage + Time.unscaledDeltaTime * 50f, 0f, 100f);
             }
+
+            SaveData();
+        }
+
+        private void SaveData()
+        {
+            JsonManager<PlayerData>.Save(new PlayerData(_hp, isShadow, isDrain, isDash), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerData data = JsonManager<PlayerData>.Load(_fileName);
+            if (data != null)
+            {
+                _hp = data.Hp;
+                isShadow = data.isShadow;
+                isDrain = data.isDrain;
+                isDash = data.isDash;
+            }
+            else
+            {
+                _hp = 100f;
+                isShadow = false;
+                isDrain = false;
+                isDash = false;
+                SaveData();
+            }
+        }
+
+        private void DeleteData()
+        {
+            JsonManager<PlayerData>.Delete(_fileName);
         }
 
         public void ShadowPartner()

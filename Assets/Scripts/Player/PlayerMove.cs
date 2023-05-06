@@ -8,6 +8,8 @@ namespace PlayerInfo
     [RequireComponent(typeof(Player))]
     public class PlayerMove : MonoBehaviour
     {
+        private string _fileName = "PlayerStatus";
+
         private Vector2 _movement;  // 플레이어를 움직이는 벡터
         private float _horizontal;  // 입력받은 값의 방향을 정함
         private Player _player;     // 플레이어 정보를 받아오기 위한 객체
@@ -78,6 +80,25 @@ namespace PlayerInfo
             _movement = new Vector2(_horizontal, 0f);
             _movement.Normalize();
             _player.Rigidbody.velocity = new Vector2(_movement.x * Speed, _player.Rigidbody.velocity.y);
+        }
+
+        private void SaveData()
+        {
+            JsonManager<PlayerStatus>.Save(new PlayerStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerStatus data = JsonManager<PlayerStatus>.Load(_fileName);
+            if (data != null)
+            {
+                Speed = data.Speed;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
+            }
         }
     }
 }

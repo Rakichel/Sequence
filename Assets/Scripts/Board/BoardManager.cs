@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Manager;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [Serializable]
 public class User
@@ -74,7 +72,7 @@ public class BoardManager : MonoBehaviour
 
     public bool DataInput()
     {
-        UserData character = ReaderBoard.Load("UserDB");
+        UserData character = JsonManager<UserData>.Load("UserDB");
         if (character == null)
             character = new UserData();
 
@@ -91,17 +89,17 @@ public class BoardManager : MonoBehaviour
         Now.transform.GetChild(2).GetComponent<Text>().text = rand.ToString();
         Now.transform.GetChild(3).GetComponent<Text>().text = n.ToString();
         character.users.Add(new User(name, rand, n++));
-        ReaderBoard.Save(character, "UserDB");
+        JsonManager<UserData>.Save(character, "UserDB");
         return true;
     }
 
     public void DataOutput()
     {
-        UserData loadData = ReaderBoard.Load("UserDB");
+        UserData loadData = JsonManager<UserData>.Load("UserDB");
         loadData.users.Sort((a, b) => a._time.CompareTo(b._time));
 
         // 데이터를 UI에 보낼 구문
-        for(int i = 0; i < Ranker.Length; i++)
+        for (int i = 0; i < Ranker.Length; i++)
         {
             if (i >= loadData.users.Count)
                 break;

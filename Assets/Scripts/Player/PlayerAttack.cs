@@ -12,6 +12,8 @@ namespace PlayerInfo
     [RequireComponent(typeof(Player))]
     public class PlayerAttack : MonoBehaviour
     {
+        private string _fileName = "PlayerStatus";
+
         private Player _player;
         private Coroutine _attack;
         private Coroutine _combo;
@@ -24,6 +26,7 @@ namespace PlayerInfo
 
         private void Start()
         {
+            LoadData();
             _player = GetComponent<Player>();
         }
 
@@ -255,6 +258,24 @@ namespace PlayerInfo
             else
             {
                 return Physics2D.OverlapBoxAll(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
+            }
+        }
+        private void SaveData()
+        {
+            JsonManager<PlayerStatus>.Save(new PlayerStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerStatus data = JsonManager<PlayerStatus>.Load(_fileName);
+            if (data != null)
+            {
+                Power = data.Power;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
             }
         }
 
