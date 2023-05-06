@@ -12,6 +12,8 @@ namespace PlayerInfo
     [RequireComponent(typeof(Player))]
     public class PlayerAttack : MonoBehaviour
     {
+        private string _fileName = "PlayerStatus";
+
         private Player _player;
         private Coroutine _attack;
         private Coroutine _combo;
@@ -24,6 +26,7 @@ namespace PlayerInfo
 
         private void Start()
         {
+            LoadData();
             _player = GetComponent<Player>();
         }
 
@@ -39,7 +42,7 @@ namespace PlayerInfo
             {
                 if (_player.PlayerFixedState() || _player.State == PlayerState.Dash)
                 {
-                    _attack = StartCoroutine(Attack());    
+                    _attack = StartCoroutine(Attack());
                 }
                 else if (_player.PlayerFixedState() || _player.State == PlayerState.Guarding)
                 {
@@ -155,10 +158,18 @@ namespace PlayerInfo
                             if (_player.State == PlayerState.Counter)
                             {
                                 _enemy.GetDamage(Power * 2);
+                                if (_player.isDrain)
+                                    _player.Hp += Power * 2;
                             }
                             else
                             {
                                 _enemy.GetDamage(Power);
+                                if (_player.isDrain)
+                                    _player.Hp += Power;
+                            }
+                            if (_player.isShadow)
+                            {
+                                CreateSlash(transform.position, col.transform.position + new Vector3(0, Random.Range(-1f, 1f)));
                             }
                             CreateSlash(transform.position, col.transform.position);
                         }
@@ -172,10 +183,18 @@ namespace PlayerInfo
                             if (_player.State == PlayerState.Counter)
                             {
                                 _boss.GetDamage(Power * 2);
+                                if (_player.isDrain)
+                                    _player.Hp += Power * 2;
                             }
                             else
                             {
                                 _boss.GetDamage(Power);
+                                if (_player.isDrain)
+                                    _player.Hp += Power;
+                            }
+                            if (_player.isShadow)
+                            {
+                                CreateSlash(transform.position, col.transform.position + new Vector3(0, Random.Range(0f, 2f)));
                             }
                             CreateSlash(transform.position, col.transform.position + new Vector3(0f, 1f));
                         }
@@ -186,10 +205,18 @@ namespace PlayerInfo
                         if (_player.State == PlayerState.Counter)
                         {
                             _archer.GetDamage(Power * 2);
+                            if (_player.isDrain)
+                                _player.Hp += (Power * 2 / 10);
                         }
                         else
                         {
                             _archer.GetDamage(Power);
+                            if (_player.isDrain)
+                                _player.Hp += Power / 10;
+                        }
+                        if (_player.isShadow)
+                        {
+                            CreateSlash(transform.position, col.transform.position + new Vector3(0, Random.Range(-1.5f, 0.5f)));
                         }
                         CreateSlash(transform.position, col.transform.position - new Vector3(0f, 0.5f));
                     }
@@ -231,6 +258,24 @@ namespace PlayerInfo
             else
             {
                 return Physics2D.OverlapBoxAll(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
+            }
+        }
+        private void SaveData()
+        {
+            JsonManager<PlayerStatus>.Save(new PlayerStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            PlayerStatus data = JsonManager<PlayerStatus>.Load(_fileName);
+            if (data != null)
+            {
+                Power = data.Power;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
             }
         }
 
