@@ -119,7 +119,7 @@ public class ArcherController : MonoBehaviour
             return;
         }
         LookDir();
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 10f, 1 << 7);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 15f, 1 << 7);
         if (col != null)
         {
             Animator.SetBool("Shot", true);
@@ -136,7 +136,7 @@ public class ArcherController : MonoBehaviour
     }
     public void StopShot()
     {
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 10f, 1 << 7);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 15f, 1 << 7);
         if (col == null)
         {
             Animator.SetBool("Shot", false);
@@ -192,6 +192,6 @@ public class ArcherController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 10f);
+        Gizmos.DrawWireSphere(transform.position, 15f);
     }
 }
