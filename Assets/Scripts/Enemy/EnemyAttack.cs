@@ -1,10 +1,12 @@
+using Manager;
 using PlayerInfo;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    private string _fileName = "EnemyStatus";
+
     public int _damage;
-    public float _attackPower;
     [SerializeField] private Enemy _enemy;
     public bool _attackin;
     private void Awake()
@@ -12,10 +14,14 @@ public class EnemyAttack : MonoBehaviour
         // 적 초기화 시 공격 대기 시간 초기화
         _enemy = gameObject.GetComponent<Enemy>();
     }
+    private void Start()
+    {
+        LoadData();
+    }
     // Update is called once per frame
     private void Update()
     {
-        if(_enemy._enemyState != EnemyState.Dead)
+        if (_enemy._enemyState != EnemyState.Dead)
         {
             AttackPlayer();
         }
@@ -53,6 +59,26 @@ public class EnemyAttack : MonoBehaviour
             _attackin = false;
         }
     }
+
+    private void SaveData()
+    {
+        JsonManager<EnemyData>.Save(new EnemyData(), _fileName);
+    }
+
+    private void LoadData()
+    {
+        EnemyData data = JsonManager<EnemyData>.Load(_fileName);
+        if (data != null)
+        {
+            _damage = data.Status[GameManager.Instance.EnemyLevel - 1].Damage;
+        }
+        else
+        {
+            SaveData();
+            LoadData();
+        }
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -12,8 +12,8 @@ namespace PlayerInfo
         public float DashDuration;          // 대쉬 지속 시간
         public float DashCooldown;          // 대쉬 쿨타임
         public float JumpForce;             // 점프력
+        public float Drain;                  // 피흡
         public int Power;                   // 공격력
-
         public PlayerStatus()
         {
             Speed = 8f;
@@ -21,6 +21,7 @@ namespace PlayerInfo
             DashDuration = 0.2f;
             DashCooldown = 0.31f;
             JumpForce = 20f;
+            Drain = 0.1f;
             Power = 10;
         }
     }

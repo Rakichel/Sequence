@@ -15,7 +15,6 @@ public static class JsonManager<T>
         string _filePath = _path + "/" + _fileName + ".json";
 
         File.WriteAllText(_filePath, _saveJson);
-        Debug.Log("Save : " + _filePath);
     }
 
     public static T Load(string _fileName)

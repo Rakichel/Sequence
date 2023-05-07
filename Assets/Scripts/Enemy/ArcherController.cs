@@ -1,14 +1,89 @@
+using Manager;
 using PlayerInfo;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class ArcherStatus
+{
+    public int Hp;
+    public int Damage;
+
+    public ArcherStatus(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                Hp = 100;
+                Damage = 1;
+                break;
+            case 2:
+                Hp = 110;
+                Damage = 1;
+                break;
+            case 3:
+                Hp = 120;
+                Damage = 1;
+                break;
+            case 4:
+                Hp = 130;
+                Damage = 1;
+                break;
+            case 5:
+                Hp = 140;
+                Damage = 1;
+                break;
+            case 6:
+                Hp = 150;
+                Damage = 1;
+                break;
+            case 7:
+                Hp = 160;
+                Damage = 1;
+                break;
+            case 8:
+                Hp = 170;
+                Damage = 1;
+                break;
+            case 9:
+                Hp = 180;
+                Damage = 1;
+                break;
+            case 10:
+                Hp = 190;
+                Damage = 1;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+[Serializable]
+public class ArcherData
+{
+    public List<ArcherStatus> Status = new List<ArcherStatus>();
+
+    public ArcherData()
+    {
+        for (int i = 1; i <= 10; i++)
+        {
+            Status.Add(new ArcherStatus(i));
+        }
+    }
+}
 public class ArcherController : MonoBehaviour
 {
+    private string _fileName = "EnemyStatus";
+
     private Animator Animator;
     private Player target;
     private SpriteRenderer archerSprite;
     private float colorTimer = 1f;
 
-    public int hp = 50;
+    public int hp;
+    public int Damage;
     public GameObject Arrow;
     public bool dieShader = false;
 
@@ -25,11 +100,11 @@ public class ArcherController : MonoBehaviour
     {
         if (dieShader)
         {
-            Manager.GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
+            GameManager.Instance.EnemyDie(gameObject.GetComponent<SpriteRenderer>().material);
         }
         if (gameObject.GetComponent<SpriteRenderer>().material.GetFloat("_Fade") <= 0)
         {
-            Manager.GameManager.Instance.KillCount++;
+            GameManager.Instance.KillCount++;
             Destroy(gameObject);
         }
         archerSprite.color = Color.Lerp(Color.red, Color.white, colorTimer);
@@ -54,7 +129,7 @@ public class ArcherController : MonoBehaviour
     public void GetDamage(int damage)
     {
         hp -= damage;
-        if(hp > 0)
+        if (hp > 0)
         {
             colorTimer = 0f;
         }
@@ -71,7 +146,8 @@ public class ArcherController : MonoBehaviour
     {
         Quaternion q = Quaternion.AngleAxis(GetAngle(transform.position, target.transform.position + new Vector3(0f, 0.5f)), Vector3.forward);
 
-        Instantiate(Arrow, transform.position, q);
+        Arrow g = Instantiate(Arrow, transform.position, q).GetComponent<Arrow>();
+        g.Damage = Damage;
     }
     public void LookDir()
     {
@@ -93,6 +169,27 @@ public class ArcherController : MonoBehaviour
     {
         dieShader = true;
     }
+
+    private void SaveData()
+    {
+        JsonManager<ArcherData>.Save(new ArcherData(), _fileName);
+    }
+
+    private void LoadData()
+    {
+        ArcherData data = JsonManager<ArcherData>.Load(_fileName);
+        if (data != null)
+        {
+            hp = data.Status[GameManager.Instance.EnemyLevel - 1].Hp;
+            Damage = data.Status[GameManager.Instance.EnemyLevel - 1].Damage;
+        }
+        else
+        {
+            SaveData();
+            LoadData();
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, 10f);

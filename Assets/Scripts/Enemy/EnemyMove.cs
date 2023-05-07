@@ -1,7 +1,10 @@
+using Manager;
 using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
+    private string _fileName = "EnemyStatus";
+
     public Enemy _enemy;
     private int _moveSpeed = 3;
     [SerializeField] float distance = 0;
@@ -16,12 +19,13 @@ public class EnemyMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData();
         _enemy = gameObject.GetComponent<Enemy>();
 
     }
     void Update()
     {
-        if(_enemy._enemyState != EnemyState.Dead)
+        if (_enemy._enemyState != EnemyState.Dead)
         {
             ChasePlayer();
         }
@@ -55,6 +59,22 @@ public class EnemyMove : MonoBehaviour
             }
         }
     }
-    // Update is called once per frame
+    private void SaveData()
+    {
+        JsonManager<EnemyData>.Save(new EnemyData(), _fileName);
+    }
 
+    private void LoadData()
+    {
+        EnemyData data = JsonManager<EnemyData>.Load(_fileName);
+        if (data != null)
+        {
+            MoveSpeed = data.Status[GameManager.Instance.EnemyLevel - 1].MoveSpeed;
+        }
+        else
+        {
+            SaveData();
+            LoadData();
+        }
+    }
 }
