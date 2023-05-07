@@ -7,6 +7,10 @@ namespace BossInfo
         private float _distanceX = 0f;
         private float _distanceY = 0f;
         private Vector2 _movement = Vector2.one;
+        private PlatformEffector2D _getGround;
+        private Collider2D _isGrounded;       // 땅에 발을 딛는지 확인하는 용도
+        private float _timer = 0f;
+        private bool _isActive;
 
         private BossController _controller;
         private float _jumpPower;
@@ -28,6 +32,8 @@ namespace BossInfo
 
         public void Work()
         {
+            _isGrounded = Physics2D.OverlapBox(_controller.transform.position, new Vector2(0.5f, 0.02f), 0f, 1 << 6);
+
             DistanceCalcurator();
             MovementState();
             if (Mathf.Abs(_distanceX) > 1f)
@@ -42,6 +48,23 @@ namespace BossInfo
             if (_distanceY > 2f && IsGround())
             {
                 Jump();
+            }
+            else if (_distanceY < -2f && IsGround() && !_isActive)
+            {
+                _getGround = _isGrounded.GetComponent<PlatformEffector2D>();
+                _getGround.colliderMask = _getGround.colliderMask ^ 1 << 9;
+                _timer = 0f;
+                _isActive = true;
+            }
+
+            if (_getGround != null && _isActive)
+            {
+                _timer += Time.unscaledDeltaTime;
+                if (_timer > 0.6f)
+                {
+                    _getGround.colliderMask = _getGround.colliderMask | 1 << 9;
+                    _isActive = false;
+                }
             }
 
             if (Vector2.Distance(_transform.position, _destination.position) < 1f)
