@@ -27,10 +27,6 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (_player.isDash)
-            {
-
-            }
             // 대쉬 쿨타임 감소
             if (_dashCooldownTimer > 0)
             {
@@ -41,7 +37,8 @@ namespace PlayerInfo
             if (Input.GetKeyDown(KeyCode.C) && _dashCooldownTimer <= 0 && _player.PlayerFixedState())
             {
                 DashInit();
-                Manager.EffectManager.Instance.Dash();
+                if (_player.isDash)
+                    Manager.EffectManager.Instance.Dash();
             }
         }
 
