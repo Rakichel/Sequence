@@ -1,28 +1,30 @@
+using System;
 using UnityEngine;
 
 namespace BossInfo
 {
-    [System.Serializable]
-    public struct BossStatus
+    [Serializable]
+    public class BossStatus
     {
         #region Field
-        [SerializeField] private int _hp;
-        [SerializeField] private int _speed;
-        [SerializeField] private int _power;
-        [SerializeField] private int _posture;
-        [SerializeField] private int _jumpPower;
-        [SerializeField] private float _gravity;
-        [SerializeField] private float _gravityAccel;
+        [field: SerializeField] public int Hp { get; set; }
+        [field: SerializeField] public int Speed { get; private set; }
+        [field: SerializeField] public int Power { get; private set; }
+        [field: SerializeField] public int Posture { get; set; }
+        [field: SerializeField] public int JumpPower { get; private set; }
+        [field: SerializeField] public float Gravity { get; private set; }
+        [field: SerializeField] public float GravityAccel { get; private set; }
         #endregion
 
-        #region Property
-        public int Hp { set { _hp = value; } get { return _hp; } }
-        public int Speed { get { return _speed; } }
-        public int Power { get { return _power; } }
-        public int Posture { set { _posture = value; } get { return _posture; } }
-        public int JumpPower { get { return _jumpPower; } }
-        public float Gravity { get { return _gravity; } }
-        public float GravityAccel { get { return _gravityAccel; } }
-        #endregion
+        public BossStatus()
+        {
+            Hp = 200;
+            Speed = 8;
+            Power = 10;
+            Posture = 5;
+            JumpPower = 20;
+            Gravity = 5f;
+            GravityAccel = -9.8f;
+        }
     }
 }
