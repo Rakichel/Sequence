@@ -17,9 +17,12 @@ namespace Manager
         [SerializeField] private GameObject SettingMenu;
         [SerializeField] private GameObject ProgressBar;
         [SerializeField] private Text EnemyLevel;
+        [SerializeField] private Text Timer;
         [SerializeField] private GameObject LevelUp;
         [SerializeField] private Slider BGM;
         [SerializeField] private Slider SFX;
+        [SerializeField] private Image SkillCheck;
+        int iTime;
         // Start is called before the first frame update
         private void Awake()
         {
@@ -36,6 +39,20 @@ namespace Manager
                     ProgressBar = GameObject.Find("ProgressBar");
                     EnemyLevel = GameObject.Find("EnemyLevel").GetComponent<Text>();
                     LevelUp = GameObject.Find("LevelUpMenu");
+                    Timer = GameObject.Find("Timer").GetComponent<Text>();
+                    BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
+                    SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
+                    GameStart();
+                }
+                else if(SceneManager.GetActiveScene().name == "BossScene")
+                {
+                    _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+                    HpBar = GameObject.Find("HpBar").GetComponent<Image>();
+                    SkillBar = GameObject.Find("SkillBar").GetComponent<Image>();
+                    PauseFade = GameObject.Find("PauseFade");
+                    PauseMenu = GameObject.Find("PauseMenu");
+                    SettingMenu = GameObject.Find("SettingMenu");
+                    Timer = GameObject.Find("Timer").GetComponent<Text>();
                     BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
                     SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
                     GameStart();
@@ -78,6 +95,7 @@ namespace Manager
             {
                 EnemyLevelUp();
                 Progress();
+                TimerUpdate();
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -93,6 +111,11 @@ namespace Manager
             }
         }
 
+        public void TimerUpdate()
+        {
+            iTime = Mathf.FloorToInt(GameManager.GameTimer);
+            Timer.text = "TIME : " + iTime;
+        }
         public void EnemyLevelUp()
         {
             EnemyLevel.text = "Enemy Level : " + GameManager.Instance.EnemyLevel;
@@ -136,7 +159,10 @@ namespace Manager
             PauseFade.SetActive(false);
             PauseMenu.SetActive(false);
             SettingMenu.SetActive(false);
-            LevelUp.SetActive(false);
+            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            {
+                LevelUp.SetActive(false);
+            }
         }
         public void Pause(bool c)
         {
@@ -157,7 +183,47 @@ namespace Manager
 
         public void LevelUpMenu(bool c)
         {
-            LevelUp.SetActive(c);
+            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            {
+                LevelUp.SetActive(c);
+            }
+        }
+
+        public void SkillInfo(int a)
+        {
+            if(LevelUp.transform.GetChild(a).GetChild(0).gameObject.activeSelf)
+            {
+                LevelUp.transform.GetChild(a).GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                LevelUp.transform.GetChild(a).GetChild(0).gameObject.SetActive(true);
+            }
+        }
+
+        public void SkillUp(string str)
+        {
+            switch(str)
+            {
+                case "Shadow":
+                    _player.ShadowPartner();
+                    LevelUpMenu(false);
+                    LevelUp.transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
+                    LevelUp.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
+                    break;
+                case "Drain":
+                    _player.DrainAble();
+                    LevelUpMenu(false);
+                    LevelUp.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+                    LevelUp.transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
+                    break;
+                case "Dash":
+                    _player.DashUp();
+                    LevelUpMenu(false);
+                    LevelUp.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                    LevelUp.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+                    break;
+            }
         }
     }
 }
