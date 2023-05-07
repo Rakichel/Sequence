@@ -1,3 +1,4 @@
+using Manager;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,8 +36,13 @@ public class BoardManager : MonoBehaviour
     public GameObject[] Ranker;
 
     public GameObject Now;
-
+    float time;
     float timer = 1f;
+
+    private void Start()
+    {
+        time = GameManager.GameTimer;
+    }
 
     void Update()
     {
@@ -57,7 +63,6 @@ public class BoardManager : MonoBehaviour
                 SceneManager.LoadScene("Title");
             }
         }
-
 
         ColorChange();
     }
@@ -83,12 +88,10 @@ public class BoardManager : MonoBehaviour
             return false;
         }
         // 데이터 입력
-
-        int rand = UnityEngine.Random.Range(0, 100);
         Now.transform.GetChild(1).GetComponent<Text>().text = name;
-        Now.transform.GetChild(2).GetComponent<Text>().text = rand.ToString();
+        Now.transform.GetChild(2).GetComponent<Text>().text = time.ToString();
         Now.transform.GetChild(3).GetComponent<Text>().text = n.ToString();
-        character.users.Add(new User(name, rand, n++));
+        character.users.Add(new User(name, Convert.ToInt32(time), n++));
         JsonManager<UserData>.Save(character, "UserDB");
         return true;
     }

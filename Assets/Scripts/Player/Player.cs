@@ -1,6 +1,7 @@
 using Manager;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace PlayerInfo
 {
@@ -83,6 +84,11 @@ namespace PlayerInfo
         public GhostTrail Ghost;                                    // 잔상을 필요 시 끄고 키기 위한 변수
         public PlayerDash Dash;                                     // 대쉬 기능을 담당하는 클래스
 
+        private void Awake()
+        {
+            if (SceneManager.GetActiveScene().name == "Japanese landscape")
+                JsonManager<UserData>.Delete("PlayerSave");
+        }
         private void Start()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
