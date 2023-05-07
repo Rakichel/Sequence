@@ -103,11 +103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 100
+  dieCheck: 0
   _player: {fileID: 0}
   enemyAnimator: {fileID: 7714250245606231837}
   enemySprite: {fileID: 0}
   rigid: {fileID: 0}
   _enemyState: 0
+  unit: 1
 --- !u!114 &7714250245606231833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _attackPower: 2
   _enemy: {fileID: 0}
   _attackin: 0
 --- !u!114 &1349212854524150603

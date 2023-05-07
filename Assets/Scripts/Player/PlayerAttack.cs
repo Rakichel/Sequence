@@ -23,6 +23,7 @@ namespace PlayerInfo
         public float AnimTime;              // 공격 애니메이션이 걸리는 시간
         public float NextAttackTime;
         public GameObject Slash;
+        public float Drain;
 
         private void Start()
         {
@@ -159,13 +160,13 @@ namespace PlayerInfo
                             {
                                 _enemy.GetDamage(Power * 2);
                                 if (_player.isDrain)
-                                    _player.Hp += Power * 2;
+                                    _player.Hp += (Power * 2) * Drain;
                             }
                             else
                             {
                                 _enemy.GetDamage(Power);
                                 if (_player.isDrain)
-                                    _player.Hp += Power;
+                                    _player.Hp += Power * Drain;
                             }
                             if (_player.isShadow)
                             {
@@ -184,13 +185,13 @@ namespace PlayerInfo
                             {
                                 _boss.GetDamage(Power * 2);
                                 if (_player.isDrain)
-                                    _player.Hp += Power * 2;
+                                    _player.Hp += (Power * 2) * Drain;
                             }
                             else
                             {
                                 _boss.GetDamage(Power);
                                 if (_player.isDrain)
-                                    _player.Hp += Power;
+                                    _player.Hp += Power * Drain;
                             }
                             if (_player.isShadow)
                             {
@@ -206,13 +207,13 @@ namespace PlayerInfo
                         {
                             _archer.GetDamage(Power * 2);
                             if (_player.isDrain)
-                                _player.Hp += (Power * 2 / 10);
+                                _player.Hp += (Power * 2) * Drain;
                         }
                         else
                         {
                             _archer.GetDamage(Power);
                             if (_player.isDrain)
-                                _player.Hp += Power / 10;
+                                _player.Hp += Power * Drain;
                         }
                         if (_player.isShadow)
                         {
@@ -271,6 +272,7 @@ namespace PlayerInfo
             if (data != null)
             {
                 Power = data.Power;
+                Drain = data.Drain;
             }
             else
             {

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    public int Damage;
     Transform target;
     Vector3 direct;
     void Start()
@@ -22,7 +23,7 @@ public class Arrow : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerHit>().GetDamage(10);
+            collision.gameObject.GetComponent<PlayerHit>().GetDamage(Damage);
             Destroy(gameObject);
         }
     }

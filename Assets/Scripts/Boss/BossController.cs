@@ -6,6 +6,8 @@ namespace BossInfo
 {
     public class BossController : MonoBehaviour
     {
+        private string _fileName = "BossStatus";
+
         private Player _player;
         private IBossTodo _todo;
         private Rigidbody2D _rigid;
@@ -31,6 +33,7 @@ namespace BossInfo
 
         void Start()
         {
+            LoadData();
             _rigid = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,11 +48,6 @@ namespace BossInfo
             Unscaling();
             LookDirection();
             _todo?.Work();
-
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                GetDamage(100);
-            }
 
             if (State == _currentState)
                 return;
@@ -168,6 +166,25 @@ namespace BossInfo
                 _spriteRenderer.flipX = true;
             else if (Direction == BossDirection.Right)
                 _spriteRenderer.flipX = false;
+        }
+
+        private void SaveData()
+        {
+            JsonManager<BossStatus>.Save(new BossStatus(), _fileName);
+        }
+
+        private void LoadData()
+        {
+            BossStatus data = JsonManager<BossStatus>.Load(_fileName);
+            if (data != null)
+            {
+                Status = data;
+            }
+            else
+            {
+                SaveData();
+                LoadData();
+            }
         }
     }
 }
