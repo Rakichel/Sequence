@@ -21,53 +21,28 @@ public class EnemyStatus
         switch (level)
         {
             case 1:
-                Hp = 100;
-                Damage = 1;
+                Hp = 50;
+                Damage = 3;
                 MoveSpeed = 3;
                 break;
             case 2:
-                Hp = 110;
-                Damage = 1;
+                Hp = 60;
+                Damage = 3;
                 MoveSpeed = 3;
                 break;
             case 3:
-                Hp = 120;
-                Damage = 1;
+                Hp = 70;
+                Damage = 3;
                 MoveSpeed = 3;
                 break;
             case 4:
-                Hp = 130;
-                Damage = 1;
+                Hp = 80;
+                Damage = 3;
                 MoveSpeed = 3;
                 break;
             case 5:
-                Hp = 140;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 6:
-                Hp = 150;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 7:
-                Hp = 160;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 8:
-                Hp = 170;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 9:
-                Hp = 180;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 10:
-                Hp = 190;
-                Damage = 1;
+                Hp = 90;
+                Damage = 3;
                 MoveSpeed = 3;
                 break;
             default:
@@ -102,53 +77,28 @@ public class ComanderStatus
         switch (level)
         {
             case 1:
-                Hp = 100;
-                Damage = 1;
+                Hp = 80;
+                Damage = 7;
                 MoveSpeed = 3;
                 break;
             case 2:
-                Hp = 110;
-                Damage = 1;
+                Hp = 90;
+                Damage = 7;
                 MoveSpeed = 3;
                 break;
             case 3:
-                Hp = 120;
-                Damage = 1;
+                Hp = 100;
+                Damage = 7;
                 MoveSpeed = 3;
                 break;
             case 4:
-                Hp = 130;
-                Damage = 1;
+                Hp = 110;
+                Damage = 7;
                 MoveSpeed = 3;
                 break;
             case 5:
-                Hp = 140;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 6:
-                Hp = 150;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 7:
-                Hp = 160;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 8:
-                Hp = 170;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 9:
-                Hp = 180;
-                Damage = 1;
-                MoveSpeed = 3;
-                break;
-            case 10:
-                Hp = 190;
-                Damage = 1;
+                Hp = 120;
+                Damage = 7;
                 MoveSpeed = 3;
                 break;
             default:
