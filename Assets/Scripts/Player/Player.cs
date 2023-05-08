@@ -86,8 +86,8 @@ namespace PlayerInfo
 
         private void Awake()
         {
-            if (SceneManager.GetActiveScene().name == "Japanese landscape")
-                JsonManager<UserData>.Delete("PlayerSave");
+            if (SceneManager.GetActiveScene().name == "Tutorial")
+                DeleteData();
         }
         private void Start()
         {

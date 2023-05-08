@@ -3208,7 +3208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Archer: {fileID: 2088117574407138927, guid: 8e3dde5575b03cc44ba14deed68556e4, type: 3}
-  SpawnTime: 30
+  SpawnTime: 40
   Cycle: 20
   Timer: 0
 --- !u!1 &444371971
@@ -7709,7 +7709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Archer: {fileID: 2088117574407138927, guid: 8e3dde5575b03cc44ba14deed68556e4, type: 3}
-  SpawnTime: 10
+  SpawnTime: 20
   Cycle: 20
   Timer: 0
 --- !u!1 &1388600997
@@ -9131,7 +9131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Archer: {fileID: 2088117574407138927, guid: 8e3dde5575b03cc44ba14deed68556e4, type: 3}
-  SpawnTime: 0
+  SpawnTime: 10
   Cycle: 20
   Timer: 0
 --- !u!4 &1569964404 stripped
@@ -12050,7 +12050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Archer: {fileID: 2088117574407138927, guid: 8e3dde5575b03cc44ba14deed68556e4, type: 3}
-  SpawnTime: 20
+  SpawnTime: 30
   Cycle: 20
   Timer: 0
 --- !u!1 &2057772700

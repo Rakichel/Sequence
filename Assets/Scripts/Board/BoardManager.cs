@@ -10,12 +10,10 @@ public class User
 {
     public string _name;
     public int _time;
-    public int _resurrect;
-    public User(string _name, int _time, int _resurrect)
+    public User(string _name, int _time)
     {
         this._name = _name;
         this._time = _time;
-        this._resurrect = _resurrect;
     }
 }
 
@@ -36,12 +34,12 @@ public class BoardManager : MonoBehaviour
     public GameObject[] Ranker;
 
     public GameObject Now;
-    float time;
+    int time;
     float timer = 1f;
 
     private void Start()
     {
-        time = GameManager.GameTimer;
+        time = Convert.ToInt32(GameManager.GameTimer);
     }
 
     void Update()
@@ -90,8 +88,7 @@ public class BoardManager : MonoBehaviour
         // 데이터 입력
         Now.transform.GetChild(1).GetComponent<Text>().text = name;
         Now.transform.GetChild(2).GetComponent<Text>().text = time.ToString();
-        Now.transform.GetChild(3).GetComponent<Text>().text = n.ToString();
-        character.users.Add(new User(name, Convert.ToInt32(time), n++));
+        character.users.Add(new User(name, time));
         JsonManager<UserData>.Save(character, "UserDB");
         return true;
     }
@@ -109,7 +106,6 @@ public class BoardManager : MonoBehaviour
 
             Ranker[i].transform.GetChild(1).GetComponent<Text>().text = loadData.users[i]._name;
             Ranker[i].transform.GetChild(2).GetComponent<Text>().text = loadData.users[i]._time.ToString();
-            Ranker[i].transform.GetChild(3).GetComponent<Text>().text = loadData.users[i]._resurrect.ToString();
             Ranker[i].SetActive(true);
         }
         Board.SetActive(true);

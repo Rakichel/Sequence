@@ -150,6 +150,11 @@ namespace PlayerInfo
                 // enemy 피격 함수 호출
                 foreach (var col in collider)
                 {
+                    int realPower = Power;
+                    if (_player.isShadow)
+                    {
+                        realPower += 5;
+                    }
                     // 나중에 인터페이스로 묶어야 함
                     if (col.GetComponent<Enemy>() != null)
                     {
@@ -158,13 +163,13 @@ namespace PlayerInfo
                         {
                             if (_player.State == PlayerState.Counter)
                             {
-                                _enemy.GetDamage(Power * 2);
+                                _enemy.GetDamage(realPower * 2);
                                 if (_player.isDrain)
                                     _player.Hp += (Power * 2) * Drain;
                             }
                             else
                             {
-                                _enemy.GetDamage(Power);
+                                _enemy.GetDamage(realPower);
                                 if (_player.isDrain)
                                     _player.Hp += Power * Drain;
                             }
@@ -183,13 +188,13 @@ namespace PlayerInfo
                         {
                             if (_player.State == PlayerState.Counter)
                             {
-                                _boss.GetDamage(Power * 2);
+                                _boss.GetDamage(realPower * 2);
                                 if (_player.isDrain)
                                     _player.Hp += (Power * 2) * Drain;
                             }
                             else
                             {
-                                _boss.GetDamage(Power);
+                                _boss.GetDamage(realPower);
                                 if (_player.isDrain)
                                     _player.Hp += Power * Drain;
                             }
@@ -205,13 +210,13 @@ namespace PlayerInfo
                         ArcherController _archer = col.GetComponent<ArcherController>();
                         if (_player.State == PlayerState.Counter)
                         {
-                            _archer.GetDamage(Power * 2);
+                            _archer.GetDamage(realPower * 2);
                             if (_player.isDrain)
                                 _player.Hp += (Power * 2) * Drain;
                         }
                         else
                         {
-                            _archer.GetDamage(Power);
+                            _archer.GetDamage(realPower);
                             if (_player.isDrain)
                                 _player.Hp += Power * Drain;
                         }

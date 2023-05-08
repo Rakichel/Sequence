@@ -2630,6 +2630,63 @@ MonoBehaviour:
   m_ChannelMask: 1
   m_Gain: 1
   m_Use2DDistance: 1
+--- !u!1001 &552175630
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231812, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714250245606231827, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+      propertyPath: m_Name
+      value: enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
 --- !u!1 &561725362
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,9 +4307,11 @@ MonoBehaviour:
   SettingMenu: {fileID: 0}
   ProgressBar: {fileID: 0}
   EnemyLevel: {fileID: 0}
+  Timer: {fileID: 0}
   LevelUp: {fileID: 0}
   BGM: {fileID: 1849752963}
   SFX: {fileID: 2080313826}
+  SkillCheck: {fileID: 0}
 --- !u!4 &955260960
 Transform:
   m_ObjectHideFlags: 0
