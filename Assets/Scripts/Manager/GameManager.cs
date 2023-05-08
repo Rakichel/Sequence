@@ -28,8 +28,8 @@ namespace Manager
         private void FixedUpdate()
         {
             Physics2D.Simulate(0.02f);
-            GameTimer += Time.unscaledDeltaTime;
-
+            if(SceneManager.GetActiveScene().name == "Japanese landscape" || SceneManager.GetActiveScene().name == "BossScene")
+                GameTimer += Time.unscaledDeltaTime;
         }
         private void Update()
         {

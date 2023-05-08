@@ -10007,7 +10007,10 @@ MonoBehaviour:
   EnemyLvUp: 0
   EnemyArr:
   - {fileID: 7714250245606231827, guid: 0afbd87cfef542a43beb39fe72a7f675, type: 3}
+  - {fileID: 2088117574407138927, guid: 8e3dde5575b03cc44ba14deed68556e4, type: 3}
+  - {fileID: 5863473916443230416, guid: e495c23190e1e0440908e0dc9368ee0e, type: 3}
   Stage: {fileID: 0}
+  EnemyId: 0
   StageMakeEvent:
     m_PersistentCalls:
       m_Calls: []
