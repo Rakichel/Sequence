@@ -10,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private int EnemyLvUp;
     [SerializeField] private GameObject[] EnemyArr;
     [SerializeField] private StageMaker Stage;
+    [SerializeField] int EnemyId;
     public UnityEvent StageMakeEvent;
 
     // Start is called before the first frame update
@@ -19,11 +20,18 @@ public class EnemyManager : MonoBehaviour
     }
 
     // Update is called once per frame
-
     public void EnemySpawn()
     {
         for (int i = 0; i < Stage.CurrentBlock.Length; i++)
         {
+            if (Manager.GameManager.Instance.EnemyLevel > 3)
+            {
+                EnemyId = Random.Range(0, 3);
+            }
+            else
+            {
+                EnemyId = Random.Range(0, 2);
+            }
             int floor = Random.Range(1, Stage.BlockFloor[i] + 1);
             float EnemySpawn = -3f;
             switch (floor)
@@ -41,7 +49,7 @@ public class EnemyManager : MonoBehaviour
                     EnemySpawn = 6f;
                     break;
             }
-            var newEnemy = Instantiate(EnemyArr[0], new Vector3((Stage.CurrentBlock[i].transform.position.x + Random.Range(-3, 4)), EnemySpawn, 0), Stage.CurrentBlock[i].transform.rotation);
+            Instantiate(EnemyArr[EnemyId], new Vector3((Stage.CurrentBlock[i].transform.position.x + Random.Range(-3, 4)), EnemySpawn, 0), Stage.CurrentBlock[i].transform.rotation);
         }
     }   
 }

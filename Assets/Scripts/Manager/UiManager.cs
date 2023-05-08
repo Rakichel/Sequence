@@ -183,7 +183,7 @@ namespace Manager
 
         public void LevelUpMenu(bool c)
         {
-            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            if(Manager.GameManager.Instance.EnemyLevel <= 3)
             {
                 LevelUp.SetActive(c);
             }

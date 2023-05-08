@@ -58,5 +58,6 @@ public class StageMaker : MonoBehaviour
         }
         Instantiate(Ground, new Vector3(CurrentBlock[BlockCount / 2 - 1].transform.position.x, -8.67f, 0), gameObject.transform.rotation);
         StageMakeEvent.Invoke();
+        StageMakeEvent.Invoke();
     }
 }
