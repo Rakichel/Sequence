@@ -2407,8 +2407,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0900a6cf26ea514b9d07f539d7dc409, type: 3}
   SFXAudioClips:
   - {fileID: 8300000, guid: 62c91ae5806d8fc4688bddd5f28d223e, type: 3}
-  VolumeBGM: 1
-  VolumeSFX: 1
+  - {fileID: 8300000, guid: d83138130e5181d49a7b4559ca65fdeb, type: 3}
 --- !u!1 &427409542
 GameObject:
   m_ObjectHideFlags: 0
