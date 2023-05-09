@@ -18,9 +18,9 @@ namespace BossInfo
 
         public BossStatus()
         {
-            Hp = 200;
+            Hp = 600;
             Speed = 8;
-            Power = 10;
+            Power = 7;
             Posture = 5;
             JumpPower = 20;
             Gravity = 5f;

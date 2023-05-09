@@ -24,22 +24,25 @@ namespace Manager
                 SoundManager.Instance.PlayBGMSound();
             }
 
-            if (Input.GetKey(KeyCode.Minus))
+            if(Input.GetKey(KeyCode.Home))
             {
-                SceneManager.LoadScene(gameObject.scene.name);
-            }
+                if (Input.GetKey(KeyCode.Minus))
+                {
+                    SceneManager.LoadScene(gameObject.scene.name);
+                }
 
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                GotoBoss();
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                GotoReader();
-            }
-            if(Input.GetKeyDown(KeyCode.I))
-            {
-                SceneManager.LoadScene("Japanese landscape");
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    GotoBoss();
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    GotoReader();
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    SceneManager.LoadScene("Japanese landscape");
+                }
             }
         }
 
