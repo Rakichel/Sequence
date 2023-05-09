@@ -31,9 +31,12 @@ namespace BossInfo
         public BossStatus Status;
         public BossState State;
 
-        void Start()
+        private void Awake()
         {
             LoadData();
+        }
+        void Start()
+        {
             _rigid = GetComponent<Rigidbody2D>();
             _animator = GetComponent<Animator>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -102,7 +105,7 @@ namespace BossInfo
                     State = BossState.Die;
                 }
             }
-            else if (Status.Posture > 0)
+            else
             {
                 Status.Posture--;
                 if (Status.Posture <= 0)

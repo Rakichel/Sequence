@@ -103,6 +103,9 @@ namespace PlayerInfo
         }
         private void Update()
         {
+            if (SceneManager.GetActiveScene().name == "Tutorial")
+                Hp = 100;
+
             if (isShadow && !Shadow.activeSelf)
                 Shadow.SetActive(true);
             else if (!isShadow && Shadow.activeSelf)
@@ -112,6 +115,7 @@ namespace PlayerInfo
                 _isSkill = true;
                 CameraManager.Instance.Chronos();
                 EffectManager.Instance.Chronos();
+                SoundManager.Instance.PlaySFXSound("ChronosSound", 1f);
                 GameManager.Instance.TimeS = 0.2f;
             }
             else if (_skillGage == 0f)

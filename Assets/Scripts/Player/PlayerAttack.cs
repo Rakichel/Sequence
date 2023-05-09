@@ -23,6 +23,7 @@ namespace PlayerInfo
         public float AnimTime;              // 공격 애니메이션이 걸리는 시간
         public float NextAttackTime;
         public GameObject Slash;
+        public GameObject SlashDrain;
         public float Drain;
 
         private void Start()
@@ -238,7 +239,11 @@ namespace PlayerInfo
         private void CreateSlash(Vector3 from, Vector3 to)
         {
             Quaternion q = Quaternion.AngleAxis(GetAngle(from + new Vector3(0f, 1f), to), Vector3.forward);
-            GameObject g = Instantiate(Slash, to + new Vector3(0f, 0f, -1f), q);
+            GameObject g;
+            if (_player.isDrain)
+                g = Instantiate(SlashDrain, to + new Vector3(0f, 0f, -1f), q);
+            else
+                g = Instantiate(Slash, to + new Vector3(0f, 0f, -1f), q);
             Destroy(g, 1f);
         }
 
@@ -259,11 +264,11 @@ namespace PlayerInfo
             }
             else if (_player.Direction == PlayerDirection.Right)
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(0.75f, 1f), new Vector3(2f, 2f), 0f, 1 << 8 | 1 << 9);
             }
             else
             {
-                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f), 0f, 1 << 8 | 1 << 9);
+                return Physics2D.OverlapBoxAll(transform.position + new Vector3(-0.75f, 1f), new Vector3(2f, 2f), 0f, 1 << 8 | 1 << 9);
             }
         }
         private void SaveData()
@@ -293,11 +298,11 @@ namespace PlayerInfo
                 Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
                 if (_player.Direction == PlayerDirection.Right)
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(1f, 1f), new Vector3(1.5f, 2f));
+                    Gizmos.DrawCube(transform.position + new Vector3(0.75f, 1f), new Vector3(2f, 2f));
                 }
                 else
                 {
-                    Gizmos.DrawCube(transform.position + new Vector3(-1f, 1f), new Vector3(1.5f, 2f));
+                    Gizmos.DrawCube(transform.position + new Vector3(-0.75f, 1f), new Vector3(2f, 2f));
                 }
                 Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
                 Gizmos.DrawCube(transform.position + new Vector3(0f, 0.75f), new Vector3(3.5f, 1.5f));

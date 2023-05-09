@@ -37,6 +37,7 @@ namespace PlayerInfo
             if (Input.GetKeyDown(KeyCode.C) && _dashCooldownTimer <= 0 && _player.PlayerFixedState())
             {
                 DashInit();
+                //Manager.SoundManager.Instance.PlaySFXSound("DashSound", 1f);
                 if (_player.isDash)
                     Manager.EffectManager.Instance.Dash();
             }

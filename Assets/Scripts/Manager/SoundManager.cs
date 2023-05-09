@@ -12,8 +12,8 @@ namespace Manager
         [SerializeField] public AudioClip[] MainAudioClip; // 배경음 저장
         [SerializeField] private AudioClip[] SFXAudioClips; // 효과음 저장
 
-        public float VolumeBGM = 1.0f; // 배경음 사운드
-        public float VolumeSFX = 1.0f; // 효과음 사운드
+        public static float VolumeBGM = 1.0f; // 배경음 사운드
+        public static float VolumeSFX = 1.0f; // 효과음 사운드
 
         //Dictionary<key, value>로 오디오를 불러온다
         Dictionary<string, AudioClip> audioclipdic = new Dictionary<string, AudioClip>();

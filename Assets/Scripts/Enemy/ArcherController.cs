@@ -55,7 +55,7 @@ public class ArcherData
 }
 public class ArcherController : MonoBehaviour
 {
-    private string _fileName = "EnemyStatus";
+    private string _fileName = "ArcherStatus";
 
     private Animator Animator;
     private Player target;
@@ -70,6 +70,7 @@ public class ArcherController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadData();
         Animator = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").GetComponent<Player>();
         archerSprite = gameObject.GetComponent<SpriteRenderer>();
