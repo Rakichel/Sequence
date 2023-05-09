@@ -42,11 +42,11 @@ public class EnemyAttack : MonoBehaviour
         Collider2D hit;
         if (!_enemy.enemySprite.flipX)
         {
-            hit = Physics2D.OverlapBox(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1), 0f, 1 << 7);
+            hit = Physics2D.OverlapBox(transform.position + new Vector3(1.2f, 0.4f, 0), new Vector3(1.5f, 1, 1), 0f, 1 << 7);
         }
         else
         {
-            hit = Physics2D.OverlapBox(transform.position + new Vector3(-0.5f, 0.1f, 0), new Vector3(1, 1, 1), 0f, 1 << 7);
+            hit = Physics2D.OverlapBox(transform.position + new Vector3(-1.2f, 0.4f, 0), new Vector3(1.5f, 1, 1), 0f, 1 << 7);
         }
         if (hit != null)
         {
@@ -82,6 +82,6 @@ public class EnemyAttack : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + new Vector3(0.5f, 0.1f, 0), new Vector3(1, 1, 1));
+        Gizmos.DrawWireCube(transform.position + new Vector3(1.2f, 0.4f, 0), new Vector3(1.5f, 1, 1));
     }
 }

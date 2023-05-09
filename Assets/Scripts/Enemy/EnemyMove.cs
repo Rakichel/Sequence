@@ -45,7 +45,7 @@ public class EnemyMove : MonoBehaviour
             {
                 _enemy.enemySprite.flipX = true;
             }
-            if (Mathf.Abs(distance) <= 5f && Mathf.Abs(distance) >= 1f)
+            if (Mathf.Abs(distance) <= 5f && Mathf.Abs(distance) >= 1.95f)
             {
                 _enemy.rigid.velocity = new Vector2(-dis.x * MoveSpeed * Time.timeScale, _enemy.rigid.velocity.y);
                 _enemy._enemyState = EnemyState.isRunning;
