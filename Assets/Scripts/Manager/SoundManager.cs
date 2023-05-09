@@ -51,7 +51,7 @@ namespace Manager
 
         private void Update()
         {
-            BGMPlayer.volume = VolumeBGM;
+            BGMPlayer.volume = VolumeBGM *= 0.5f;
         }
     }
 }

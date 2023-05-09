@@ -115,7 +115,7 @@ namespace PlayerInfo
                 _isSkill = true;
                 CameraManager.Instance.Chronos();
                 EffectManager.Instance.Chronos();
-                SoundManager.Instance.PlaySFXSound("ChronosSound", 1f);
+                SoundManager.Instance.PlaySFXSound("ChronosSound", 0.5f);
                 GameManager.Instance.TimeS = 0.2f;
             }
             else if (_skillGage == 0f)
