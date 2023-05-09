@@ -12317,6 +12317,8 @@ MonoBehaviour:
   AnimTime: 0.35
   NextAttackTime: 1
   Slash: {fileID: 4150443416626131060, guid: 250b62731cf6b8b41a64911a0aa869e5, type: 3}
+  SlashDrain: {fileID: 7419681714646568283, guid: 8c5af33c7972efc40858f58e4ac44631, type: 3}
+  Drain: 0
 --- !u!114 &4890686318568800832
 MonoBehaviour:
   m_ObjectHideFlags: 0

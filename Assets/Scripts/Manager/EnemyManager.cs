@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     {
         for (int i = 0; i < Stage.CurrentBlock.Length; i++)
         {
-            if (Manager.GameManager.Instance.EnemyLevel > 3)
+            if (Manager.GameManager.Instance.EnemyLevel >= 3)
             {
                 EnemyId = Random.Range(0, 3);
             }

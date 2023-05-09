@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71703c79551247442acfe174d20d3bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 100
+  Shadow: {fileID: 0}
   isShadow: 0
   isDrain: 0
   isDash: 0
@@ -239,6 +239,8 @@ MonoBehaviour:
   AnimTime: 0.35
   NextAttackTime: 1
   Slash: {fileID: 4150443416626131060, guid: 250b62731cf6b8b41a64911a0aa869e5, type: 3}
+  SlashDrain: {fileID: 7419681714646568283, guid: 8c5af33c7972efc40858f58e4ac44631, type: 3}
+  Drain: 0
 --- !u!114 &2086709476964619449
 MonoBehaviour:
   m_ObjectHideFlags: 0

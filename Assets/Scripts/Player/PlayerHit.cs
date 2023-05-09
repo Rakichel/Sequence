@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Manager;
 
 namespace PlayerInfo
 {
@@ -104,6 +105,7 @@ namespace PlayerInfo
             {
                 _player.State = PlayerState.Die;
                 yield return new WaitForSecondsRealtime(HitAnimTime);
+                StageManager.Instance.GotoTitle();
             }
         }
     }

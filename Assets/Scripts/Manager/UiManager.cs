@@ -42,6 +42,8 @@ namespace Manager
                     Timer = GameObject.Find("Timer").GetComponent<Text>();
                     BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
                     SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
+                    BGM.value = SoundManager.VolumeBGM;
+                    SFX.value = SoundManager.VolumeSFX;
                     GameStart();
                 }
                 else if(SceneManager.GetActiveScene().name == "BossScene")
@@ -55,6 +57,8 @@ namespace Manager
                     Timer = GameObject.Find("Timer").GetComponent<Text>();
                     BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
                     SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
+                    BGM.value = SoundManager.VolumeBGM;
+                    SFX.value = SoundManager.VolumeSFX;
                     GameStart();
                 }
                 else
@@ -67,6 +71,8 @@ namespace Manager
                     SettingMenu = GameObject.Find("SettingMenu");
                     BGM = GameObject.Find("BgmSlider").GetComponent<Slider>();
                     SFX = GameObject.Find("SfxSlider").GetComponent<Slider>();
+                    BGM.value = SoundManager.VolumeBGM;
+                    SFX.value = SoundManager.VolumeSFX;
                     GameStart();
                 }
             }
@@ -85,8 +91,8 @@ namespace Manager
                 HpBar.fillAmount = _player.Hp / 100f;
                 SkillBar.fillAmount = _player.SkillGage / 100f;
             }
-            SoundManager.Instance.VolumeBGM = BGM.value;
-            SoundManager.Instance.VolumeSFX = SFX.value;
+            SoundManager.VolumeBGM = BGM.value;
+            SoundManager.VolumeSFX = SFX.value;
         }
 
         private void Update()
@@ -95,6 +101,10 @@ namespace Manager
             {
                 EnemyLevelUp();
                 Progress();
+                TimerUpdate();
+            }
+            else if(SceneManager.GetActiveScene().name == "BossScene")
+            {
                 TimerUpdate();
             }
 
@@ -183,7 +193,7 @@ namespace Manager
 
         public void LevelUpMenu(bool c)
         {
-            if(Manager.GameManager.Instance.EnemyLevel <= 3)
+            if(Manager.GameManager.Instance.EnemyLevel <= 4)
             {
                 LevelUp.SetActive(c);
             }

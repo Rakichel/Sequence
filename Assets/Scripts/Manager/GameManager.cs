@@ -41,12 +41,20 @@ namespace Manager
                 Debug.Log(Time.timeScale);
             }
 
-            if (KillCount == LevelScale + KillCountTotal)
+            if(SceneManager.GetActiveScene().name == "Japanese landscape")
             {
-                EnemyLevel++;
-                UiManager.Instance.LevelUpMenu(true);
-                KillCountTotal += KillCount;
-                KillCount = 0;
+                if (KillCount == LevelScale + KillCountTotal)
+                {
+                    EnemyLevel++;
+                    UiManager.Instance.LevelUpMenu(true);
+                    KillCountTotal += 5;
+                    KillCount = 0;
+                }
+            }
+
+            if (EnemyLevel == 5)
+            {
+                Manager.StageManager.Instance.GotoBoss();
             }
         }
 

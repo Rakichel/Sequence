@@ -6,8 +6,8 @@ public class BossHpBar : MonoBehaviour
 {
     public BossController Boss;
     private Image image;
-    private float curHp;
-    private float maxHp;
+    public float curHp;
+    public float maxHp;
     // Start is called before the first frame update
     void Start()
     {

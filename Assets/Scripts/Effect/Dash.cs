@@ -24,16 +24,4 @@ public class Dash : MonoBehaviour
     {
         gameObject.SetActive(b);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            collision.GetComponent<Enemy>().GetDamage(10);
-        }
-        else if (collision.CompareTag("Boss"))
-        {
-            collision.GetComponent<BossController>().GetDamage(10);
-        }
-    }
 }
