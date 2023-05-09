@@ -47,11 +47,12 @@ namespace Manager
         {
             //BGMPlayer.clip = MainAudioClip[0];
             BGMPlayer.loop = true;
+            BGMPlayer.volume *= 0.5f;
         }
 
         private void Update()
         {
-            BGMPlayer.volume = VolumeBGM *= 0.5f;
+            BGMPlayer.volume = VolumeBGM;
         }
     }
 }
