@@ -110,26 +110,29 @@ namespace PlayerInfo
                 Shadow.SetActive(true);
             else if (!isShadow && Shadow.activeSelf)
                 Shadow.SetActive(false);
-            if (Input.GetKeyDown(KeyCode.F) && _isSkill == false && _skillGage == 100f && State != PlayerState.Die)
+            if (Time.timeScale > 0.1f)
             {
-                _isSkill = true;
-                CameraManager.Instance.Chronos();
-                EffectManager.Instance.Chronos();
-                SoundManager.Instance.PlaySFXSound("ChronosSound", 0.5f);
-                GameManager.Instance.TimeS = 0.2f;
-            }
-            else if (_skillGage == 0f)
-            {
-                _isSkill = false;
-                CameraManager.Instance.ChronosBGA = 0f;
-                GameManager.Instance.TimeS = 1f;
+                if (Input.GetKeyDown(KeyCode.F) && _isSkill == false && _skillGage == 100f && State != PlayerState.Die)
+                {
+                    _isSkill = true;
+                    CameraManager.Instance.Chronos();
+                    EffectManager.Instance.Chronos();
+                    SoundManager.Instance.PlaySFXSound("ChronosSound", 0.5f);
+                    GameManager.Instance.TimeS = 0.2f;
+                }
+                else if (_skillGage == 0f)
+                {
+                    _isSkill = false;
+                    CameraManager.Instance.ChronosBGA = 0f;
+                    GameManager.Instance.TimeS = 1f;
+                }
             }
 
-            if (_isSkill == true)
+            if (_isSkill == true && Time.timeScale != 0.1f)
             {
                 _skillGage = Mathf.Clamp(_skillGage - Time.unscaledDeltaTime * 20f, 0f, 100f);
             }
-            else if (_isSkill == false)
+            else if (_isSkill == false && Time.timeScale != 0.1f)
             {
                 _skillGage = Mathf.Clamp(_skillGage + Time.unscaledDeltaTime * 50f, 0f, 100f);
             }

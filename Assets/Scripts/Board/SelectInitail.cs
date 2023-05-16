@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectInitail : MonoBehaviour
@@ -19,7 +17,7 @@ public class SelectInitail : MonoBehaviour
         {
             Arrows[index].SetActive(false);
             index++;
-            if (index > Arrows.Length)
+            if (index >= Arrows.Length)
                 index = 0;
             Arrows[index].SetActive(true);
         }
@@ -29,7 +27,7 @@ public class SelectInitail : MonoBehaviour
             Arrows[index].SetActive(false);
             index--;
             if (index < 0)
-                index = Arrows.Length;
+                index = Arrows.Length - 1;
             Arrows[index].SetActive(true);
         }
     }

@@ -27,6 +27,9 @@ namespace PlayerInfo
 
         private void Update()
         {
+            if (Time.timeScale == 0.1f)
+                return;
+
             // 대쉬 쿨타임 감소
             if (_dashCooldownTimer > 0)
             {

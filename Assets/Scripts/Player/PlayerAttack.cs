@@ -34,6 +34,13 @@ namespace PlayerInfo
 
         private void Update()
         {
+            if (Time.timeScale == 0.1f)
+            {
+                StopAllCoroutines();
+                _player.State = PlayerState.Idle;
+                return;
+            }
+
             if (_player.State == PlayerState.Die)
             {
                 StopAllCoroutines();

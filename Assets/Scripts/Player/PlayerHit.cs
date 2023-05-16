@@ -1,6 +1,6 @@
+using Manager;
 using System.Collections;
 using UnityEngine;
-using Manager;
 
 namespace PlayerInfo
 {
@@ -26,6 +26,8 @@ namespace PlayerInfo
 
         private void Update()
         {
+            if (Time.timeScale == 0.1f)
+                return;
             // 가드키 입력
             if (Input.GetKey(KeyCode.Z) && _player.PlayerFixedState())
             {

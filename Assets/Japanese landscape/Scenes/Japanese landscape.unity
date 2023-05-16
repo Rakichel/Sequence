@@ -1726,10 +1726,11 @@ MonoBehaviour:
   TimeS: 1
   KillCount: 0
   EnemyLevel: 1
-  LevelScale: 5
+  LevelScale: 4
   KillCountTotal: 0
   dieTime: 0.05
   _fade: 0.05
+  isStop: 0
 --- !u!4 &433857524
 Transform:
   m_ObjectHideFlags: 0
@@ -4562,6 +4563,7 @@ MonoBehaviour:
   BGM: {fileID: 1849752963}
   SFX: {fileID: 2080313826}
   SkillCheck: {fileID: 0}
+  saveScale: 0
 --- !u!4 &955260960
 Transform:
   m_ObjectHideFlags: 0

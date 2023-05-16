@@ -32,6 +32,9 @@ namespace PlayerInfo
 
         private void Update()
         {
+            if (Time.timeScale == 0.1f)
+                return;
+
             // 땅에 발 딛고 있는지 체크
             _isGrounded = Physics2D.OverlapBox(GroundCheck.position, new Vector2(CheckSizeX, CheckSizeY), 0f, WhatIsGround);
 

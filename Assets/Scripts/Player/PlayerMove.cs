@@ -23,6 +23,8 @@ namespace PlayerInfo
 
         void Update()
         {
+            if (Time.timeScale == 0.1f)
+                return;
             // 경직된 상태가 아닐 때만 이동을 원함
             if (_player.PlayerFixedState())
                 _horizontal = Input.GetAxisRaw("Horizontal");

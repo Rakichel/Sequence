@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Manager
 {
-    
+
     public class GameManager : Singleton<GameManager>
     {
         public static float GameTimer;
@@ -20,15 +19,16 @@ namespace Manager
 
         private void Awake()
         {
-            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            if (SceneManager.GetActiveScene().name == "Japanese landscape")
             {
                 GameTimer = 0f;
             }
         }
         private void FixedUpdate()
         {
-            Physics2D.Simulate(0.02f);
-            if(SceneManager.GetActiveScene().name == "Japanese landscape" || SceneManager.GetActiveScene().name == "BossScene")
+            if (Time.timeScale != 0.1f)
+                Physics2D.Simulate(0.02f);
+            if (SceneManager.GetActiveScene().name == "Japanese landscape" || SceneManager.GetActiveScene().name == "BossScene")
                 GameTimer += Time.unscaledDeltaTime;
         }
         private void Update()
@@ -41,13 +41,13 @@ namespace Manager
                 Debug.Log(Time.timeScale);
             }
 
-            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            if (SceneManager.GetActiveScene().name == "Japanese landscape")
             {
                 if (KillCount == LevelScale + KillCountTotal)
                 {
                     EnemyLevel++;
                     UiManager.Instance.LevelUpMenu(true);
-                    KillCountTotal += 5;
+                    KillCountTotal += 4;
                     KillCount = 0;
                 }
             }

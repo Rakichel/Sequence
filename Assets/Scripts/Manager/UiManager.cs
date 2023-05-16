@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using PlayerInfo;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Manager
 {
@@ -23,12 +21,13 @@ namespace Manager
         [SerializeField] private Slider SFX;
         [SerializeField] private Image SkillCheck;
         int iTime;
+        public float saveScale;
         // Start is called before the first frame update
         private void Awake()
         {
             try
             {
-                if(SceneManager.GetActiveScene().name == "Japanese landscape")
+                if (SceneManager.GetActiveScene().name == "Japanese landscape")
                 {
                     _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
                     HpBar = GameObject.Find("HpBar").GetComponent<Image>();
@@ -46,7 +45,7 @@ namespace Manager
                     SFX.value = SoundManager.VolumeSFX;
                     GameStart();
                 }
-                else if(SceneManager.GetActiveScene().name == "BossScene")
+                else if (SceneManager.GetActiveScene().name == "BossScene")
                 {
                     _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
                     HpBar = GameObject.Find("HpBar").GetComponent<Image>();
@@ -103,7 +102,7 @@ namespace Manager
                 Progress();
                 TimerUpdate();
             }
-            else if(SceneManager.GetActiveScene().name == "BossScene")
+            else if (SceneManager.GetActiveScene().name == "BossScene")
             {
                 TimerUpdate();
             }
@@ -169,7 +168,7 @@ namespace Manager
             PauseFade.SetActive(false);
             PauseMenu.SetActive(false);
             SettingMenu.SetActive(false);
-            if(SceneManager.GetActiveScene().name == "Japanese landscape")
+            if (SceneManager.GetActiveScene().name == "Japanese landscape")
             {
                 LevelUp.SetActive(false);
             }
@@ -193,15 +192,25 @@ namespace Manager
 
         public void LevelUpMenu(bool c)
         {
-            if(Manager.GameManager.Instance.EnemyLevel <= 4)
+            if (Manager.GameManager.Instance.EnemyLevel <= 4)
             {
                 LevelUp.SetActive(c);
+                saveScale = GameManager.Instance.TimeS;
+                GameManager.Instance.TimeS = 0.1f;
+            }
+        }
+        public void LevelUpMenuClose()
+        {
+            if (Manager.GameManager.Instance.EnemyLevel <= 4)
+            {
+                LevelUp.SetActive(false);
+                GameManager.Instance.TimeS = saveScale;
             }
         }
 
         public void SkillInfo(int a)
         {
-            if(LevelUp.transform.GetChild(a).GetChild(0).gameObject.activeSelf)
+            if (LevelUp.transform.GetChild(a).GetChild(0).gameObject.activeSelf)
             {
                 LevelUp.transform.GetChild(a).GetChild(0).gameObject.SetActive(false);
             }
@@ -211,25 +220,28 @@ namespace Manager
             }
         }
 
+
         public void SkillUp(string str)
         {
-            switch(str)
+            switch (str)
             {
                 case "Shadow":
                     _player.ShadowPartner();
-                    LevelUpMenu(false);
+                    LevelUpMenuClose();
                     LevelUp.transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
                     LevelUp.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
                     break;
                 case "Drain":
                     _player.DrainAble();
-                    LevelUpMenu(false);
+                    LevelUpMenuClose();
+
                     LevelUp.transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
                     LevelUp.transform.GetChild(1).GetChild(2).gameObject.SetActive(true);
                     break;
                 case "Dash":
                     _player.DashUp();
-                    LevelUpMenu(false);
+                    LevelUpMenuClose();
+
                     LevelUp.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
                     LevelUp.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
                     break;

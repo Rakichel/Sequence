@@ -29,7 +29,7 @@ namespace PlayerInfo
 
         private void Update()
         {
-            if (Time.timeScale < 1f)
+            if (Time.timeScale < 1f && Time.timeScale != 0.1f)
             {
                 isOne = true;
                 if (_timer > 0)
@@ -46,7 +46,7 @@ namespace PlayerInfo
                     }
                 }
             }
-            else if (isOne)
+            else if (isOne && Time.timeScale != 0.1f)
             {
                 for (int i = 0; i < GhostGroup.transform.childCount; i++)
                 {

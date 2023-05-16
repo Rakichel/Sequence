@@ -17,6 +17,11 @@ namespace PlayerInfo
 
         void Update()
         {
+            if (Time.timeScale == 0.1f)
+                _animator.updateMode = AnimatorUpdateMode.Normal;
+            else
+                _animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
             if (_state == _player.State)
                 return;
 
